@@ -11,6 +11,7 @@ namespace esas\cmsgate\view\admin\validators;
 
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\Registry;
+use Exception;
 use Throwable;
 
 /**
@@ -48,6 +49,8 @@ abstract class Validator
         try {
             $ret->setValid($this->validateValue($value));
         } catch (Throwable $e) {
+            $ret->setValid(false);
+        } catch (Exception $e) { // для совместимости с php 5
             $ret->setValid(false);
         }
         if (!$ret->isValid()) {

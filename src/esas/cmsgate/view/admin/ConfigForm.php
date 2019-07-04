@@ -9,21 +9,17 @@
 namespace esas\cmsgate\view\admin;
 
 
-use esas\cmsgate\ConfigurationFields;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\fields\ConfigField;
-use esas\cmsgate\view\admin\fields\ConfigFieldTextarea;
-use esas\cmsgate\view\admin\fields\ConfigFieldText;
-use esas\cmsgate\view\admin\fields\ConfigFieldPassword;
-use esas\cmsgate\view\admin\fields\ConfigFieldNumber;
 use esas\cmsgate\view\admin\fields\ConfigFieldCheckbox;
-use esas\cmsgate\view\admin\fields\ConfigFieldStatusList;
 use esas\cmsgate\view\admin\fields\ConfigFieldList;
+use esas\cmsgate\view\admin\fields\ConfigFieldNumber;
+use esas\cmsgate\view\admin\fields\ConfigFieldPassword;
+use esas\cmsgate\view\admin\fields\ConfigFieldRichtext;
+use esas\cmsgate\view\admin\fields\ConfigFieldStatusList;
+use esas\cmsgate\view\admin\fields\ConfigFieldTextarea;
+use esas\cmsgate\view\admin\fields\ListOption;
 use esas\cmsgate\view\admin\validators\ValidationResult;
-use esas\cmsgate\view\admin\validators\ValidatorEmail;
-use esas\cmsgate\view\admin\validators\ValidatorInteger;
-use esas\cmsgate\view\admin\validators\ValidatorNotEmpty;
-use esas\cmsgate\view\admin\validators\ValidatorNumeric;
 
 /**
  * Class ConfigForm обеспечивает генерация формы с настройками плагина (может быть как генерация конечного html,
@@ -71,9 +67,9 @@ abstract class ConfigForm
     {
         $this->logger = Logger::getLogger(get_class($this));
         foreach ($this->initFields() as $configField) {
-            $configField->setSortOrder(++$this->sortOrderCounter);
-            $this->allFields[$configField->getKey()] = $configField;
-        }
+        $configField->setSortOrder(++$this->sortOrderCounter);
+        $this->allFields[$configField->getKey()] = $configField;
+    }
     }
 
     /**
@@ -143,6 +139,11 @@ abstract class ConfigForm
         return $this->generateTextField($configField);
     }
 
+    public function generateRichtextField(ConfigFieldRichtext $configField)
+    {
+        return $this->generateTextAreaField($configField);
+    }
+
     public function generateNumberField(ConfigFieldNumber $configField)
     {
         return $this->generateTextField($configField);
@@ -160,13 +161,19 @@ abstract class ConfigForm
 
     public function generateStatusListField(ConfigFieldStatusList $configField)
     {
-        return $this->generateTextField($configField);
+        $configField->setOptions($this->createStatusListOptions());
+        return $this->generateListField($configField);
     }
 
     public function generateListField(ConfigFieldList $configField)
     {
         return $this->generateTextField($configField);
     }
+
+    /**
+     * @return ListOption[]
+     */
+    public abstract function createStatusListOptions();
 
     /**
      * Проверка корректности введенного значения. По кллючу поля $configKey получает соответсвующий ему валидатор
@@ -211,3 +218,6 @@ abstract class ConfigForm
         return $this->validationErrorText;
     }
 }
+
+
+
