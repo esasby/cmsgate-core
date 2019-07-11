@@ -13,5 +13,6 @@ class RsType
 {
     const _STRING = 0;
     const _ARRAY = 1;
+    const _JSON = 1;
     const _XML = 2;
 }

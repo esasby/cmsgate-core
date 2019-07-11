@@ -50,7 +50,7 @@ abstract class Protocol
      * @return mixed
      * @throws Exception
      */
-    private function requestGet($path, $data = '', $rsType = RsType::_ARRAY)
+    protected function requestGet($path, $data = '', $rsType = RsType::_ARRAY)
     {
         return $this->connect($path, $data, RqMethod::_GET, $rsType);
     }
@@ -65,7 +65,7 @@ abstract class Protocol
      * @return bool
      * @throws Exception
      */
-    private function requestPost($path, $data = '', $rsType = RsType::_ARRAY)
+    protected function requestPost($path, $data = '', $rsType = RsType::_ARRAY)
     {
         return $this->connect($path, $data, RqMethod::_POST, $rsType);
     }
@@ -81,7 +81,7 @@ abstract class Protocol
      * @return mixed
      * @throws Exception
      */
-    private function requestDelete($path, $data = '', $rsType = RsType::_ARRAY)
+    protected function requestDelete($path, $data = '', $rsType = RsType::_ARRAY)
     {
         return $this->connect($path, $data, RqMethod::_DELETE, $rsType);
     }
@@ -144,7 +144,7 @@ abstract class Protocol
                 return simplexml_load_string($response);
             case RsType::_ARRAY:
                 return $this->responseToArray($response);
-            case RS_TYPE::_JSON:
+            case RsType::_JSON:
                 return array_change_key_case(json_decode($response, true), CASE_LOWER);
             default:
                 throw new Exception("Wrong rsType.");
