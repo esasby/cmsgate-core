@@ -38,7 +38,7 @@ abstract class ConfigFormArray extends ConfigForm
     public function generate()
     {
         // при проверке instanceof не забывать про наследование
-        foreach ($this->fieldsToRender as $configField) {
+        foreach ($this->managedFields->getFieldsToRender() as $configField) {
             if ($configField instanceof ConfigFieldPassword) {
                 $ret[$configField->getKey()] = $this->generatePasswordField($configField);
                 continue;

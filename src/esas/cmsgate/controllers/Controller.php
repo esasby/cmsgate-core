@@ -11,12 +11,12 @@ namespace esas\cmsgate\controllers;
 
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\Logger;
-use esas\cmsgate\wrappers\ConfigurationWrapper;
+use esas\cmsgate\wrappers\ConfigWrapper;
 
 abstract class Controller
 {
     /**
-     * @var ConfigurationWrapper
+     * @var ConfigWrapper
      */
     protected $configurationWrapper;
 
@@ -28,13 +28,13 @@ abstract class Controller
     /**
      * Controller constructor.
      */
-    public function __construct(ConfigurationWrapper $configurationWrapper = null)
+    public function __construct(ConfigWrapper $configurationWrapper = null)
     {
         $this->logger = Logger::getLogger(get_class($this));
         if ($configurationWrapper != null)
             $this->configurationWrapper = $configurationWrapper;
         else
-            $this->configurationWrapper = Registry::getRegistry()->getConfigurationWrapper();
+            $this->configurationWrapper = Registry::getRegistry()->getConfigWrapper();
     }
 
 }

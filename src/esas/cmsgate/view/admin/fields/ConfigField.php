@@ -83,7 +83,7 @@ abstract class ConfigField
             $this->validator = $validator;
         else
             $this->validator = new ValidatorImpl("");
-        $this->default = Registry::getRegistry()->getConfigurationWrapper()->getDefaultConfig($key);
+        $this->default = Registry::getRegistry()->getConfigWrapper()->getDefaultConfig($key);
         return $this;
     }
 
@@ -171,7 +171,7 @@ abstract class ConfigField
         if (!is_null($this->validationResult))
             return $this->validationResult->getValidatedValue();
         else
-            return Registry::getRegistry()->getConfigurationWrapper()->get($this->key);
+            return Registry::getRegistry()->getConfigWrapper()->get($this->key);
     }
 
     /**

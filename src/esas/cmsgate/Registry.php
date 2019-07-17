@@ -12,20 +12,20 @@ namespace esas\cmsgate;
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\ConfigForm;
-use esas\cmsgate\wrappers\ConfigurationWrapper;
+use esas\cmsgate\wrappers\ConfigWrapper;
 use esas\cmsgate\wrappers\OrderWrapper;
 
 /**
- * Реализация шаблона registry для удобства доступа к $configurationWrapper и $translator.
+ * Реализация шаблона registry для удобства доступа к ConfigurationWrapper, OrderWrapper, Translator и т.д..
  * В каждой CMS должен быть обязательно наследован и проинициализирован через Registry->init()
  * Class Registry
  * @package esas\cmsgate
  */
 abstract class Registry
 {
-    private $configurationWrapper;
-    private $translator;
-    private $configForm;
+    protected $configWrapper;
+    protected $translator;
+    protected $configForm;
 
     public function init() {
         global $esasRegistry;
@@ -36,16 +36,16 @@ abstract class Registry
     }
 
     /**
-     * @return ConfigurationWrapper
+     * @return ConfigWrapper
      */
-    public function getConfigurationWrapper()
+    public function getConfigWrapper()
     {
-        if ($this->configurationWrapper == null)
-            $this->configurationWrapper = $this->createConfigurationWrapper();
-        return $this->configurationWrapper;
+        if ($this->configWrapper == null)
+            $this->configWrapper = $this->createConfigWrapper();
+        return $this->configWrapper;
     }
     
-    public abstract function createConfigurationWrapper();
+    public abstract function createConfigWrapper();
 
     /**
      * @return Translator

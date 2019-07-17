@@ -3,7 +3,7 @@
 namespace esas\cmsgate\protocol;
 
 use esas\cmsgate\Registry;
-use esas\cmsgate\wrappers\ConfigurationWrapper;
+use esas\cmsgate\wrappers\ConfigWrapper;
 use Exception;
 use esas\cmsgate\utils\Logger;
 use Throwable;
@@ -19,7 +19,7 @@ abstract class Protocol
     private $logger;
 
     /**
-     * @var ConfigurationWrapper
+     * @var ConfigWrapper
      */
     private $configurationWrapper;
 
@@ -29,7 +29,7 @@ abstract class Protocol
     public function __construct($realUrl, $testUrl)
     {
         $this->logger = Logger::getLogger(get_class($this));
-        $this->configurationWrapper = Registry::getRegistry()->getConfigurationWrapper();
+        $this->configurationWrapper = Registry::getRegistry()->getConfigWrapper();
         if ($this->configurationWrapper->isSandbox()) {
             $this->connectionUrl = $testUrl;
             $this->logger->info("Test mode is on");

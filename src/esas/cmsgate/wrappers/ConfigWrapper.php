@@ -8,11 +8,27 @@
 
 namespace esas\cmsgate\wrappers;
 
-use esas\cmsgate\ConfigurationFields;
+use esas\cmsgate\ConfigStorageCms;
+use esas\cmsgate\ConfigFields;
+use Exception;
 use Throwable;
 
-abstract class ConfigurationWrapper extends Wrapper
+abstract class ConfigWrapper extends Wrapper
 {
+    /**
+     * @var ConfigStorageCms
+     */
+    protected $configStorageCms;
+
+    /**
+     * ConfigWrapper constructor.
+     * @param $configStorage
+     */
+    public function __construct($configStorageCms)
+    {
+        parent::__construct();
+        $this->configStorageCms = $configStorageCms;
+    }
 
 
     /**
@@ -21,7 +37,7 @@ abstract class ConfigurationWrapper extends Wrapper
      */
     public function getPaymentMethodName()
     {
-        return $this->getConfig(ConfigurationFields::paymentMethodName());
+        return $this->getConfig(ConfigFields::paymentMethodName());
     }
 
     /**
@@ -30,7 +46,7 @@ abstract class ConfigurationWrapper extends Wrapper
      */
     public function getPaymentMethodDetails()
     {
-        return $this->getConfig(ConfigurationFields::paymentMethodDetails());
+        return $this->getConfig(ConfigFields::paymentMethodDetails());
     }
 
     /**
@@ -39,7 +55,7 @@ abstract class ConfigurationWrapper extends Wrapper
      */
     public function isSandbox()
     {
-        return $this->checkOn(ConfigurationFields::sandbox());
+        return $this->checkOn(ConfigFields::sandbox());
     }
 
     /**
@@ -48,7 +64,7 @@ abstract class ConfigurationWrapper extends Wrapper
      */
     public function getBillStatusPending()
     {
-        return $this->getConfig(ConfigurationFields::billStatusPending());
+        return $this->getConfig(ConfigFields::billStatusPending());
     }
 
     /**
@@ -57,7 +73,7 @@ abstract class ConfigurationWrapper extends Wrapper
      */
     public function getBillStatusPayed()
     {
-        return $this->getConfig(ConfigurationFields::billStatusPayed());
+        return $this->getConfig(ConfigFields::billStatusPayed());
     }
 
     /**
@@ -66,7 +82,7 @@ abstract class ConfigurationWrapper extends Wrapper
      */
     public function getBillStatusFailed()
     {
-        return $this->getConfig(ConfigurationFields::billStatusFailed());
+        return $this->getConfig(ConfigFields::billStatusFailed());
     }
 
     /**
@@ -75,13 +91,13 @@ abstract class ConfigurationWrapper extends Wrapper
      */
     public function getBillStatusCanceled()
     {
-        return $this->getConfig(ConfigurationFields::billStatusCanceled());
+        return $this->getConfig(ConfigFields::billStatusCanceled());
     }
 
     public function getConfig($key, $warn = false)
     {
         try {
-            $value = $this->getCmsConfig($key);
+            $value = $this->configStorageCms->getConfig($key);
             if ($warn)
                 return $this->warnIfEmpty($value, $key);
             else
@@ -91,37 +107,38 @@ abstract class ConfigurationWrapper extends Wrapper
         }
     }
 
-    private function checkOn($key)
+    protected function checkOn($key)
     {
         $value = false;
         try {
-            $value = $this->getCmsConfig($key);
+            $value = $this->configStorageCms->getConfig($key);
+            $this->warnIfEmpty($value, $key);
+            if (is_null($value) && $this->needDefaults())
+                $value = $this->getDefaultConfig($key);
             if (is_bool($value))
                 return $value; //уже boolean
-            else
-                return ("" == $value || "0" == $value) ? false : $this->convertToBoolean($value);
+            return ("" == $value || "0" == $value) ? false : $this->configStorageCms->convertToBoolean($value);
         } catch (Throwable $e) {
+            $this->logger->error("Can not load config field[" . $key . "]");
+        } catch (Exception $e) { // для совместимости с php 5
             $this->logger->error("Can not load config field[" . $key . "]");
         }
         return $value;
     }
 
-
     /**
-     * Получение свойства из харнилища настроек конкретной CMS
-     * @param string $key
-     * @return mixed
-     * @throws Exception
-     */
-    public abstract function getCmsConfig($key);
-
-    /**
-     * Конвертация представляения boolean свойства в boolean тип (во разных CMS в хранилищах настроект boolean могут храниться в разном виде)
-     * @param $key
+     * Определяет, надо ли подставлять значение по умолчанию. Значения по умолчанию должны подставляться только
+     * при первом конфигурировании. Простой проверки значения на null не достаточно в некоторых CMS (например в CSCart если убрать
+     * checkbox параметр просто удалится из БД и getCmsConfig будет возращать для него null, хотя должен false)
      * @return bool
      * @throws Exception
      */
-    public abstract function convertToBoolean($cmsConfigValue);
+    protected function needDefaults()
+    {
+        // предполагаем, что если в хранилище есть названием платежного метода, это не первая инциализация и значения по умолчанию не нужны
+        $loginValue = $this->configStorageCms->getConfig(ConfigFields::paymentMethodName());
+        return is_null($loginValue);
+    }
 
     /**
      * Метод для получения значения праметра по ключу
@@ -132,48 +149,20 @@ abstract class ConfigurationWrapper extends Wrapper
     {
         switch ($config_key) {
             // сперва пробегаем по соответствующим методам, на случай если они были переопределены в дочернем классе
-            case ConfigurationFields::shopName():
-                return $this->getShopName();
-            case ConfigurationFields::login():
-                return $this->getHutkigroshLogin();
-            case ConfigurationFields::password():
-                return $this->getHutkigroshPassword();
-            case ConfigurationFields::eripId():
-                return $this->getEripId();
-            case ConfigurationFields::eripTreeId():
-                return $this->getEripTreeId();
-            case ConfigurationFields::sandbox():
+            case ConfigFields::sandbox():
                 return $this->isSandbox();
-            case ConfigurationFields::instructionsSection():
-                return $this->isInstructionsSectionEnabled();
-            case ConfigurationFields::qrcodeSection():
-                return $this->isQRCodeSectionEnabled();
-            case ConfigurationFields::alfaclickSection():
-                return $this->isAlfaclickSectionEnabled();
-            case ConfigurationFields::webpaySection():
-                return $this->isWebpaySectionEnabled();
-            case ConfigurationFields::notificationEmail():
-                return $this->isEmailNotification();
-            case ConfigurationFields::notificationSms():
-                return $this->isSmsNotification();
-            case ConfigurationFields::completionText():
-                return $this->getCompletionText();
-            case ConfigurationFields::paymentMethodName():
+            case ConfigFields::paymentMethodName():
                 return $this->getPaymentMethodName();
-            case ConfigurationFields::paymentMethodDetails():
+            case ConfigFields::paymentMethodDetails():
                 return $this->getPaymentMethodDetails();
-            case ConfigurationFields::billStatusPending():
+            case ConfigFields::billStatusPending():
                 return $this->getBillStatusPending();
-            case ConfigurationFields::billStatusPayed():
+            case ConfigFields::billStatusPayed():
                 return $this->getBillStatusPayed();
-            case ConfigurationFields::billStatusFailed():
+            case ConfigFields::billStatusFailed():
                 return $this->getBillStatusFailed();
-            case ConfigurationFields::billStatusCanceled():
+            case ConfigFields::billStatusCanceled():
                 return $this->getBillStatusCanceled();
-            case ConfigurationFields::dueInterval():
-                return $this->getDueInterval();
-            case ConfigurationFields::eripPath():
-                return $this->getEripPath();
             default:
                 return $this->getConfig($config_key);
         }
@@ -194,7 +183,6 @@ abstract class ConfigurationWrapper extends Wrapper
             "@order_fullname" => $orderWrapper->getFullName(),
             "@order_phone" => $orderWrapper->getMobilePhone(),
             "@order_address" => $orderWrapper->getAddress(),
-            "@erip_path" => $this->getEripPath(),
         ));
     }
 
@@ -213,5 +201,10 @@ abstract class ConfigurationWrapper extends Wrapper
      * @return string
      */
     public abstract function createCmsRelatedKey($key);
+
+    /**
+     * Нельзя делать в конструкторе
+     */
+    public abstract function getDefaultConfig($key);
 
 }

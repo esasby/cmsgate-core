@@ -9,7 +9,7 @@
 namespace esas\cmsgate;
 
 
-class ConfigurationFields
+class ConfigFields
 {
     private static $cmsKeys;
 
@@ -19,10 +19,10 @@ class ConfigurationFields
      * @param $localkey
      * @return mixed
      */
-    private static function getCmsRelatedKey($localkey)
+    protected static function getCmsRelatedKey($localkey)
     {
         if (self::$cmsKeys == null || !in_array($localkey, self::$cmsKeys)) {
-            self::$cmsKeys[$localkey] = Registry::getRegistry()->getConfigurationWrapper()->createCmsRelatedKey($localkey);
+            self::$cmsKeys[$localkey] = Registry::getRegistry()->getConfigWrapper()->createCmsRelatedKey($localkey);
         }
         return self::$cmsKeys[$localkey];
     }

@@ -12,19 +12,46 @@ class TranslatorImpl extends Translator
 {
     private $lang;
 
-    protected function loadLocale($locale)
+    /**
+     * @var LocaleLoaderCms
+     */
+    private $localeLoader;
+
+    /**
+     * @var string
+     */
+    private $psMsgDir;
+
+    /**
+     * TranslatorImpl constructor.
+     * @param LocaleLoaderCms $localeLoader
+     */
+    public function __construct(LocaleLoaderCms $localeLoader, $psMsgDir)
+    {
+        $this->localeLoader = $localeLoader;
+        $this->psMsgDir = $psMsgDir;
+
+    }
+
+    private function loadLocale($locale)
     {
         if (null == $this->lang[$locale]) {
-            $file = __DIR__ . "/" . $locale . ".php";
-            if (!file_exists($file)) {
-                $code = substr($locale, 0, 2);
-                $file = __DIR__ . "/" . $code . "_" . strtoupper($code) . ".php";
-                if (!file_exists($file))
-                    $file = __DIR__ . "/ru_RU.php";
-            }
-            $this->lang[$locale] = include $file;
+            $this->loadLocaleFromDir(__DIR__, $locale); //загружаем локаль из каталога lang core
+            $this->loadLocaleFromDir($this->psMsgDir, $locale); //загружаем локаль для каталога lang наследника
         }
     }
+
+    private function loadLocaleFromDir($dir, $locale) {
+        $file = $dir . "/" . $locale . ".php";
+        if (!file_exists($file)) {
+            $code = substr($locale, 0, 2);
+            $file = $dir . "/" . $code . "_" . strtoupper($code) . ".php";
+            if (!file_exists($file))
+                $file = $dir . "/ru_RU.php";
+        }
+        $this->lang[$locale] = include $file;
+    }
+
 
     /**
      * Translator constructor.
@@ -32,8 +59,7 @@ class TranslatorImpl extends Translator
     public function translate($msg, $locale = null)
     {
         if (null == $locale)
-            $locale = $this->getLocale();
-        $locale = $this->formatLocaleName($locale);
+            $locale = $this->localeLoader->getLocale();
         $this->loadLocale($locale);
         if (array_key_exists($msg, $this->lang[$locale]))
             return $this->lang[$locale][$msg];
@@ -41,23 +67,5 @@ class TranslatorImpl extends Translator
             return $msg;
     }
 
-    /**
-     * Locale по умолчанию, может быть переопределен
-     * @return string
-     */
-    public function getLocale()
-    {
-        return Locale::ru_RU;
-    }
-
-    /**
-     * Перобразует имя локали из формата CMS, во внутренний формат (ru_RU, en_EN ...)
-     * @param $locale
-     * @return string
-     */
-    public function formatLocaleName($locale)
-    {
-        return $locale;
-    }
 
 }
