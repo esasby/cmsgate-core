@@ -16,11 +16,6 @@ use esas\cmsgate\wrappers\ConfigWrapper;
 abstract class Controller
 {
     /**
-     * @var ConfigWrapper
-     */
-    protected $configurationWrapper;
-
-    /**
      * @var Logger
      */
     protected $logger;
@@ -28,13 +23,9 @@ abstract class Controller
     /**
      * Controller constructor.
      */
-    public function __construct(ConfigWrapper $configurationWrapper = null)
+    public function __construct()
     {
         $this->logger = Logger::getLogger(get_class($this));
-        if ($configurationWrapper != null)
-            $this->configurationWrapper = $configurationWrapper;
-        else
-            $this->configurationWrapper = Registry::getRegistry()->getConfigWrapper();
     }
 
 }

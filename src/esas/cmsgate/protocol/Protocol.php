@@ -97,7 +97,7 @@ abstract class Protocol
      * @return mixed
      * @throws Exception
      */
-    private function connect($path, $data = '', $request = RqMethod::_GET, $rsType = RsType::_ARRAY)
+    protected function connect($path, $data = '', $request = RqMethod::_GET, $rsType = RsType::_ARRAY)
     {
         $headers = array('Content-Type: application/xml', 'Content-Length: ' . strlen($data));
 
