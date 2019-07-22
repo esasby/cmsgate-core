@@ -1,5 +1,5 @@
 {
-  "name": "esas/cmsgate",
+  "name": "esas/cmsgate-core",
   "description": "Common cms payment gate library",
   "keywords": [
     "cmsgate",
