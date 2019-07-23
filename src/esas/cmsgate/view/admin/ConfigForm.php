@@ -45,7 +45,6 @@ abstract class ConfigForm
      */
     protected $managedFields;
 
-
     /**
      * ConfigurationRender constructor.
      * @param ManagedFields $managedFields
@@ -54,6 +53,14 @@ abstract class ConfigForm
     {
         $this->logger = Logger::getLogger(get_class($this));
         $this->managedFields = $managedFields;
+    }
+
+    /**
+     * @return ManagedFields
+     */
+    public function getManagedFields()
+    {
+        return $this->managedFields;
     }
 
     /**

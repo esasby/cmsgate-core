@@ -38,4 +38,8 @@ class StringUtils
     {
         return str_replace(array_keys($data), array_values($data), $format);
     }
+
+    static function isNullOrEmptyString($str){
+        return (!isset($str) || trim($str) === '');
+    }
 }

@@ -89,4 +89,10 @@ abstract class Registry
     }
 
     public abstract function createConfigForm();
+
+    /**
+     * Машинное название платежной системы
+     * @return string
+     */
+    public abstract function getPaySystemName();
 }
