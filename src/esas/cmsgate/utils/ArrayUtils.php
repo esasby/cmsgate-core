@@ -6,7 +6,7 @@
  * Time: 11:02
  */
 
-namespace esas\hutkigrosh\utils;
+namespace esas\cmsgate\utils;
 
 
 class ArrayUtils

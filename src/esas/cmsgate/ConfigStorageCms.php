@@ -8,6 +8,7 @@
 
 namespace esas\cmsgate;
 
+use esas\cmsgate\utils\Logger;
 
 abstract class ConfigStorageCms
 {
