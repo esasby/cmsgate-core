@@ -204,7 +204,7 @@ abstract class OrderSafeWrapper extends OrderWrapper
     public function getExtId()
     {
         try {
-            return $this->getBillIdUnsafe();
+            return $this->getExtIdUnsafe();
         } catch (Throwable $e) {
             $this->logger->error("Can not get billid from order. Using empty!", $e);
             return "";
@@ -216,7 +216,7 @@ abstract class OrderSafeWrapper extends OrderWrapper
      * @throws Throwable
      * @return mixed
      */
-    public abstract function getBillIdUnsafe();
+    public abstract function getExtIdUnsafe();
 
     /**
      * Текущий статус заказа в CMS

@@ -19,7 +19,7 @@ class ConfigFields
      * @param $localkey
      * @return mixed
      */
-    protected static function getCmsRelatedKey($localkey)
+    public static function getCmsRelatedKey($localkey)
     {
         if (self::$cmsKeys == null || !in_array($localkey, self::$cmsKeys)) {
             self::$cmsKeys[$localkey] = Registry::getRegistry()->getConfigWrapper()->createCmsRelatedKey($localkey);

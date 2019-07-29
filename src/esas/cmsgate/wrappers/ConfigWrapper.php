@@ -200,7 +200,9 @@ abstract class ConfigWrapper extends Wrapper
      * @param $key
      * @return string
      */
-    public abstract function createCmsRelatedKey($key);
+    public function createCmsRelatedKey($key) {
+        return $this->configStorageCms->createCmsRelatedKey($key);
+    }
 
     /**
      * Нельзя делать в конструкторе

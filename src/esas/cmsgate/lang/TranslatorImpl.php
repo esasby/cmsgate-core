@@ -20,16 +20,17 @@ class TranslatorImpl extends Translator
     /**
      * @var string
      */
-    private $psMsgDir;
+    private $extraVocabularyDir;
 
     /**
      * TranslatorImpl constructor.
      * @param LocaleLoaderCms $localeLoader
+     * @param $psMsgDir - путь к дополнительным словарям
      */
-    public function __construct(LocaleLoaderCms $localeLoader, $psMsgDir)
+    public function __construct(LocaleLoaderCms $localeLoader, $extraVocabularyDir)
     {
         $this->localeLoader = $localeLoader;
-        $this->psMsgDir = $psMsgDir;
+        $this->extraVocabularyDir = $extraVocabularyDir;
 
     }
 
@@ -37,7 +38,7 @@ class TranslatorImpl extends Translator
     {
         if (null == $this->lang[$locale]) {
             $this->loadLocaleFromDir(__DIR__, $locale); //загружаем локаль из каталога lang core
-            $this->loadLocaleFromDir($this->psMsgDir, $locale); //загружаем локаль для каталога lang наследника
+            $this->loadLocaleFromDir($this->extraVocabularyDir, $locale); //загружаем локаль для каталога lang наследника
         }
     }
 
@@ -49,7 +50,11 @@ class TranslatorImpl extends Translator
             if (!file_exists($file))
                 $file = $dir . "/ru_RU.php";
         }
-        $this->lang[$locale] = include $file;
+        $vocabulary = include $file;
+        if (is_array($this->lang[$locale]))
+            $this->lang[$locale] = array_merge($this->lang[$locale], $vocabulary);
+        else
+            $this->lang[$locale] = $vocabulary;
     }
 
 

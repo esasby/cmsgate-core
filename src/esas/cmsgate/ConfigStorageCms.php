@@ -41,4 +41,12 @@ abstract class ConfigStorageCms
      * @throws Exception
      */
     public abstract function convertToBoolean($cmsConfigValue);
+
+    /**
+     * При необходимости соблюдения определенных правил в именовании ключей настроек (зависящих от конкретной CMS)
+     * Данный метод должен быть переопределен
+     * @param $key
+     * @return string
+     */
+    public abstract function createCmsRelatedKey($key);
 }
