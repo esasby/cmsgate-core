@@ -11,7 +11,7 @@ namespace esas\cmsgate\view\admin\validators;
 
 class ValidationResult
 {
-    private $valid;
+    private $valid = true;
 
     private $validatedValue;
 

@@ -26,6 +26,7 @@ abstract class Registry
     protected $configWrapper;
     protected $translator;
     protected $configForm;
+    protected $messenger;
 
     public function init() {
         global $esasRegistry;
@@ -95,4 +96,14 @@ abstract class Registry
      * @return string
      */
     public abstract function getPaySystemName();
+
+    /**
+     * @return Messenger
+     */
+    public function getMessenger()
+    {
+        if ($this->messenger == null)
+            $this->messenger = new Messenger($this->createTranslator());
+        return $this->messenger;
+    }
 }

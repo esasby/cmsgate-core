@@ -117,6 +117,8 @@ abstract class ManagedFields
     public function validate($configKey, $configValue)
     {
         $configField = $this->getField($configKey);
+        if ($configField == null)
+            return new ValidationResult(); //неизвестные поля пропускаем
         $validationResult = $configField->validate($configValue);
         if (!$validationResult->isValid()) {
             $this->logger->error("Configuration field[" . $configKey . "] value[" . $configValue . "] is not valid: " . $validationResult->getErrorTextSimple());
