@@ -34,6 +34,14 @@ abstract class ConfigStorageCms
      */
     public abstract function getConfig($key);
 
+
+    /**
+     * Сохранение значения свойства в харнилища настроек конкретной CMS.
+     * @param string $key
+     * @throws Exception
+     */
+    public abstract function saveConfig($key, $value);
+
     /**
      * Конвертация представляения boolean свойства в boolean тип (во разных CMS в хранилищах настроект boolean могут храниться в разном виде)
      * @param $key
