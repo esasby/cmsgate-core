@@ -8,8 +8,8 @@
 
 namespace esas\cmsgate\wrappers;
 
-use esas\cmsgate\ConfigStorageCms;
 use esas\cmsgate\ConfigFields;
+use esas\cmsgate\ConfigStorageCms;
 use Exception;
 use Throwable;
 
@@ -107,6 +107,14 @@ abstract class ConfigWrapper extends Wrapper
         }
     }
 
+    public function getConfigOrDefaults($key, $warn = false)
+    {
+        $text = $this->getConfig($key, $warn);
+        if ($text == "")
+            $text = $this->translator->getConfigFieldDefault($key);
+        return htmlspecialchars_decode($text); // в некотрых CMS при сохранении в БД html-символы кодируются, и поэтому надо их декодировать обратно
+    }
+
     protected function checkOn($key)
     {
         $value = false;
@@ -195,13 +203,34 @@ abstract class ConfigWrapper extends Wrapper
     }
 
     /**
-     * При необходимости соблюдения определенных правил в именовании ключей настроек (зависящих от конкретной CMS)
-     * Данный метод должен быть переопределен
+     * Используется для соблюдения определенных правил в именовании ключей настроек (зависящих от конкретной CMS)
      * @param $key
      * @return string
      */
-    public function createCmsRelatedKey($key) {
+    public function createCmsRelatedKey($key)
+    {
         return $this->configStorageCms->createCmsRelatedKey($key);
+    }
+
+
+    /**
+     * Сохранение значения свойства в настройках.
+     * @param $key - ключ
+     * @param $value - значение
+     */
+    public function saveConfig($key, $value)
+    {
+        $this->logger->warn("Storing config field[" . $key . "] value[" . $value . "]");
+        $this->configStorageCms->saveConfig(
+            $this->createCmsRelatedKey($key),
+            $value);
+    }
+
+    public function saveConfigs($keyValueArray)
+    {
+        foreach ($keyValueArray as $key => $value) {
+            $this->saveConfig($key, $value);
+        }
     }
 
     /**
