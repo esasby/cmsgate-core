@@ -215,14 +215,14 @@ abstract class ConfigWrapper extends Wrapper
 
     /**
      * Сохранение значения свойства в настройках.
-     * @param $key - ключ
+     * @param $key - ключ (уже CMS Related)
      * @param $value - значение
      */
     public function saveConfig($key, $value)
     {
         $this->logger->warn("Storing config field[" . $key . "] value[" . $value . "]");
         $this->configStorageCms->saveConfig(
-            $this->createCmsRelatedKey($key),
+            $key,
             $value);
     }
 
