@@ -9,6 +9,7 @@
 namespace esas\cmsgate\view\admin;
 
 
+use esas\cmsgate\Errors;
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\fields\ConfigField;
@@ -20,6 +21,7 @@ use esas\cmsgate\view\admin\fields\ConfigFieldRichtext;
 use esas\cmsgate\view\admin\fields\ConfigFieldStatusList;
 use esas\cmsgate\view\admin\fields\ConfigFieldTextarea;
 use esas\cmsgate\view\admin\fields\ListOption;
+use Exception;
 
 /**
  * Class ConfigForm обеспечивает генерация формы с настройками плагина (может быть как генерация конечного html,
@@ -118,7 +120,15 @@ abstract class ConfigForm
      */
     public abstract function createStatusListOptions();
 
-
+    /**
+     * @throws Exception
+     */
+    public function validate() {
+        if (!$this->getManagedFields()->validateAll($_REQUEST)) {
+            Registry::getRegistry()->getMessenger()->addErrorMessage(Errors::INCORRECT_INPUT);
+            throw new Exception('Config form is not valid');
+        }
+    }
 }
 
 

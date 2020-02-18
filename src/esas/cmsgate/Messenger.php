@@ -18,7 +18,9 @@ class Messenger
      */
     protected $translator;
 
-    private $messeges = '';
+    private $infoMessages = '';
+    private $warnMessages = '';
+    private $errorMessages = '';
 
     /**
      * Messenger constructor.
@@ -29,16 +31,42 @@ class Messenger
         $this->translator = $translator;
     }
 
-    public function addMessage($msg) {
-        $this->messeges = $this->messeges . ($this->messeges != '' ? "\n" : "") . $this->translator->translate($msg);
+    public function addInfoMessage($msg) {
+        $this->infoMessages = $this->infoMessages . ($this->infoMessages != '' ? "\n" : "") . $this->translator->translate($msg);
+    }
+
+    public function addWarnMessage($msg) {
+        $this->warnMessages = $this->warnMessages . ($this->warnMessages != '' ? "\n" : "") . $this->translator->translate($msg);
+    }
+
+    public function addErrorMessage($msg) {
+        $this->errorMessages = $this->errorMessages . ($this->errorMessages != '' ? "\n" : "") . $this->translator->translate($msg);
     }
 
     /**
      * @return string
      */
-    public function getMesseges()
+    public function getInfoMessages()
     {
-        return $this->messeges;
+        return $this->infoMessages;
     }
+
+    /**
+     * @return string
+     */
+    public function getWarnMessages()
+    {
+        return $this->warnMessages;
+    }
+
+    /**
+     * @return string
+     */
+    public function getErrorMessages()
+    {
+        return $this->errorMessages;
+    }
+
+
 
 }
