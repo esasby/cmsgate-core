@@ -32,6 +32,82 @@ use esas\cmsgate\view\admin\fields\ConfigFieldTextarea;
  */
 abstract class ConfigFormHtml extends ConfigForm
 {
+    /**
+     * @var string
+     */
+    protected $headingTitle;
+
+    /**
+     * @var string
+     */
+    protected $submitUrl;
+
+    /**
+     * @var array
+     */
+    protected $submitButtons;
+
+    /**
+     * ConfigFormHtml constructor.
+     * @param string $headingTitle
+     */
+    public function __construct($managedFields, $headingTitle, $submitUrl, $submitButtons)
+    {
+        parent::__construct($managedFields);
+        $this->headingTitle = $headingTitle;
+        $this->submitUrl = $submitUrl;
+        $this->submitButtons = $submitButtons;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeadingTitle()
+    {
+        return $this->headingTitle;
+    }
+
+    /**
+     * @param string $headingTitle
+     */
+    public function setHeadingTitle($headingTitle)
+    {
+        $this->headingTitle = $headingTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubmitUrl()
+    {
+        return $this->submitUrl;
+    }
+
+    /**
+     * @param string $submitUrl
+     */
+    public function setSubmitUrl($submitUrl)
+    {
+        $this->submitUrl = $submitUrl;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSubmitButtons()
+    {
+        return $this->submitButtons;
+    }
+
+    /**
+     * @param array $submitButtons
+     */
+    public function setSubmitButtons($submitButtons)
+    {
+        $this->submitButtons = $submitButtons;
+    }
+
+
 
     /**
      * Производит формирование конечного html с настройками модуля

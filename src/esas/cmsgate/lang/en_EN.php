@@ -12,5 +12,8 @@ return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNumeric::class => 'Value had to be numeric',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Wrong email format',
 
+    AdminViewFields::CONFIG_FORM_HEADING => 'Common settings',
+    AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Save',
+
     Errors::INCORRECT_INPUT => "Incorrect input",
 );

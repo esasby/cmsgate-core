@@ -28,6 +28,13 @@ class Elements
     const A = "a";
     const BR = "br";
     const HR = "hr";
+    const H1 = "h1";
+    const H2 = "h2";
+    const H3 = "h3";
+    const H4 = "h4";
+    const I = "i";
+    const FORM = "form";
+    const BUTTON = "button";
     const SCRIPT = "script";
     const STYLE = "style";
     const LI = "li";
@@ -131,6 +138,41 @@ class Elements
     public static function hr()
     {
         return new ElementVoid(self::HR, null);
+    }
+
+    public static function h1(...$elementAndAttributes)
+    {
+        return new Element(self::H1, $elementAndAttributes);
+    }
+
+    public static function h2(...$elementAndAttributes)
+    {
+        return new Element(self::H2, $elementAndAttributes);
+    }
+
+    public static function h3(...$elementAndAttributes)
+    {
+        return new Element(self::H3, $elementAndAttributes);
+    }
+
+    public static function h4(...$elementAndAttributes)
+    {
+        return new Element(self::H4, $elementAndAttributes);
+    }
+
+    public static function i(...$elementAndAttributes)
+    {
+        return new Element(self::I, $elementAndAttributes);
+    }
+
+    public static function form(...$elementAndAttributes)
+    {
+        return new Element(self::FORM, $elementAndAttributes);
+    }
+
+    public static function button(...$elementAndAttributes)
+    {
+        return new Element(self::BUTTON, $elementAndAttributes);
     }
 
     public static function content(...$elementsAndContent)

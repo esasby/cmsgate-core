@@ -13,5 +13,8 @@ return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNumeric::class => 'Значение должно быть целым числом',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Неверный формат email',
 
+    AdminViewFields::CONFIG_FORM_HEADING => 'Общие настройки',
+    AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Сохранить',
+
     Errors::INCORRECT_INPUT => "Некорректные данные",
 );

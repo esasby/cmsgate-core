@@ -15,5 +15,6 @@ namespace esas\cmsgate\view\admin;
  */
 class AdminViewFields
 {
-    const CONFIG_FORM_COMMON_HEADING = 'configform_common_heading';
+    const CONFIG_FORM_HEADING = 'configform_heading';
+    const CONFIG_FORM_BUTTON_SAVE = 'configform_save';
 }

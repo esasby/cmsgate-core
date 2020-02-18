@@ -15,6 +15,9 @@ class Attributes
     const CLAZZ = "class";
     const STYLE = "style";
     const ALIGN = "align";
+    const ACTION = "action";
+    const METHOD = "method";
+    const ENCTYPE = "enctype";
     const TYPE = "type";
     const NAME = "name";
     const FORR = "for";
@@ -25,6 +28,7 @@ class Attributes
     const CHECKED = "checked";
     const SELECTED = "selected";
     const DATA_TOGLE = "data-toggle";
+    const DATA_DISMISS = "data-dismiss";
     const TITLE = "title";
     const SRC = "src";
     const ALT = "alt";
@@ -53,6 +57,21 @@ class Attributes
     public static function align($align)
     {
         return new Attribute(self::ALIGN, $align);
+    }
+
+    public static function action($action)
+    {
+        return new Attribute(self::ACTION, $action);
+    }
+
+    public static function method($methos)
+    {
+        return new Attribute(self::METHOD, $methos);
+    }
+
+    public static function enctype($enctype)
+    {
+        return new Attribute(self::ENCTYPE, $enctype);
     }
 
     public static function type($type)
@@ -103,6 +122,11 @@ class Attributes
     public static function data_toggle($dataToggle)
     {
         return new Attribute(self::DATA_TOGLE, $dataToggle);
+    }
+
+    public static function data_dismiss($dataDismiss)
+    {
+        return new Attribute(self::DATA_DISMISS, $dataDismiss);
     }
 
     public static function title($title)
