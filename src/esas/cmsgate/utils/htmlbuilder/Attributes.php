@@ -24,6 +24,7 @@ class Attributes
     const PLACEHOLDER = "placeholder";
     const ROWS = "rows";
     const COLS = "cols";
+    const COLOR = "color";
     const VALUE = "value";
     const CHECKED = "checked";
     const SELECTED = "selected";
@@ -97,6 +98,11 @@ class Attributes
     public static function cols($cols)
     {
         return new Attribute(self::COLS, $cols);
+    }
+
+    public static function color($color)
+    {
+        return new Attribute(self::COLOR, $color);
     }
 
     public static function forr($forr)

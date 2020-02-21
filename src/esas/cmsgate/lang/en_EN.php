@@ -1,6 +1,6 @@
 <?php
 
-use esas\cmsgate\Errors;
+use esas\cmsgate\view\Messages;
 use esas\cmsgate\view\admin\AdminViewFields;
 if (!defined("_DESC")) define("_DESC", '_desc');
 if (!defined("_DEFAULT")) define("_DEFAULT", '_default');
@@ -11,9 +11,11 @@ return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorInteger::class => 'Value had to be between %d and %d',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNumeric::class => 'Value had to be numeric',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Wrong email format',
+    _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorUploadFileExtension::class => 'Wrong file extension. *.[%s] file is expected',
 
     AdminViewFields::CONFIG_FORM_HEADING => 'Common settings',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Save',
 
-    Errors::INCORRECT_INPUT => "Incorrect input",
+    Messages::INCORRECT_INPUT => "Incorrect input",
+    Messages::SETTINGS_SAVED => "Settings were successfully saved!",
 );

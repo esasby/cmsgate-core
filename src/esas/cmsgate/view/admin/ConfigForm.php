@@ -9,11 +9,11 @@
 namespace esas\cmsgate\view\admin;
 
 
-use esas\cmsgate\Errors;
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\fields\ConfigField;
 use esas\cmsgate\view\admin\fields\ConfigFieldCheckbox;
+use esas\cmsgate\view\admin\fields\ConfigFieldFile;
 use esas\cmsgate\view\admin\fields\ConfigFieldList;
 use esas\cmsgate\view\admin\fields\ConfigFieldNumber;
 use esas\cmsgate\view\admin\fields\ConfigFieldPassword;
@@ -21,6 +21,7 @@ use esas\cmsgate\view\admin\fields\ConfigFieldRichtext;
 use esas\cmsgate\view\admin\fields\ConfigFieldStatusList;
 use esas\cmsgate\view\admin\fields\ConfigFieldTextarea;
 use esas\cmsgate\view\admin\fields\ListOption;
+use esas\cmsgate\view\Messages;
 use Exception;
 
 /**
@@ -104,6 +105,11 @@ abstract class ConfigForm
         return $this->generateTextField($configField);
     }
 
+    public function generateFileField(ConfigFieldFile $configField)
+    {
+        return $this->generateTextField($configField);
+    }
+
     public function generateStatusListField(ConfigFieldStatusList $configField)
     {
         $configField->setOptions($this->createStatusListOptions());
@@ -124,8 +130,9 @@ abstract class ConfigForm
      * @throws Exception
      */
     public function validate() {
-        if (!$this->getManagedFields()->validateAll($_REQUEST)) {
-            Registry::getRegistry()->getMessenger()->addErrorMessage(Errors::INCORRECT_INPUT);
+        if (!$this->getManagedFields()->validateAll($_REQUEST) 
+            || !$this->getManagedFields()->validateAll($_FILES)) {
+            Registry::getRegistry()->getMessenger()->addErrorMessage(Messages::INCORRECT_INPUT);
             throw new Exception('Config form is not valid');
         }
     }

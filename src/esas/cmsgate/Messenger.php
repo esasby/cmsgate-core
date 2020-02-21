@@ -18,9 +18,9 @@ class Messenger
      */
     protected $translator;
 
-    private $infoMessages = '';
-    private $warnMessages = '';
-    private $errorMessages = '';
+    private $infoMessages = array();
+    private $warnMessages = array();
+    private $errorMessages = array();
 
     /**
      * Messenger constructor.
@@ -32,21 +32,29 @@ class Messenger
     }
 
     public function addInfoMessage($msg) {
-        $this->infoMessages = $this->infoMessages . ($this->infoMessages != '' ? "\n" : "") . $this->translator->translate($msg);
+        $this->infoMessages[] = $this->translator->translate($msg);
     }
 
     public function addWarnMessage($msg) {
-        $this->warnMessages = $this->warnMessages . ($this->warnMessages != '' ? "\n" : "") . $this->translator->translate($msg);
+        $this->warnMessages[] = $this->translator->translate($msg);
     }
 
     public function addErrorMessage($msg) {
-        $this->errorMessages = $this->errorMessages . ($this->errorMessages != '' ? "\n" : "") . $this->translator->translate($msg);
+        $this->errorMessages[] = $this->translator->translate($msg);
     }
 
     /**
      * @return string
      */
     public function getInfoMessages()
+    {
+        return implode("\n", $this->infoMessages);
+    }
+
+    /**
+     * @return array
+     */
+    public function getInfoMessagesArray()
     {
         return $this->infoMessages;
     }
@@ -56,6 +64,14 @@ class Messenger
      */
     public function getWarnMessages()
     {
+        return implode("\n", $this->warnMessages);
+    }
+
+    /**
+     * @return array
+     */
+    public function getWarnMessagesArray()
+    {
         return $this->warnMessages;
     }
 
@@ -64,9 +80,15 @@ class Messenger
      */
     public function getErrorMessages()
     {
-        return $this->errorMessages;
+        return implode("\n", $this->errorMessages);
     }
 
-
+    /**
+     * @return array
+     */
+    public function getErrorMessagesArray()
+    {
+        return $this->errorMessages;
+    }
 
 }

@@ -34,6 +34,7 @@ class Elements
     const H4 = "h4";
     const I = "i";
     const FORM = "form";
+    const FONT = "font";
     const BUTTON = "button";
     const SCRIPT = "script";
     const STYLE = "style";
@@ -168,6 +169,11 @@ class Elements
     public static function form(...$elementAndAttributes)
     {
         return new Element(self::FORM, $elementAndAttributes);
+    }
+
+    public static function font(...$elementAndAttributes)
+    {
+        return new Element(self::FONT, $elementAndAttributes);
     }
 
     public static function button(...$elementAndAttributes)

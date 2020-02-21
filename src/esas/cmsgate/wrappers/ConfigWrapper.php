@@ -10,6 +10,9 @@ namespace esas\cmsgate\wrappers;
 
 use esas\cmsgate\ConfigFields;
 use esas\cmsgate\ConfigStorageCms;
+use esas\cmsgate\Registry;
+use esas\cmsgate\utils\FileUtils;
+use esas\cmsgate\view\Messages;
 use Exception;
 use Throwable;
 
@@ -226,11 +229,17 @@ abstract class ConfigWrapper extends Wrapper
             $value);
     }
 
+    /**
+     * @param $keyValueArray
+     * @throws Throwable
+     */
     public function saveConfigs($keyValueArray)
     {
         foreach ($keyValueArray as $key => $value) {
             $this->saveConfig($key, $value);
         }
+        Registry::getRegistry()->getMessenger()->addInfoMessage(Messages::SETTINGS_SAVED);
+        FileUtils::uploadFiles();
     }
 
     /**

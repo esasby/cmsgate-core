@@ -30,7 +30,7 @@ class Logger
     public static function init()
     {
         $dir = dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/logs';
-        self::createSafeDir($dir);
+        FileUtils::createSafeDir($dir);
         Log4php::configure(array(
             'rootLogger' => array(
                 'appenders' => array('fileAppender'),
@@ -92,30 +92,13 @@ class Logger
     /**
      * В библиотеке log4php v 2.3.0 есть баг с вывводом trace, при работе с php 7
      */
-    private static function getStackTrace(Throwable $th = null)
+    private static function getStackTrace($th = null)
     {
-        if ($th != null && $th instanceof Throwable)
+        if ($th != null && $th instanceof Throwable || $th instanceof Exception)
             return "\n#E " . $th->getFile() . "(" . $th->getLine() . "): " . $th->getMessage() . "\n" . $th->getTraceAsString();
         else
             return "";
     }
 
-    /**
-     * Создает директорию с файлом .htaccess
-     * Для ограничения доступа из вне к файлам логов
-     * @param $dirname
-     * @throws Exception
-     */
-    private static function createSafeDir($dirname)
-    {
-        if (!is_dir($dirname) && !mkdir($dirname)) {
-            throw new Exception("Can not create log dir[" . $dirname . "]");
-        }
-        $file = $dirname . '/.htaccess';
-        if (!file_exists($file)) {
-            $content =
-                '<Files *.log>Deny from all</Files>' . PHP_EOL;
-            file_put_contents($file, $content);
-        }
-    }
+    
 }

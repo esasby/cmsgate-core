@@ -6,10 +6,11 @@
  * Time: 11:11
  */
 
-namespace esas\cmsgate;
+namespace esas\cmsgate\view;
 
 
-class Errors
+class Messages
 {
     const INCORRECT_INPUT = 'incorrect_input';
+    const SETTINGS_SAVED = 'settings_saved';
 }

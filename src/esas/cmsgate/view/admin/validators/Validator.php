@@ -45,7 +45,8 @@ abstract class Validator
     public function validate($value)
     {
         $ret = new ValidationResult();
-        $ret->setValidatedValue($value);
+        if (!is_array($value)) // на случай валидации загружаемых файлов, в $value будет массив методанных по файлу и его в setValidatedValue не надо
+            $ret->setValidatedValue($value);
         try {
             $ret->setValid($this->validateValue($value));
         } catch (Throwable $e) {

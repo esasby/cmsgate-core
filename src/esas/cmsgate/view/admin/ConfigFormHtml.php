@@ -9,9 +9,11 @@
 namespace esas\cmsgate\view\admin;
 
 
+use esas\cmsgate\Registry;
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
 use esas\cmsgate\view\admin\fields\ConfigFieldCheckbox;
+use esas\cmsgate\view\admin\fields\ConfigFieldFile;
 use esas\cmsgate\view\admin\fields\ConfigFieldList;
 use esas\cmsgate\view\admin\fields\ConfigFieldNumber;
 use esas\cmsgate\view\admin\fields\ConfigFieldPassword;
@@ -108,6 +110,20 @@ abstract class ConfigFormHtml extends ConfigForm
     }
 
 
+    /**
+     * @param $name
+     * @param null $value
+     * @return $this
+     */
+    public function addSubmitButton($name, $value = null)
+    {
+        if ($value != null)
+            $this->submitButtons[$name] = $value;
+        else
+            $this->submitButtons[$name] = Registry::getRegistry()->getTranslator()->translate($name);
+        return $this;
+    }
+
 
     /**
      * Производит формирование конечного html с настройками модуля
@@ -138,6 +154,9 @@ abstract class ConfigFormHtml extends ConfigForm
                 continue;
             } elseif ($configField instanceof ConfigFieldList) {
                 $ret .= $this->generateListField($configField);
+                continue;
+            } elseif ($configField instanceof ConfigFieldFile) {
+                $ret .= $this->generateFileField($configField);
                 continue;
             } else
                 $ret .= $this->generateTextField($configField);
