@@ -38,6 +38,7 @@ class Elements
     const BUTTON = "button";
     const SCRIPT = "script";
     const STYLE = "style";
+    const STRONG = "strong";
     const LI = "li";
     const UL = "ul";
 
@@ -61,6 +62,11 @@ class Elements
         return new Element(self::TEXTAREA, $elementAndAttributes);
     }
 
+    public static function condition($condition, ...$elementAndAttributes)
+    {
+        return new Condition($condition, $elementAndAttributes);
+    }
+
     public static function label(...$elementAndAttributes)
     {
         return new Element(self::LABEL, $elementAndAttributes);
@@ -69,6 +75,11 @@ class Elements
     public static function styleFile($fileLocation)
     {
         return new Element(self::STYLE, [new ReadContentFile($fileLocation)]);
+    }
+
+    public static function strong($elementAndAttributes)
+    {
+        return new Element(self::STRONG, $elementAndAttributes);
     }
 
     public static function option(...$elementAndAttributes)

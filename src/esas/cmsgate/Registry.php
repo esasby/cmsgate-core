@@ -14,6 +14,7 @@ use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\ConfigForm;
 use esas\cmsgate\wrappers\ConfigWrapper;
 use esas\cmsgate\wrappers\OrderWrapper;
+use esas\cmsgate\wrappers\SystemSettingsWrapper;
 
 /**
  * Реализация шаблона registry для удобства доступа к ConfigurationWrapper, OrderWrapper, Translator и т.д..
@@ -24,6 +25,7 @@ use esas\cmsgate\wrappers\OrderWrapper;
 abstract class Registry
 {
     protected $configWrapper;
+    protected $systemSettingsWrapper;
     protected $translator;
     protected $configForm;
     protected $messenger;
@@ -47,6 +49,20 @@ abstract class Registry
     }
     
     public abstract function createConfigWrapper();
+
+    /**
+     * @return SystemSettingsWrapper
+     */
+    public function getSystemSettingsWrapper()
+    {
+        if ($this->systemSettingsWrapper == null)
+            $this->systemSettingsWrapper = $this->createSystemSettingsWrapper();
+        return $this->systemSettingsWrapper;
+    }
+
+    public function createSystemSettingsWrapper() {
+        return new SystemSettingsWrapper();
+    }
 
     /**
      * @return Translator

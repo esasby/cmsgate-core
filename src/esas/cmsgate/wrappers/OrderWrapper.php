@@ -30,6 +30,12 @@ abstract class OrderWrapper extends Wrapper
     }
 
     /**
+     * Идентификатор клиента
+     * @return string
+     */
+    public abstract function getClientId();
+
+    /**
      * Полное имя покупателя
      * @return string
      */

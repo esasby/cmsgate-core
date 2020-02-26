@@ -64,6 +64,27 @@ abstract class OrderSafeWrapper extends OrderWrapper
     public abstract function getFullNameUnsafe();
 
     /**
+     * Идентификатор клиента
+     * @return string
+     */
+    public function getClientId()
+    {
+        try {
+            return trim($this->getClientIdUnsafe());
+        } catch (Throwable $e) {
+            $this->logger->error("Can not get client id. Using empty!", $e);
+            return "";
+        }
+    }
+
+    /**
+     * Идентификатор клиента
+     * @throws Throwable
+     * @return string
+     */
+    public abstract function getClientIdUnsafe();
+
+    /**
      * Мобильный номер покупателя для sms-оповещения
      * (если включено администратором)
      * @return string

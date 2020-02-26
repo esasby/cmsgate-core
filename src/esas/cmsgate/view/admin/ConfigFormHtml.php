@@ -87,10 +87,13 @@ abstract class ConfigFormHtml extends ConfigForm
 
     /**
      * @param string $submitUrl
+     * @return ConfigFormHtml
      */
     public function setSubmitUrl($submitUrl)
     {
         $this->submitUrl = $submitUrl;
+        /** @var $this */
+        return $this;
     }
 
     /**

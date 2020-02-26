@@ -29,8 +29,7 @@ class Logger
 
     public static function init()
     {
-        $dir = dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/logs';
-        FileUtils::createSafeDir($dir);
+        FileUtils::createSafeDir(self::getLogFileDirectory());
         Log4php::configure(array(
             'rootLogger' => array(
                 'appenders' => array('fileAppender'),
@@ -46,12 +45,20 @@ class Logger
                         )
                     ),
                     'params' => array(
-                        'file' => $dir . '/cmsgate.log',
+                        'file' => self::getLogFilePath(),
                         'append' => true
                     )
                 )
             )
         ));
+    }
+
+    public static function getLogFileDirectory() {
+        return dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/logs';
+    }
+
+    public static function getLogFilePath() {
+        return self::getLogFileDirectory() . '/cmsgate.log';
     }
 
     public static function getLogger($name)
