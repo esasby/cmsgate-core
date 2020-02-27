@@ -77,7 +77,7 @@ class Elements
         return new Element(self::STYLE, [new ReadContentFile($fileLocation)]);
     }
 
-    public static function strong($elementAndAttributes)
+    public static function strong(...$elementAndAttributes)
     {
         return new Element(self::STRONG, $elementAndAttributes);
     }
