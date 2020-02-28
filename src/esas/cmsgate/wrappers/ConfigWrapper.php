@@ -62,6 +62,15 @@ abstract class ConfigWrapper extends Wrapper
     }
 
     /**
+     * Включен ли режим debug
+     * @return boolean
+     */
+    public function isDebugMode()
+    {
+        return $this->checkOn(ConfigFields::debugMode());
+    }
+
+    /**
      * Какой статус присвоить заказу после успешно выставления счета в ЕРИП (на шлюз Хуткигрош_
      * @return string
      */
@@ -162,6 +171,8 @@ abstract class ConfigWrapper extends Wrapper
             // сперва пробегаем по соответствующим методам, на случай если они были переопределены в дочернем классе
             case ConfigFields::sandbox():
                 return $this->isSandbox();
+            case ConfigFields::debugMode():
+                return $this->isDebugMode();
             case ConfigFields::paymentMethodName():
                 return $this->getPaymentMethodName();
             case ConfigFields::paymentMethodDetails():

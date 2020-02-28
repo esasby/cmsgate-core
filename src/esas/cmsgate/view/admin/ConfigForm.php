@@ -10,6 +10,7 @@ namespace esas\cmsgate\view\admin;
 
 
 use esas\cmsgate\Registry;
+use esas\cmsgate\utils\FileUtils;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\fields\ConfigField;
 use esas\cmsgate\view\admin\fields\ConfigFieldCheckbox;
@@ -135,6 +136,18 @@ abstract class ConfigForm
             Registry::getRegistry()->getMessenger()->addErrorMessage(Messages::INCORRECT_INPUT);
             throw new Exception('Config form is not valid');
         }
+    }
+
+    /**
+     * @throws \Throwable
+     */
+    public function save() {
+        foreach ($this->getManagedFields()->getFieldsToRender() as $configField) {
+            $value = array_key_exists($configField->getKey(), $_REQUEST) ? $_REQUEST[$configField->getKey()] : "";
+            Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
+        }
+        Registry::getRegistry()->getMessenger()->addInfoMessage(Messages::SETTINGS_SAVED);
+        FileUtils::uploadFiles();
     }
 }
 

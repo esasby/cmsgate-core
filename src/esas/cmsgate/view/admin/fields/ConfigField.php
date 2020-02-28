@@ -168,10 +168,11 @@ abstract class ConfigField
     public function getValue()
     {
         //тут будет не null, если до этого для поля вызывался валидатор
-        if (!is_null($this->validationResult))
+        if (isset($this->validationResult) && $this->validationResult != null) {
             return $this->validationResult->getValidatedValue();
-        else
+        } else {
             return Registry::getRegistry()->getConfigWrapper()->get($this->key);
+        }
     }
 
     /**

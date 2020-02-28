@@ -32,6 +32,11 @@ class ConfigFields
         return self::getCmsRelatedKey("sandbox");
     }
 
+    public static function debugMode()
+    {
+        return self::getCmsRelatedKey("debug_mode");
+    }
+
     public static function paymentMethodName()
     {
         return self::getCmsRelatedKey("payment_method_name");
