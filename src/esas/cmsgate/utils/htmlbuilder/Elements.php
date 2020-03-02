@@ -33,7 +33,9 @@ class Elements
     const H3 = "h3";
     const H4 = "h4";
     const I = "i";
+    const P = "p";
     const FORM = "form";
+    const FIELDSET = "fieldset";
     const FONT = "font";
     const BUTTON = "button";
     const SCRIPT = "script";
@@ -60,11 +62,6 @@ class Elements
     public static function textarea(...$elementAndAttributes)
     {
         return new Element(self::TEXTAREA, $elementAndAttributes);
-    }
-
-    public static function condition($condition, ...$elementAndAttributes)
-    {
-        return new Condition($condition, $elementAndAttributes);
     }
 
     public static function label(...$elementAndAttributes)
@@ -177,9 +174,19 @@ class Elements
         return new Element(self::I, $elementAndAttributes);
     }
 
+    public static function p(...$elementAndAttributes)
+    {
+        return new Element(self::P, $elementAndAttributes);
+    }
+
     public static function form(...$elementAndAttributes)
     {
         return new Element(self::FORM, $elementAndAttributes);
+    }
+
+    public static function fieldset(...$elementAndAttributes)
+    {
+        return new Element(self::FIELDSET, $elementAndAttributes);
     }
 
     public static function font(...$elementAndAttributes)

@@ -57,5 +57,7 @@ abstract class ConfigStorageCms
      * @param $key
      * @return string
      */
-    public abstract function createCmsRelatedKey($key);
+    public function createCmsRelatedKey($key) {
+        return $key;
+    }
 }
