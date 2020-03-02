@@ -31,11 +31,22 @@ abstract class Registry
     protected $messenger;
 
     public function init() {
-        global $esasRegistry;
-        if ($esasRegistry == null) {
+        $registryName = self::getUniqRegistryName();
+        global $$registryName;
+        if ($$registryName == null) {
             Logger::getLogger(get_class($this))->debug("init");
-            $esasRegistry = $this;
+            $$registryName = $this;
         }
+    }
+
+    /**
+     * В случае, если в CMS одновеременно установлено несколько cmsgate плагинов,
+     * Registry каждого должны быть сохранен в global под разными именами
+     * Для уникальности генерируем хэш по пути текущего файла
+     * @return string
+     */
+    private static function getUniqRegistryName() {
+        return "cmsRegistry_" . hash('md5', getcwd());
     }
 
     /**
@@ -76,15 +87,19 @@ abstract class Registry
 
     public abstract function createTranslator();
 
+    /**
+     * @return Registry
+     */
     public static function getRegistry() {
         /**
          * @var \esas\cmsgate\Registry $esasRegistry
          */
-        global $esasRegistry;
-        if ($esasRegistry == null) {
-            Logger::getLogger("registry")->fatal("Esas registry is not initialized!");
+        $registryName = self::getUniqRegistryName();
+        global $$registryName;
+        if ($$registryName == null) {
+            Logger::getLogger("registry")->fatal("CMSGate registry is not initialized!");
         }
-        return $esasRegistry;
+        return $$registryName;
     }
 
     /**
