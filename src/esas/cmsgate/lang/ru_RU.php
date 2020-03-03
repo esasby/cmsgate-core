@@ -21,4 +21,5 @@ return array(
     Messages::INCORRECT_INPUT => "Некорректные данные",
     Messages::SETTINGS_SAVED => "Настройки успешно сохранены!",
     Messages::SANDBOX_MODE_IS_ON => 'Внимание! Модуль включен в режиме тестирования. Средства с вашего счёта списываться не будут',
+    Messages::SETTINGS => 'Настройки',
 );

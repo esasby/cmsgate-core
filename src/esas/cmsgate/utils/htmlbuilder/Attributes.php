@@ -14,6 +14,7 @@ class Attributes
     const ID = "id";
     const CLAZZ = "class";
     const STYLE = "style";
+    const SCOPE = "scope";
     const ALIGN = "align";
     const ACTION = "action";
     const METHOD = "method";
@@ -24,8 +25,10 @@ class Attributes
     const PLACEHOLDER = "placeholder";
     const ROWS = "rows";
     const COLS = "cols";
+    const COLSPAN = "colspan";
     const COLOR = "color";
     const VALUE = "value";
+    const VALIGN = "valign";
     const CHECKED = "checked";
     const SELECTED = "selected";
     const DATA_TOGLE = "data-toggle";
@@ -53,6 +56,11 @@ class Attributes
     public static function style($style)
     {
         return new Attribute(self::STYLE, $style);
+    }
+
+    public static function scope($scope)
+    {
+        return new Attribute(self::SCOPE, $scope);
     }
 
     public static function align($align)
@@ -100,6 +108,11 @@ class Attributes
         return new Attribute(self::COLS, $cols);
     }
 
+    public static function colspan($colspan)
+    {
+        return new Attribute(self::COLSPAN, $colspan);
+    }
+
     public static function color($color)
     {
         return new Attribute(self::COLOR, $color);
@@ -113,6 +126,11 @@ class Attributes
     public static function value($value)
     {
         return new Attribute(self::VALUE, $value);
+    }
+
+    public static function valign($valign)
+    {
+        return new Attribute(self::VALIGN, $valign);
     }
 
     public static function checked($checked)

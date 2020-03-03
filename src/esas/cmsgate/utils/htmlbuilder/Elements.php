@@ -13,6 +13,10 @@ class Elements
     const DIV = "div";
     const INPUT = "input";
     const TEXTAREA = "textarea";
+    const TABLE = "table";
+    const TR = "tr";
+    const TD = "td";
+    const TH = "th";
     const LABEL = "label";
     const SELECT = "select";
     const VALUE = "value";
@@ -62,6 +66,26 @@ class Elements
     public static function textarea(...$elementAndAttributes)
     {
         return new Element(self::TEXTAREA, $elementAndAttributes);
+    }
+
+    public static function table(...$elementAndAttributes)
+    {
+        return new Element(self::TABLE, $elementAndAttributes);
+    }
+
+    public static function tr(...$elementAndAttributes)
+    {
+        return new Element(self::TR, $elementAndAttributes);
+    }
+
+    public static function td(...$elementAndAttributes)
+    {
+        return new Element(self::TD, $elementAndAttributes);
+    }
+
+    public static function th(...$elementAndAttributes)
+    {
+        return new Element(self::TH, $elementAndAttributes);
     }
 
     public static function label(...$elementAndAttributes)
