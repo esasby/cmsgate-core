@@ -43,6 +43,30 @@ abstract class OrderSafeWrapper extends OrderWrapper
     public abstract function getOrderIdUnsafe();
 
     /**
+     * Уникальный номер счета в рамках CMS отображаемый клиенту
+     * (в некоторых CMS может не совпадать с OrderId и поэтому метод может быть переопределен)
+     * @return string
+     * @throws Throwable
+     */
+    public function getOrderNumber()
+    {
+        try {
+            return $this->getOrderNumberUnsafe();
+        } catch (Throwable $e) {
+            $this->logger->fatal("Can not get order number!", $e);
+            throw $e;
+        }
+    }
+
+    /**
+     * @return string
+     * @throws Throwable
+     */
+    public function getOrderNumberUnsafe() {
+        return $this->getOrderIdUnsafe();
+    }
+
+    /**
      * Полное имя покупателя
      * @return string
      */

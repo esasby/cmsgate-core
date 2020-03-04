@@ -6,7 +6,7 @@
  * Time: 12:40
  */
 
-namespace esas\cmsgate;
+namespace esas\cmsgate\messenger;
 
 
 use esas\cmsgate\lang\Translator;

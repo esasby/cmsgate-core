@@ -1,6 +1,6 @@
 <?php
 
-use esas\cmsgate\view\Messages;
+use esas\cmsgate\messenger\Messages;
 use esas\cmsgate\view\admin\AdminViewFields;
 if (!defined("_DESC")) define("_DESC", '_desc');
 if (!defined("_DEFAULT")) define("_DEFAULT", '_default');

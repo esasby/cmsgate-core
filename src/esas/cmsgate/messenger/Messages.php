@@ -6,7 +6,7 @@
  * Time: 11:11
  */
 
-namespace esas\cmsgate\view;
+namespace esas\cmsgate\messenger;
 
 
 class Messages

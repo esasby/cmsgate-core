@@ -204,11 +204,11 @@ class Amount
      */
     public function getCurrencyNumcode()
     {
-        if (!isset($currencyNumcodes[$this->currency])) {
+        if (self::currencyNumcodes[$this->currency] == null) {
             Logger::getLogger("Currency")->error("Unknown currency [" . $this->currency . "]");
             return "";
         } else
-            return $currencyNumcodes[$this->currency];
+            return self::currencyNumcodes[$this->currency];
 
     }
 }

@@ -12,7 +12,7 @@ use esas\cmsgate\ConfigFields;
 use esas\cmsgate\ConfigStorageCms;
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\FileUtils;
-use esas\cmsgate\view\Messages;
+use esas\cmsgate\messenger\Messages;
 use Exception;
 use Throwable;
 

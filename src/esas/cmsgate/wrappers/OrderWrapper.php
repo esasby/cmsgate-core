@@ -18,9 +18,9 @@ abstract class OrderWrapper extends Wrapper
      * @return string
      */
     public abstract function getOrderId();
+    
     /**
      * Уникальный номер счета в рамках CMS отображаемый клиенту
-     * и отправляемый на шлюз
      * (в некоторых CMS может не совпадать с OrderId и поэтому метод может быть переопределен)
      * @return string
      */

@@ -10,6 +10,7 @@ namespace esas\cmsgate;
 
 
 use esas\cmsgate\lang\Translator;
+use esas\cmsgate\messenger\Messenger;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\ConfigForm;
 use esas\cmsgate\wrappers\ConfigWrapper;
@@ -34,7 +35,7 @@ abstract class Registry
         $registryName = self::getUniqRegistryName();
         global $$registryName;
         if ($$registryName == null) {
-            Logger::getLogger(get_class($this))->debug("init");
+//            Logger::getLogger(get_class($this))->debug("init");
             $$registryName = $this;
         }
     }

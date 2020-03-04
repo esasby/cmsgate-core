@@ -22,7 +22,7 @@ use esas\cmsgate\view\admin\fields\ConfigFieldRichtext;
 use esas\cmsgate\view\admin\fields\ConfigFieldStatusList;
 use esas\cmsgate\view\admin\fields\ConfigFieldTextarea;
 use esas\cmsgate\view\admin\fields\ListOption;
-use esas\cmsgate\view\Messages;
+use esas\cmsgate\messenger\Messages;
 use Exception;
 
 /**
@@ -130,9 +130,11 @@ abstract class ConfigForm
     /**
      * @throws Exception
      */
-    public function validate() {
-        if (!$this->getManagedFields()->validateAll($_REQUEST) 
-            || !$this->getManagedFields()->validateAll($_FILES)) {
+    public function validate()
+    {
+        $fieldsAreValid = $this->getManagedFields()->validateAll($_REQUEST);
+        $filesAreValid = $this->getManagedFields()->validateAll($_FILES);
+        if (!$fieldsAreValid || !$filesAreValid) {
             Registry::getRegistry()->getMessenger()->addErrorMessage(Messages::INCORRECT_INPUT);
             throw new Exception('Config form is not valid');
         }
@@ -141,13 +143,19 @@ abstract class ConfigForm
     /**
      * @throws \Throwable
      */
-    public function save() {
+    public function save()
+    {
         foreach ($this->getManagedFields()->getFieldsToRender() as $configField) {
             $value = array_key_exists($configField->getKey(), $_REQUEST) ? $_REQUEST[$configField->getKey()] : "";
-            Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
+            if ($configField instanceof ConfigFieldFile) {
+                $fileMeta = $_FILES[$configField->getKey()];
+                if ($fileMeta != null) {
+                    FileUtils::uploadFile($configField->getKey());
+                }
+            } else
+                Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
         }
         Registry::getRegistry()->getMessenger()->addInfoMessage(Messages::SETTINGS_SAVED);
-        FileUtils::uploadFiles();
     }
 }
 
