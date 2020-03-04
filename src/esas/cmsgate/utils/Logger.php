@@ -11,6 +11,8 @@ namespace esas\cmsgate\utils;
 
 use Exception;
 use Logger as Log4php;
+use LoggerAppenderFile;
+use LoggerLayoutPattern;
 use Throwable;
 
 class Logger
@@ -24,33 +26,25 @@ class Logger
     public function __construct($name)
     {
         $this->logger = Log4php::getLogger($name);
+        //удялем все appender-ы, т.к. если делать конфигурацию через статическую конфигурацию, то логи могут писаться
+        //в файл, который был сконифигурирован в другом плагине (видимо из-за статичности)
+        $this->logger->removeAllAppenders();
+        $layout = new LoggerLayoutPattern();
+        $layout->setConversionPattern("%date{Y-m-d H:i:s,u} | %logger{0} | %-5level | %msg %n");
+        $layout->activateOptions();
+        $appFile = new LoggerAppenderFile('cmsFileAppender');
+        $appFile->setFile(self::getLogFilePath());
+        $appFile->setAppend(true);
+        $appFile->setThreshold('all');
+        $appFile->activateOptions();
+        $appFile->setLayout($layout);
+        $this->logger->addAppender($appFile);
     }
 
 
     public static function init()
     {
         FileUtils::createSafeDir(self::getLogFileDirectory());
-        Log4php::configure(array(
-            'rootLogger' => array(
-                'appenders' => array('fileAppender'),
-                'level' => 'INFO',
-            ),
-            'appenders' => array(
-                'fileAppender' => array(
-                    'class' => 'LoggerAppenderFile',
-                    'layout' => array(
-                        'class' => 'LoggerLayoutPattern',
-                        'params' => array(
-                            'conversionPattern' => '%date{Y-m-d H:i:s,u} | %logger{0} | %-5level | %msg %n',
-                        )
-                    ),
-                    'params' => array(
-                        'file' => self::getLogFilePath(),
-                        'append' => true
-                    )
-                )
-            )
-        ));
     }
 
     public static function getLogFileDirectory() {
