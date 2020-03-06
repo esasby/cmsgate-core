@@ -14,6 +14,7 @@ class Attributes
     const ID = "id";
     const CLAZZ = "class";
     const STYLE = "style";
+    const WIDTH = "width";
     const SCOPE = "scope";
     const ALIGN = "align";
     const ACTION = "action";
@@ -56,6 +57,10 @@ class Attributes
     public static function style($style)
     {
         return new Attribute(self::STYLE, $style);
+    }
+    public static function width($width)
+    {
+        return new Attribute(self::WIDTH, $width);
     }
 
     public static function scope($scope)

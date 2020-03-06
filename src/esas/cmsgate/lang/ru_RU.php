@@ -14,7 +14,7 @@ return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Неверный формат email',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorUploadFileExtension::class => 'Некорректное расширение файла. Ожидается *.[%s] файл',
 
-    AdminViewFields::CONFIG_FORM_HEADING => 'Общие настройки',
+    AdminViewFields::CONFIG_FORM_COMMON => 'Общие настройки',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Сохранить',
 
     Messages::GENERAL_MODULE_ERROR => "Ошибка работы модуля",

@@ -257,7 +257,7 @@ abstract class OrderSafeWrapper extends OrderWrapper
     }
 
     /**
-     * BillId (идентификатор хуткигрош) успешно выставленного счета
+     * Идентификатор платежа внешней системы
      * @throws Throwable
      * @return mixed
      */

@@ -13,7 +13,7 @@ return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Wrong email format',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorUploadFileExtension::class => 'Wrong file extension. *.[%s] file is expected',
 
-    AdminViewFields::CONFIG_FORM_HEADING => 'Common settings',
+    AdminViewFields::CONFIG_FORM_COMMON => 'Common settings',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Save',
 
     Messages::GENERAL_MODULE_ERROR => "General module error",

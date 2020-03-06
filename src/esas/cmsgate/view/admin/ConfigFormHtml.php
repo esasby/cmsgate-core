@@ -37,6 +37,11 @@ abstract class ConfigFormHtml extends ConfigForm
     /**
      * @var string
      */
+    protected $formKey;
+
+    /**
+     * @var string
+     */
     protected $headingTitle;
 
     /**
@@ -51,12 +56,13 @@ abstract class ConfigFormHtml extends ConfigForm
 
     /**
      * ConfigFormHtml constructor.
-     * @param string $headingTitle
+     * @param string $formKey
      */
-    public function __construct($managedFields, $headingTitle, $submitUrl, $submitButtons)
+    public function __construct($managedFields, $formKey, $submitUrl, $submitButtons)
     {
         parent::__construct($managedFields);
-        $this->headingTitle = $headingTitle;
+        $this->formKey = $formKey;
+        $this->headingTitle = Registry::getRegistry()->getTranslator()->translate($formKey);
         $this->submitUrl = $submitUrl;
         $this->submitButtons = $submitButtons;
     }
@@ -178,5 +184,29 @@ abstract class ConfigFormHtml extends ConfigForm
             );
         }
         return $ret;
+    }
+
+    protected function elementSubmitButtons()
+    {
+        $ret = "";
+        if (isset($this->submitButtons)) {
+            foreach ($this->submitButtons as $buttonName => $buttonValue) {
+                $ret .= $this->elementInputSubmit($buttonName, $buttonValue) . "&nbsp;";
+            }
+        } else
+            $ret = $this->elementInputSubmit("submit_button", Registry::getRegistry()->getTranslator()->translate(AdminViewFields::CONFIG_FORM_BUTTON_SAVE));
+        return $ret;
+    }
+
+    /**
+     * При необходимости, может быть переопределен.
+     * Не объявлен abstract, т.к. не во всех наследниках нужные submit кнопки
+     * @param $name
+     * @param $value
+     * @return string
+     */
+    protected function elementInputSubmit($name, $value)
+    {
+        return "";
     }
 }

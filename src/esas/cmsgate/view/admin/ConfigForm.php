@@ -130,10 +130,10 @@ abstract class ConfigForm
     /**
      * @throws Exception
      */
-    public function validate()
+    public function validate($fieldValues = null, $filesMeta = null)
     {
-        $fieldsAreValid = $this->getManagedFields()->validateAll($_REQUEST);
-        $filesAreValid = $this->getManagedFields()->validateAll($_FILES);
+        $fieldsAreValid = $this->getManagedFields()->validateAll($fieldValues != null ? $fieldValues : $_REQUEST);
+        $filesAreValid = $this->getManagedFields()->validateAll($filesMeta != null ? $filesMeta : $_FILES);
         if (!$fieldsAreValid || !$filesAreValid) {
             Registry::getRegistry()->getMessenger()->addErrorMessage(Messages::INCORRECT_INPUT);
             throw new Exception('Config form is not valid');
