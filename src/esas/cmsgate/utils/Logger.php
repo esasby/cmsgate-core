@@ -29,6 +29,7 @@ class Logger
         //удялем все appender-ы, т.к. если делать конфигурацию через статическую конфигурацию, то логи могут писаться
         //в файл, который был сконифигурирован в другом плагине (видимо из-за статичности)
         $this->logger->removeAllAppenders();
+        $this->logger->setAdditivity(false);
         $layout = new LoggerLayoutPattern();
         $layout->setConversionPattern("%date{Y-m-d H:i:s,u} | %logger{0} | %-5level | %msg %n");
         $layout->activateOptions();
