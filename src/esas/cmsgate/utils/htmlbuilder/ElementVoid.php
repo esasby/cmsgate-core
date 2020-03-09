@@ -35,7 +35,7 @@ class ElementVoid
             if ($obj instanceof Attribute)
                 $this->attibutes[] = $obj;
             else
-                Logger::getLogger(get_class($this))->error("Unknown htmlbuilder arg");
+                Logger::getLogger(get_class($this))->error("Unknown htmlbuilder arg: " . $obj);
         }
     }
 

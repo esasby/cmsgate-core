@@ -13,6 +13,7 @@ class Attributes
 {
     const ID = "id";
     const CLAZZ = "class";
+    const DATA = "data";
     const STYLE = "style";
     const WIDTH = "width";
     const SCOPE = "scope";
@@ -28,6 +29,7 @@ class Attributes
     const COLS = "cols";
     const COLSPAN = "colspan";
     const COLOR = "color";
+    const ONCLICK = "onclick";
     const VALUE = "value";
     const VALIGN = "valign";
     const CHECKED = "checked";
@@ -52,6 +54,11 @@ class Attributes
     public static function clazz($class)
     {
         return new Attribute(self::CLAZZ, $class);
+    }
+
+    public static function data($extraTag, $data)
+    {
+        return new Attribute(self::DATA . "-" . $extraTag, $data);
     }
 
     public static function style($style)
@@ -121,6 +128,11 @@ class Attributes
     public static function color($color)
     {
         return new Attribute(self::COLOR, $color);
+    }
+
+    public static function onclick($onclick)
+    {
+        return new Attribute(self::ONCLICK, $onclick);
     }
 
     public static function forr($forr)
