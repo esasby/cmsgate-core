@@ -64,6 +64,7 @@ class FileUtils
             header('Content-Length: ' . $file->fileSize());
             $file->read();
             $logger->info('Done');
+            exit();
         } catch (Throwable $e) {
             $logger->error("Exception! ", $e);
             throw $e;
