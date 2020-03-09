@@ -12,6 +12,7 @@ namespace esas\cmsgate\view\admin;
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
+use esas\cmsgate\utils\RequestParams;
 use esas\cmsgate\view\admin\fields\ConfigFieldCheckbox;
 use esas\cmsgate\view\admin\fields\ConfigFieldFile;
 use esas\cmsgate\view\admin\fields\ConfigFieldList;
@@ -34,10 +35,7 @@ use esas\cmsgate\view\admin\fields\ConfigFieldTextarea;
  */
 abstract class ConfigFormHtml extends ConfigForm
 {
-    /**
-     * @var string
-     */
-    protected $formKey;
+
 
     /**
      * @var string
@@ -60,8 +58,7 @@ abstract class ConfigFormHtml extends ConfigForm
      */
     public function __construct($managedFields, $formKey, $submitUrl, $submitButtons)
     {
-        parent::__construct($managedFields);
-        $this->formKey = $formKey;
+        parent::__construct($formKey, $managedFields);
         $this->headingTitle = Registry::getRegistry()->getTranslator()->translate($formKey);
         $this->submitUrl = $submitUrl;
         $this->submitButtons = $submitButtons;
@@ -194,7 +191,7 @@ abstract class ConfigFormHtml extends ConfigForm
                 $ret .= $this->elementInputSubmit($buttonName, $buttonValue) . "&nbsp;";
             }
         } else
-            $ret = $this->elementInputSubmit("submit_button", Registry::getRegistry()->getTranslator()->translate(AdminViewFields::CONFIG_FORM_BUTTON_SAVE));
+            $ret = $this->elementInputSubmit(RequestParams::SUBMIT_BUTTON, Registry::getRegistry()->getTranslator()->translate(AdminViewFields::CONFIG_FORM_BUTTON_SAVE));
         return $ret;
     }
 

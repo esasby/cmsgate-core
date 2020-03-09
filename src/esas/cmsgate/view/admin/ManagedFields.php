@@ -38,6 +38,8 @@ abstract class ManagedFields
      */
     protected $validationErrorText;
 
+    protected $valid = true;
+
     protected $sortOrderCounter = 0;
 
     /**
@@ -134,15 +136,25 @@ abstract class ManagedFields
      */
     public function validateAll($keyValueArray)
     {
-        $ret = true;
+        $this->valid = true;
         $this->validationErrorText = "";
         foreach ($keyValueArray as $key => $value) {
             if (!$this->validate($key, $value)->isValid()) {
-                $ret = false;
+                $this->valid = false;
             }
         }
-        return $ret;
+        return $this->valid;
     }
+
+    /**
+     * @return mixed
+     */
+    public function isValid()
+    {
+        return $this->valid;
+    }
+
+
 
     /**
      * @return mixed

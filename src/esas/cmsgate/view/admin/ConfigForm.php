@@ -9,6 +9,7 @@
 namespace esas\cmsgate\view\admin;
 
 
+use esas\cmsgate\messenger\Messages;
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\FileUtils;
 use esas\cmsgate\utils\Logger;
@@ -22,7 +23,6 @@ use esas\cmsgate\view\admin\fields\ConfigFieldRichtext;
 use esas\cmsgate\view\admin\fields\ConfigFieldStatusList;
 use esas\cmsgate\view\admin\fields\ConfigFieldTextarea;
 use esas\cmsgate\view\admin\fields\ListOption;
-use esas\cmsgate\messenger\Messages;
 use Exception;
 
 /**
@@ -50,13 +50,20 @@ abstract class ConfigForm
     protected $managedFields;
 
     /**
+     * @var string
+     */
+    protected $formKey;
+
+    /**
      * ConfigurationRender constructor.
+     * @param $formKey
      * @param ManagedFields $managedFields
      */
-    public function __construct($managedFields)
+    public function __construct($formKey, $managedFields)
     {
         $this->logger = Logger::getLogger(get_class($this));
         $this->managedFields = $managedFields;
+        $this->formKey = $formKey;
     }
 
     /**
@@ -66,6 +73,15 @@ abstract class ConfigForm
     {
         return $this->managedFields;
     }
+
+    /**
+     * @return string
+     */
+    public function getFormKey()
+    {
+        return $this->formKey;
+    }
+
 
     /**
      * Производит формирование формы с настройками модуля
@@ -140,13 +156,31 @@ abstract class ConfigForm
         }
     }
 
+
+    /**
+     * @param null $fieldValues
+     * @param null $filesMeta
+     * @return bool
+     */
+    public function isValid($fieldValues = null, $filesMeta = null)
+    {
+        if ($fieldValues == null && $filesMeta == null)
+            return $this->getManagedFields()->isValid();
+        try {
+            $this->validate($fieldValues, $filesMeta);
+        } catch (Exception $e) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @throws \Throwable
      */
     public function save()
     {
         foreach ($this->getManagedFields()->getFieldsToRender() as $configField) {
-            $value = array_key_exists($configField->getKey(), $_REQUEST) ? $_REQUEST[$configField->getKey()] : "";
+            $value = array_key_exists($configField->getKey(), $_REQUEST) ? $_REQUEST[$configField->getKey()] : $configField->getValue();
             if ($configField instanceof ConfigFieldFile) {
                 $fileMeta = $_FILES[$configField->getKey()];
                 if ($fileMeta != null) {
