@@ -99,14 +99,12 @@ abstract class OrderWrapper extends Wrapper
      * Обновляет статус заказа в БД
      * @param $newStatus
      * @throws Throwable
-     * @return mixed
      */
     public abstract function updateStatus($newStatus);
 
     /**
      * Сохраняет привязку внешнего идентификтора к заказу
      * @param $extId
-     * @return mixed
      */
     public abstract function saveExtId($extId);
 }

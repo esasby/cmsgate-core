@@ -12,6 +12,8 @@ namespace esas\cmsgate;
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\messenger\Messenger;
 use esas\cmsgate\utils\Logger;
+use esas\cmsgate\utils\SessionUtils;
+use esas\cmsgate\view\admin\AdminViewFields;
 use esas\cmsgate\view\admin\ConfigForm;
 use esas\cmsgate\wrappers\ConfigWrapper;
 use esas\cmsgate\wrappers\OrderWrapper;
@@ -93,7 +95,7 @@ abstract class Registry
      */
     public static function getRegistry() {
         /**
-         * @var \esas\cmsgate\Registry $esasRegistry
+         * @var $esasRegistry
          */
         $registryName = self::getUniqRegistryName();
         global $$registryName;
@@ -104,11 +106,25 @@ abstract class Registry
     }
 
     /**
-     * По локальному номеру счета (номеру заказа) возвращает wrapper
+     * По локальному id заказа возвращает wrapper
      * @param $orderId
      * @return OrderWrapper
      */
     public abstract function getOrderWrapper($orderId);
+
+    /**
+     * По локальному номеру заказа (может отличаться от id) возвращает wrapper
+     * @param $orderNumber
+     * @return OrderWrapper
+     */
+    public abstract function getOrderWrapperByOrderNumber($orderNumber);
+
+    /**
+     * По номеру транзакции внешней система возвращает wrapper
+     * @param $extId
+     * @return OrderWrapper
+     */
+    public abstract function getOrderWrapperByExtId($extId);
 
     /**
      * Получение формы с настройками сделано через Registry, т.к. в некоторых CMS создание формы и ее валидация разнесены в разные хуки
@@ -116,7 +132,11 @@ abstract class Registry
      */
     public function getConfigForm()
     {
-        if ($this->configForm == null)
+        if ($this->configForm != null)
+            return $this->configForm;
+        else if (SessionUtils::getForm(AdminViewFields::CONFIG_FORM_COMMON) != null)
+            $this->configForm = SessionUtils::getForm(AdminViewFields::CONFIG_FORM_COMMON);
+        else
             $this->configForm = $this->createConfigForm();
         return $this->configForm;
     }

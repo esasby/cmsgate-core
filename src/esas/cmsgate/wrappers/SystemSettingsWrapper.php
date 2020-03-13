@@ -8,12 +8,13 @@
 
 namespace esas\cmsgate\wrappers;
 
-    class SystemSettingsWrapper extends Wrapper
+class SystemSettingsWrapper extends Wrapper
 {
     /**
      * @return string
      */
-    public function getCMSAdminEmail() {
+    public function getCMSAdminEmail()
+    {
         return 'n.mekh@hutkigrosh.by'; //todo
     }
 }
