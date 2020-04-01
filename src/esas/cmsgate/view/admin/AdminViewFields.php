@@ -15,6 +15,9 @@ namespace esas\cmsgate\view\admin;
  */
 class AdminViewFields
 {
+    const ADMIN_PAYMENT_METHOD_NAME = 'admin_payment_method_name';
+    const ADMIN_PAYMENT_METHOD_DESCRIPTION = 'admin_payment_method_description';
+    const SETTINGS = 'settings';
     const CONFIG_FORM_COMMON = 'configform_common';
     const CONFIG_FORM_BUTTON_SAVE = 'configform_save';
 }

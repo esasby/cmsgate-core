@@ -16,10 +16,11 @@ return array(
 
     AdminViewFields::CONFIG_FORM_COMMON => 'Общие настройки',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Сохранить',
+    AdminViewFields::SETTINGS => 'Настройки',
 
     Messages::GENERAL_MODULE_ERROR => "Ошибка работы модуля",
     Messages::INCORRECT_INPUT => "Некорректные данные",
     Messages::SETTINGS_SAVED => "Настройки успешно сохранены!",
     Messages::SANDBOX_MODE_IS_ON => 'Внимание! Модуль включен в режиме тестирования. Средства с вашего счёта списываться не будут',
-    Messages::SETTINGS => 'Настройки',
+
 );

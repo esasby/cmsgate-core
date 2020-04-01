@@ -15,10 +15,11 @@ return array(
 
     AdminViewFields::CONFIG_FORM_COMMON => 'Common settings',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Save',
+    AdminViewFields::SETTINGS => 'Settings',
 
     Messages::GENERAL_MODULE_ERROR => "General module error",
     Messages::INCORRECT_INPUT => "Incorrect input",
     Messages::SETTINGS_SAVED => "Settings were successfully saved!",
     Messages::SANDBOX_MODE_IS_ON => 'Payment Gateway in \'Sandbox \'. Funds from your account will not be removed.',
-    Messages::SETTINGS => 'Settings',
+
 );

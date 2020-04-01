@@ -18,27 +18,29 @@ class TranslatorImpl extends Translator
     private $localeLoader;
 
     /**
-     * @var string
+     * @var array
      */
-    private $extraVocabularyDir;
+    private $extraVocabularyDirs;
 
     /**
      * TranslatorImpl constructor.
      * @param LocaleLoaderCms $localeLoader
      * @param $psMsgDir - путь к дополнительным словарям
      */
-    public function __construct(LocaleLoaderCms $localeLoader, $extraVocabularyDir)
+    public function __construct(LocaleLoaderCms $localeLoader, $paySystemVocabularyDir)
     {
         $this->localeLoader = $localeLoader;
-        $this->extraVocabularyDir = $extraVocabularyDir;
-
+        $this->extraVocabularyDirs[] = $paySystemVocabularyDir;
+        $this->extraVocabularyDirs[] = $localeLoader->getCmsVocabularyDir();
     }
 
     private function loadLocale($locale)
     {
         if (null == $this->lang[$locale]) {
             $this->loadLocaleFromDir(__DIR__, $locale); //загружаем локаль из каталога lang core
-            $this->loadLocaleFromDir($this->extraVocabularyDir, $locale); //загружаем локаль для каталога lang наследника
+            foreach ($this->extraVocabularyDirs as $extraVocabularyDir) {
+                $this->loadLocaleFromDir($extraVocabularyDir, $locale); //загружаем локаль для каталога lang наследника
+            }
         }
     }
 

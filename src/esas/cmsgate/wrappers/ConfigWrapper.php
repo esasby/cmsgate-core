@@ -195,7 +195,7 @@ abstract class ConfigWrapper extends Wrapper
      * @param OrderWrapper $orderWrapper
      * @return string
      */
-    public function cookText($text, OrderWrapper $orderWrapper)
+    public function cookText($text, $orderWrapper)
     {
         return strtr($text, array(
             "@order_id" => $orderWrapper->getOrderId(),

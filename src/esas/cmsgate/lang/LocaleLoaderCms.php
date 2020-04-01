@@ -19,4 +19,6 @@ abstract class LocaleLoaderCms
     {
         return Locale::ru_RU;
     }
+    
+    public abstract function getCmsVocabularyDir();
 }

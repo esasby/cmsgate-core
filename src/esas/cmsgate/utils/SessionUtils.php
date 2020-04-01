@@ -30,6 +30,8 @@ class SessionUtils
      */
     public static function getForm($formKey)
     {
+        if(!array_key_exists(self::SESSION_FROMS_ARRAY, $_SESSION))
+            return null;
         $obj = $_SESSION[self::SESSION_FROMS_ARRAY][$formKey];
         if ($obj == null)
             return null;
