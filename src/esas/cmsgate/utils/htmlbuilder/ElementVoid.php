@@ -34,8 +34,11 @@ class ElementVoid
         foreach ($attibutes as $obj) {
             if ($obj instanceof Attribute)
                 $this->attibutes[] = $obj;
-            else
-                Logger::getLogger(get_class($this))->error("Unknown htmlbuilder arg: " . $obj);
+            elseif ($obj == null || $obj == "")
+                continue; //skip empty attributes
+            else {
+                Logger::getLogger(get_class($this))->error("Element[" . $name ."]: unknown arg[" . $obj . "]", debug_backtrace());
+            }
         }
     }
 

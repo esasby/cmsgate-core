@@ -48,11 +48,13 @@ class Logger
         FileUtils::createSafeDir(self::getLogFileDirectory());
     }
 
-    public static function getLogFileDirectory() {
+    public static function getLogFileDirectory()
+    {
         return dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/logs';
     }
 
-    public static function getLogFilePath() {
+    public static function getLogFilePath()
+    {
         return self::getLogFileDirectory() . '/cmsgate.log';
     }
 
@@ -98,9 +100,13 @@ class Logger
     {
         if ($th != null && $th instanceof Throwable || $th instanceof Exception)
             return "\n#E " . $th->getFile() . "(" . $th->getLine() . "): " . $th->getMessage() . "\n" . $th->getTraceAsString();
-        else
-            return "";
+        else if (is_array($th)) { // backtrace
+            $ret = '';
+            foreach ($th as $key => $traceElementArray) {
+                $ret .= "\n\t#" . $key . " " . $traceElementArray["file"] . "(" .  $traceElementArray["line"] . "): " . $traceElementArray["function"];
+            }
+            return $ret;
+        } else
+            return '';
     }
-
-    
 }
