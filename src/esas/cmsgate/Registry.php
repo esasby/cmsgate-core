@@ -29,6 +29,7 @@ use esas\cmsgate\wrappers\SystemSettingsWrapper;
 abstract class Registry
 {
     protected $configWrapper;
+    protected $orderWrapperFactory;
     protected $systemSettingsWrapper;
     protected $translator;
     protected $configForm;
@@ -109,7 +110,13 @@ abstract class Registry
     /**
      * @return OrderWrapperFactory
      */
-    public abstract function getOrderWrapperFactory();
+    public function getOrderWrapperFactory() {
+        if ($this->orderWrapperFactory == null)
+            $this->orderWrapperFactory = $this->createOrderWrapperFactory();
+        return $this->orderWrapperFactory;
+    }
+
+    public abstract function createOrderWrapperFactory();
 
     /**
      * По локальному id заказа возвращает wrapper
