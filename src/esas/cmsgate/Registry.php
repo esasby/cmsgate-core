@@ -17,6 +17,7 @@ use esas\cmsgate\view\admin\AdminViewFields;
 use esas\cmsgate\view\admin\ConfigForm;
 use esas\cmsgate\wrappers\ConfigWrapper;
 use esas\cmsgate\wrappers\OrderWrapper;
+use esas\cmsgate\wrappers\OrderWrapperFactory;
 use esas\cmsgate\wrappers\SystemSettingsWrapper;
 
 /**
@@ -106,25 +107,39 @@ abstract class Registry
     }
 
     /**
+     * @return OrderWrapperFactory
+     */
+    public abstract function getOrderWrapperFactory();
+
+    /**
      * По локальному id заказа возвращает wrapper
+     * @deprecated use getOrderWrapperFactory()->getOrderWrapperByOrderId instead
      * @param $orderId
      * @return OrderWrapper
      */
-    public abstract function getOrderWrapper($orderId);
+    public function getOrderWrapper($orderId) {
+        $this->getOrderWrapperFactory()->getOrderWrapperByOrderId($orderId);
+    }
 
     /**
      * По локальному номеру заказа (может отличаться от id) возвращает wrapper
+     * @deprecated use getOrderWrapperFactory()->getOrderWrapperByOrderNumber instead
      * @param $orderNumber
      * @return OrderWrapper
      */
-    public abstract function getOrderWrapperByOrderNumber($orderNumber);
+    public function getOrderWrapperByOrderNumber($orderNumber) {
+        $this->getOrderWrapperFactory()->getOrderWrapperByOrderNumber($orderNumber);
+    }
 
     /**
      * По номеру транзакции внешней система возвращает wrapper
+     * @deprecated use getOrderWrapperFactory()->getOrderWrapperByExtId instead
      * @param $extId
      * @return OrderWrapper
      */
-    public abstract function getOrderWrapperByExtId($extId);
+    public function getOrderWrapperByExtId($extId) {
+        $this->getOrderWrapperFactory()->getOrderWrapperByExtId($extId);
+    }
 
     /**
      * Получение формы с настройками сделано через Registry, т.к. в некоторых CMS создание формы и ее валидация разнесены в разные хуки
