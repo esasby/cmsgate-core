@@ -125,7 +125,7 @@ abstract class Registry
      * @return OrderWrapper
      */
     public function getOrderWrapper($orderId) {
-        $this->getOrderWrapperFactory()->getOrderWrapperByOrderId($orderId);
+        return $this->getOrderWrapperFactory()->getOrderWrapperByOrderId($orderId);
     }
 
     /**
@@ -135,7 +135,7 @@ abstract class Registry
      * @return OrderWrapper
      */
     public function getOrderWrapperByOrderNumber($orderNumber) {
-        $this->getOrderWrapperFactory()->getOrderWrapperByOrderNumber($orderNumber);
+        return $this->getOrderWrapperFactory()->getOrderWrapperByOrderNumber($orderNumber);
     }
 
     /**
@@ -145,7 +145,7 @@ abstract class Registry
      * @return OrderWrapper
      */
     public function getOrderWrapperByExtId($extId) {
-        $this->getOrderWrapperFactory()->getOrderWrapperByExtId($extId);
+        return $this->getOrderWrapperFactory()->getOrderWrapperByExtId($extId);
     }
 
     /**

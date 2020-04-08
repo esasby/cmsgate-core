@@ -14,4 +14,17 @@ class RqMethod
     const _GET = 0;
     const _POST = 1;
     const _DELETE = 2;
+
+    public static function toString($rqMethod) {
+        switch ($rqMethod) {
+            case self::_GET:
+                return "GET";
+            case self::_POST:
+                return "POST";
+            case  self::_DELETE:
+                return "DELETE";
+            default:
+                return "UNKNOWN";
+        }
+    }
 }
