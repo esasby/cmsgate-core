@@ -19,6 +19,7 @@ use esas\cmsgate\wrappers\ConfigWrapper;
 use esas\cmsgate\wrappers\OrderWrapper;
 use esas\cmsgate\wrappers\OrderWrapperFactory;
 use esas\cmsgate\wrappers\SystemSettingsWrapper;
+use Exception;
 
 /**
  * Реализация шаблона registry для удобства доступа к ConfigurationWrapper, OrderWrapper, Translator и т.д..
@@ -120,32 +121,54 @@ abstract class Registry
 
     /**
      * По локальному id заказа возвращает wrapper
-     * @deprecated use getOrderWrapperFactory()->getOrderWrapperByOrderId instead
      * @param $orderId
      * @return OrderWrapper
+     * @throws Exception если не удается получить
      */
     public function getOrderWrapper($orderId) {
-        return $this->getOrderWrapperFactory()->getOrderWrapperByOrderId($orderId);
+        $orderWrapper =  $this->getOrderWrapperFactory()->getOrderWrapperByOrderId($orderId);
+        if ($orderWrapper == null)
+            throw new Exception('Can not get orderWrapper by given orderId[' . $orderId . "]");
+        return $orderWrapper;
     }
 
     /**
      * По локальному номеру заказа (может отличаться от id) возвращает wrapper
-     * @deprecated use getOrderWrapperFactory()->getOrderWrapperByOrderNumber instead
      * @param $orderNumber
      * @return OrderWrapper
+     * @throws Exception
      */
     public function getOrderWrapperByOrderNumber($orderNumber) {
-        return $this->getOrderWrapperFactory()->getOrderWrapperByOrderNumber($orderNumber);
+        $orderWrapper = $this->getOrderWrapperFactory()->getOrderWrapperByOrderNumber($orderNumber);
+        if ($orderWrapper == null)
+            throw new Exception('Can not get orderWrapper by given orderТгьиук[' . $orderNumber . "]");
+        return $orderWrapper;
     }
 
     /**
      * По номеру транзакции внешней система возвращает wrapper
-     * @deprecated use getOrderWrapperFactory()->getOrderWrapperByExtId instead
      * @param $extId
      * @return OrderWrapper
+     * @throws Exception
      */
     public function getOrderWrapperByExtId($extId) {
-        return $this->getOrderWrapperFactory()->getOrderWrapperByExtId($extId);
+        $orderWrapper = $this->getOrderWrapperFactory()->getOrderWrapperByExtId($extId);
+        if ($orderWrapper == null)
+            throw new Exception('Can not get orderWrapper by given extId[' . $extId . "]");
+        return $orderWrapper;
+    }
+
+    /**
+     * По номеру транзакции внешней система возвращает wrapper
+     * @param $extId
+     * @return OrderWrapper
+     * @throws Exception
+     */
+    public function getOrderWrapperForCurrentUser() {
+        $orderWrapper = $this->getOrderWrapperFactory()->getOrderWrapperForCurrentUser();
+        if ($orderWrapper == null)
+            throw new Exception('Can not get orderWrapper for current order of current user');
+        return $orderWrapper;
     }
 
     /**

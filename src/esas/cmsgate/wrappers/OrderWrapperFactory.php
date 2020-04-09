@@ -9,7 +9,8 @@
 namespace esas\cmsgate\wrappers;
 
 /**
- * Методы получения OrderWrapper вынесены из Registry в отдельный Factory для возможности наследования в cms-libs
+ * Методы получения OrderWrapper вынесены из Registry в отдельный Factory для возможности наследования в cms-libs.
+ * Если по какой-то причине создать OrderWarpper не удалсоь, должны возвращать null
  * Class OrderWrapperFactory
  * @package esas\cmsgate\wrappers
  */
@@ -18,7 +19,7 @@ abstract class OrderWrapperFactory
     /**
      * По локальному id заказа возвращает wrapper
      * @param $orderId
-     * @return OrderWrapper
+     * @return OrderWrapper или null
      */
     public abstract function getOrderWrapperByOrderId($orderId);
 
@@ -26,7 +27,7 @@ abstract class OrderWrapperFactory
      * По локальному номеру заказа (может отличаться от id) возвращает wrapper.
      * Должен быть переопределен если в CMS есть разница между orderId и orderNumber
      * @param $orderNumber
-     * @return OrderWrapper
+     * @return OrderWrapper или null
      */
     public function getOrderWrapperByOrderNumber($orderNumber){
         return $this->getOrderWrapperByOrderId($orderNumber);
@@ -34,14 +35,14 @@ abstract class OrderWrapperFactory
 
     /**
      * Возвращает OrderWrapper для текущего заказа текущего пользователя
-     * @return OrderWrapper
+     * @return OrderWrapper или null
      */
-    public abstract function getOrderWrapperByOrderForCurrentUser();
+    public abstract function getOrderWrapperForCurrentUser();
 
     /**
      * По номеру транзакции внешней система возвращает wrapper
      * @param $extId
-     * @return OrderWrapper
+     * @return OrderWrapper или null
      */
     public abstract function getOrderWrapperByExtId($extId);
 
