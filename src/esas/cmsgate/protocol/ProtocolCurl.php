@@ -135,9 +135,10 @@ abstract class ProtocolCurl
         if (preg_match('/^<(.*)>$/', $response)) {
             $xml = simplexml_load_string($response);
             $array = json_decode(json_encode($xml), true);
-        } elseif (preg_match('/^\{(.*)\}$/', $response)) { //json
+        } elseif (preg_match('/^\{(.*)\}$/', $response) || preg_match('/^\[\{(.*)\}\]$/', $response)) { //json
             $array = json_decode($response, true);
-        }
+        } else
+            $this->logger->error('Can not convert response to array');
         return $array;
     }
 }
