@@ -9,6 +9,7 @@
 namespace esas\cmsgate\utils;
 
 
+use esas\cmsgate\Registry;
 use Exception;
 use Logger as Log4php;
 use LoggerAppenderFile;
@@ -36,7 +37,12 @@ class Logger
         $appFile = new LoggerAppenderFile('cmsFileAppender');
         $appFile->setFile(self::getLogFilePath());
         $appFile->setAppend(true);
-        $appFile->setThreshold('all');
+        /**
+         * Тут не получается установить порог в зависимости от значения
+         * Registry::getRegistry()->getConfigWrapper()->isDebugMode(), т.к. при таком вызове возникает бесконечная рекурсия
+         * Проверка порога вынесена в методы trace и debug
+         */
+        $appFile->setThreshold('ALL');
         $appFile->activateOptions();
         $appFile->setLayout($layout);
         $this->logger->addAppender($appFile);
@@ -80,6 +86,8 @@ class Logger
 
     public function debug($message, $throwable = null)
     {
+        if (!Registry::getRegistry()->getConfigWrapper()->isDebugMode())
+            return;
         $this->logger->debug($message . self::getStackTrace($throwable));
     }
 
@@ -90,6 +98,8 @@ class Logger
 
     public function trace($message, $throwable = null)
     {
+        if (!Registry::getRegistry()->getConfigWrapper()->isDebugMode())
+            return;
         $this->logger->trace($message . self::getStackTrace($throwable));
     }
 

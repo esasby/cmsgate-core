@@ -8,8 +8,20 @@
 
 namespace esas\cmsgate\lang;
 
+use esas\cmsgate\utils\Logger;
+
 abstract class Translator
 {
+    /**
+     * @var Logger
+     */
+    protected $logger;
+
+    public function __construct()
+    {
+        $this->logger = Logger::getLogger(get_class($this));
+    }
+
     public abstract function translate($msg, $locale = null);
 
     public function getConfigFieldName($key, $locale = null)

@@ -1,5 +1,6 @@
 <?php
 
+use esas\cmsgate\ConfigFields;
 use esas\cmsgate\messenger\Messages;
 use esas\cmsgate\view\admin\AdminViewFields;
 
@@ -13,6 +14,9 @@ return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNumeric::class => 'Значение должно быть целым числом',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Неверный формат email',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorUploadFileExtension::class => 'Некорректное расширение файла. Ожидается *.[%s] файл',
+
+    ConfigFields::debugMode() => 'Debug mode',
+    ConfigFields::debugMode() . _DESC => 'Отображение деталей ошибок',
 
     AdminViewFields::CONFIG_FORM_COMMON => 'Общие настройки',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Сохранить',

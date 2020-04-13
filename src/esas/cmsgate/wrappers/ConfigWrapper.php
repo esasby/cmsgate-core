@@ -133,7 +133,7 @@ abstract class ConfigWrapper extends Wrapper
         try {
             $value = $this->configStorageCms->getConfig($key);
             $this->warnIfEmpty($value, $key);
-            if (is_null($value) && $this->needDefaults())
+            if ((is_null($value) || "" == $value) && $this->needDefaults())
                 $value = $this->getDefaultConfig($key);
             if (is_bool($value))
                 return $value; //уже boolean
@@ -156,8 +156,8 @@ abstract class ConfigWrapper extends Wrapper
     protected function needDefaults()
     {
         // предполагаем, что если в хранилище есть названием платежного метода, это не первая инциализация и значения по умолчанию не нужны
-        $loginValue = $this->configStorageCms->getConfig(ConfigFields::paymentMethodName());
-        return is_null($loginValue);
+        $paymentMethodName = $this->configStorageCms->getConfig(ConfigFields::paymentMethodName());
+        return empty($paymentMethodName);
     }
 
     /**

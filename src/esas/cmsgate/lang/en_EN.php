@@ -1,5 +1,6 @@
 <?php
 
+use esas\cmsgate\ConfigFields;
 use esas\cmsgate\messenger\Messages;
 use esas\cmsgate\view\admin\AdminViewFields;
 if (!defined("_DESC")) define("_DESC", '_desc');
@@ -12,6 +13,9 @@ return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNumeric::class => 'Value had to be numeric',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Wrong email format',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorUploadFileExtension::class => 'Wrong file extension. *.[%s] file is expected',
+
+    ConfigFields::debugMode() => 'Debug mode',
+    ConfigFields::debugMode() . _DESC => 'Debug mode. If *true* then extra messages will be shown',
 
     AdminViewFields::CONFIG_FORM_COMMON => 'Common settings',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Save',

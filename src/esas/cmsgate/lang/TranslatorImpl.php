@@ -29,6 +29,7 @@ class TranslatorImpl extends Translator
      */
     public function __construct(LocaleLoaderCms $localeLoader, $paySystemVocabularyDir)
     {
+        parent::__construct();
         $this->localeLoader = $localeLoader;
         $this->extraVocabularyDirs[] = $paySystemVocabularyDir;
         $this->extraVocabularyDirs[] = $localeLoader->getCmsVocabularyDir();
@@ -51,6 +52,10 @@ class TranslatorImpl extends Translator
             $file = $dir . "/" . $code . "_" . strtoupper($code) . ".php";
             if (!file_exists($file))
                 $file = $dir . "/ru_RU.php";
+        }
+        if (!file_exists($file) || is_dir($file)) {//пропускаем
+            $this->logger->debug("Translation file was not found: " . $file);
+            return;
         }
         $vocabulary = include $file;
         if (is_array($this->lang[$locale]))
