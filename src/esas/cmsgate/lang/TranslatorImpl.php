@@ -2,6 +2,8 @@
 
 namespace esas\cmsgate\lang;
 
+use esas\cmsgate\Registry;
+
 /**
  * Created by PhpStorm.
  * User: nikit
@@ -27,12 +29,12 @@ class TranslatorImpl extends Translator
      * @param LocaleLoaderCms $localeLoader
      * @param $psMsgDir - путь к дополнительным словарям
      */
-    public function __construct(LocaleLoaderCms $localeLoader, $paySystemVocabularyDir)
+    public function __construct( $paySystemVocabularyDir)
     {
         parent::__construct();
-        $this->localeLoader = $localeLoader;
+        $this->localeLoader = Registry::getRegistry()->createLocaleLoader();
         $this->extraVocabularyDirs[] = $paySystemVocabularyDir;
-        $this->extraVocabularyDirs[] = $localeLoader->getCmsVocabularyDir();
+        $this->extraVocabularyDirs[] = $this->localeLoader->getCmsVocabularyDir();
     }
 
     private function loadLocale($locale)

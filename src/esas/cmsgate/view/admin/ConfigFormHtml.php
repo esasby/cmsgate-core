@@ -186,12 +186,12 @@ abstract class ConfigFormHtml extends ConfigForm
     protected function elementSubmitButtons()
     {
         $ret = "";
-        if (isset($this->submitButtons)) {
-            foreach ($this->submitButtons as $buttonName => $buttonValue) {
-                $ret .= $this->elementInputSubmit($buttonName, $buttonValue) . "&nbsp;";
-            }
-        } else
-            $ret = $this->elementInputSubmit(RequestParams::SUBMIT_BUTTON, Registry::getRegistry()->getTranslator()->translate(AdminViewFields::CONFIG_FORM_BUTTON_SAVE));
+        if (!isset($this->submitButtons)) {
+            $this->addSubmitButton(RequestParams::SAVE_BUTTON);
+        }
+        foreach ($this->submitButtons as $buttonName => $buttonValue) {
+            $ret .= $this->elementInputSubmit($buttonName, $buttonValue) . "&nbsp;";
+        }
         return $ret;
     }
 

@@ -27,9 +27,12 @@ abstract class ConfigWrapper extends Wrapper
      * ConfigWrapper constructor.
      * @param $configStorage
      */
-    public function __construct($configStorageCms)
+    public function __construct($configStorageCms = null)
     {
         parent::__construct();
+        if ($configStorageCms == null) {
+            $configStorageCms = Registry::getRegistry()->createConfigStorage();
+        }
         $this->configStorageCms = $configStorageCms;
     }
 

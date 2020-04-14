@@ -30,11 +30,14 @@ use Exception;
 abstract class Registry
 {
     protected $configWrapper;
-    protected $orderWrapperFactory;
     protected $systemSettingsWrapper;
     protected $translator;
     protected $configForm;
     protected $messenger;
+    /**
+     * @var CmsConnector
+     */
+    protected $cmsConnector;
 
     public function init() {
         $registryName = self::getUniqRegistryName();
@@ -78,7 +81,7 @@ abstract class Registry
     }
 
     public function createSystemSettingsWrapper() {
-        return new SystemSettingsWrapper();
+        return $this->cmsConnector->createSystemSettingsWrapper();
     }
 
     /**
@@ -109,24 +112,13 @@ abstract class Registry
     }
 
     /**
-     * @return OrderWrapperFactory
-     */
-    public function getOrderWrapperFactory() {
-        if ($this->orderWrapperFactory == null)
-            $this->orderWrapperFactory = $this->createOrderWrapperFactory();
-        return $this->orderWrapperFactory;
-    }
-
-    public abstract function createOrderWrapperFactory();
-
-    /**
      * По локальному id заказа возвращает wrapper
      * @param $orderId
      * @return OrderWrapper
      * @throws Exception если не удается получить
      */
     public function getOrderWrapper($orderId) {
-        $orderWrapper =  $this->getOrderWrapperFactory()->getOrderWrapperByOrderId($orderId);
+        $orderWrapper =  $this->cmsConnector->createOrderWrapperByOrderId($orderId);
         if ($orderWrapper == null)
             throw new Exception('Can not get orderWrapper by given orderId[' . $orderId . "]");
         return $orderWrapper;
@@ -139,7 +131,7 @@ abstract class Registry
      * @throws Exception
      */
     public function getOrderWrapperByOrderNumber($orderNumber) {
-        $orderWrapper = $this->getOrderWrapperFactory()->getOrderWrapperByOrderNumber($orderNumber);
+        $orderWrapper = $this->cmsConnector->createOrderWrapperByOrderNumber($orderNumber);
         if ($orderWrapper == null)
             throw new Exception('Can not get orderWrapper by given orderТгьиук[' . $orderNumber . "]");
         return $orderWrapper;
@@ -152,7 +144,7 @@ abstract class Registry
      * @throws Exception
      */
     public function getOrderWrapperByExtId($extId) {
-        $orderWrapper = $this->getOrderWrapperFactory()->getOrderWrapperByExtId($extId);
+        $orderWrapper = $this->cmsConnector->createOrderWrapperByExtId($extId);
         if ($orderWrapper == null)
             throw new Exception('Can not get orderWrapper by given extId[' . $extId . "]");
         return $orderWrapper;
@@ -165,7 +157,7 @@ abstract class Registry
      * @throws Exception
      */
     public function getOrderWrapperForCurrentUser() {
-        $orderWrapper = $this->getOrderWrapperFactory()->getOrderWrapperForCurrentUser();
+        $orderWrapper = $this->cmsConnector->createOrderWrapperForCurrentUser();
         if ($orderWrapper == null)
             throw new Exception('Can not get orderWrapper for current order of current user');
         return $orderWrapper;
@@ -202,5 +194,21 @@ abstract class Registry
         if ($this->messenger == null)
             $this->messenger = new Messenger($this->createTranslator());
         return $this->messenger;
+    }
+
+    public function createLocaleLoader() {
+        return $this->cmsConnector->createLocaleLoader();
+    }
+
+    public function createConfigStorage() {
+        return $this->cmsConnector->createConfigStorage();
+    }
+
+    /**
+     * @return CmsConnector
+     */
+    public function getCmsConnector()
+    {
+        return $this->cmsConnector;
     }
 }
