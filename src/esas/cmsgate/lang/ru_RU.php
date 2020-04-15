@@ -4,6 +4,7 @@ use esas\cmsgate\ConfigFields;
 use esas\cmsgate\messenger\Messages;
 use esas\cmsgate\utils\RequestParams;
 use esas\cmsgate\view\admin\AdminViewFields;
+use esas\cmsgate\view\ViewFields;
 
 if (!defined("_DESC")) define("_DESC", '_desc');
 if (!defined("_DEFAULT")) define("_DEFAULT", '_default');
@@ -21,6 +22,8 @@ return array(
 
     AdminViewFields::CONFIG_FORM_COMMON => 'Общие настройки',
     AdminViewFields::SETTINGS => 'Настройки',
+
+    ViewFields::BUTTON_CONTINUE => 'Продолжить',
 
     RequestParams::SAVE_BUTTON => 'Сохранить',
     RequestParams::SAVE_AND_EXIT_BUTTON => 'Сохранить и выйти',

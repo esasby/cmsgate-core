@@ -8,12 +8,14 @@
 
 namespace esas\cmsgate\view\admin;
 
+use esas\cmsgate\view\ViewFields;
+
 /**
  * Перечисление полей, доступных на странице настроек плагина
  * Class AdminViewFields
  * @package sas\cmsgate\view\admin
  */
-class AdminViewFields
+class AdminViewFields extends ViewFields
 {
     const ADMIN_PAYMENT_METHOD_NAME = 'admin_payment_method_name';
     const ADMIN_PAYMENT_METHOD_DESCRIPTION = 'admin_payment_method_description';

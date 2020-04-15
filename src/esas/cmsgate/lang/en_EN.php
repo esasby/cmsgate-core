@@ -4,6 +4,8 @@ use esas\cmsgate\ConfigFields;
 use esas\cmsgate\messenger\Messages;
 use esas\cmsgate\utils\RequestParams;
 use esas\cmsgate\view\admin\AdminViewFields;
+use esas\cmsgate\view\ViewFields;
+
 if (!defined("_DESC")) define("_DESC", '_desc');
 if (!defined("_DEFAULT")) define("_DEFAULT", '_default');
 if (!defined("_ERROR_VALIDATION")) define("_ERROR_VALIDATION", 'error_validation_');
@@ -20,6 +22,8 @@ return array(
 
     AdminViewFields::CONFIG_FORM_COMMON => 'Common settings',
     AdminViewFields::SETTINGS => 'Settings',
+
+    ViewFields::BUTTON_CONTINUE => 'Continue',
 
     RequestParams::SAVE_BUTTON => 'Save',
     RequestParams::SAVE_AND_EXIT_BUTTON => 'Save and exit',

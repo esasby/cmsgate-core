@@ -38,6 +38,10 @@ abstract class Registry
      * @var CmsConnector
      */
     protected $cmsConnector;
+    /**
+     * @var PaysystemConnector
+     */
+    protected $paysystemConnector;
 
     public function init() {
         $registryName = self::getUniqRegistryName();
@@ -68,7 +72,9 @@ abstract class Registry
         return $this->configWrapper;
     }
     
-    public abstract function createConfigWrapper();
+    public function createConfigWrapper() {
+        return $this->paysystemConnector->createConfigWrapper();
+    }
 
     /**
      * @return SystemSettingsWrapper
@@ -94,7 +100,9 @@ abstract class Registry
         return $this->translator;
     }
 
-    public abstract function createTranslator();
+    public function createTranslator() {
+        return $this->paysystemConnector->createTranslator();
+    }
 
     /**
      * @return Registry
