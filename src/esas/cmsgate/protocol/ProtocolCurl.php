@@ -88,6 +88,17 @@ abstract class ProtocolCurl
         return $this->send($path, $data, RqMethod::_DELETE, $rsType);
     }
 
+    protected function defaultCurlInit($url) {
+        $this->ch = curl_init();
+        curl_setopt($this->ch, CURLOPT_URL, $url);
+        curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true); // возврат результата вместо вывода на экран
+        if (Registry::getRegistry()->getConfigWrapper()->isDebugMode()) {
+            curl_setopt($this->ch, CURLOPT_VERBOSE, true); // вывод доп. информации в STDERR
+            curl_setopt($this->ch, CURLINFO_HEADER_OUT, true); // вывод отправленных заголовков
+        }
+    }
+
     /**
      * Подключение GET, POST или DELETE
      *
