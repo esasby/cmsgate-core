@@ -99,6 +99,16 @@ abstract class ProtocolCurl
         }
     }
 
+    protected function execCurlAndLog() {
+        $response = curl_exec($this->ch);
+        $this->logger->debug("Request headers[" . curl_getinfo($this->ch, CURLINFO_HEADER_OUT ) . ']');
+        $this->logger->info('Got response: code[' . curl_getinfo($this->ch, CURLINFO_RESPONSE_CODE  ) . '] body[' . $response . "]");
+        if (curl_errno($this->ch)) {
+            throw new Exception(curl_error($this->ch), curl_errno($this->ch));
+        }
+        return $response;
+    }
+
     /**
      * Подключение GET, POST или DELETE
      *
