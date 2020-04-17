@@ -187,7 +187,7 @@ abstract class ConfigFormHtml extends ConfigForm
     {
         $ret = "";
         if (!isset($this->submitButtons)) {
-            $this->addSubmitButton(RequestParams::SAVE_BUTTON);
+            $this->addSubmitButton(AdminViewFields::CONFIG_FORM_BUTTON_SAVE);
         }
         foreach ($this->submitButtons as $buttonName => $buttonValue) {
             $ret .= $this->elementInputSubmit($buttonName, $buttonValue) . "&nbsp;";

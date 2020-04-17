@@ -16,20 +16,18 @@ class FileWrapper
 
     private $name;
     private $path;
-    private $logger;
+    protected $logger;
 
     /**
      * FileWrapper constructor.
      * @param $name
      * @throws \Exception
      */
-    public function __construct($name)
+    public function __construct($path)
     {
         $this->logger = Logger::getLogger(get_class($this));
-        $this->name = $name;
-        $dir = dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/upload/';
-        FileUtils::createSafeDir($dir);
-        $this->path = $dir . $name;
+        $this->name = pathinfo($path, PATHINFO_FILENAME);
+        $this->path = $path;
     }
 
 

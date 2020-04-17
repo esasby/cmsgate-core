@@ -2,7 +2,6 @@
 
 use esas\cmsgate\ConfigFields;
 use esas\cmsgate\messenger\Messages;
-use esas\cmsgate\utils\RequestParams;
 use esas\cmsgate\view\admin\AdminViewFields;
 use esas\cmsgate\view\ViewFields;
 
@@ -21,12 +20,13 @@ return array(
     ConfigFields::debugMode() . _DESC => 'Debug mode. If *true* then extra messages will be shown',
 
     AdminViewFields::CONFIG_FORM_COMMON => 'Common settings',
+    AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Save',
+    AdminViewFields::CONFIG_FORM_BUTTON_SAVE_AND_EXIT => 'Save and exit',
+    AdminViewFields::CONFIG_FORM_BUTTON_CANCEL => 'Cancel',
+    AdminViewFields::CONFIG_FORM_BUTTON_DOWNLOAD_LOG => 'Download logs',
     AdminViewFields::SETTINGS => 'Settings',
 
     ViewFields::BUTTON_CONTINUE => 'Continue',
-
-    RequestParams::SAVE_BUTTON => 'Save',
-    RequestParams::SAVE_AND_EXIT_BUTTON => 'Save and exit',
 
     Messages::GENERAL_MODULE_ERROR => "General module error",
     Messages::INCORRECT_INPUT => "Incorrect input",

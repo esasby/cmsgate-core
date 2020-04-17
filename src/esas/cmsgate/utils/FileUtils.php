@@ -10,9 +10,9 @@ namespace esas\cmsgate\utils;
 
 
 use esas\cmsgate\Registry;
+use esas\cmsgate\utils\Logger as CmsgateLogger;
 use Exception;
 use Throwable;
-use esas\cmsgate\utils\Logger as CmsgateLogger;
 
 class FileUtils
 {
@@ -36,16 +36,37 @@ class FileUtils
     }
 
     /**
-     * @param $configFieldWithFileName
-     * @throws Exception
+     * @param string $configFieldWithFileName
      * @throws Throwable
      */
-    public static function downloadFile($configFieldWithFileName)
+    public static function downloadByConfigField($configFieldWithFileName)
+    {
+        $logger = CmsgateLogger::getLogger('FileDownload');
+        $logger->info("Downloading file for field[" . $configFieldWithFileName . "]");
+        $file = new UploadedFileWrapper(Registry::getRegistry()->getConfigWrapper()->getConfig($configFieldWithFileName));
+        self::downloadByWrapper($file);
+    }
+
+    /**
+     * @param string $filePath
+     * @throws Throwable
+     */
+    public static function downloadByPath($filePath)
+    {
+        $logger = CmsgateLogger::getLogger('FileDownload');
+        $logger->info("Downloading file by path[" . $filePath . "]");
+        $file = new FileWrapper($filePath);
+        self::downloadByWrapper($file);
+    }
+
+    /**
+     * @param FileWrapper $file
+     * @throws Throwable
+     */
+    public static function downloadByWrapper($file)
     {
         try {
             $logger = CmsgateLogger::getLogger('FileDownload');
-            $logger->info("Downloading file for field[" . $configFieldWithFileName . "]");
-            $file = new FileWrapper(Registry::getRegistry()->getConfigWrapper()->getConfig($configFieldWithFileName));
             if (!$file->isExists()) {
                 Registry::getRegistry()->getMessenger()->addErrorMessage("File[" . $file->getPath() . "] does not exist");
                 return;
@@ -87,9 +108,9 @@ class FileUtils
             $uploadedFileExtension = strrchr($_FILES[$configFieldWithFileName]['name'], '.');
             if ($fileExtension != null && $uploadedFileExtension != $fileExtension)
                 throw new Exception("Incorrect file type. [*." . $fileExtension . "] expected");
-            $file = new FileWrapper(Registry::getRegistry()->getConfigWrapper()->getConfig($configFieldWithFileName));
+            $file = new UploadedFileWrapper(Registry::getRegistry()->getConfigWrapper()->getConfig($configFieldWithFileName));
             $file->deleteIfExists();
-            $newFile = new FileWrapper(self::generateRandomName() . $uploadedFileExtension);
+            $newFile = new UploadedFileWrapper(self::generateRandomName() . $uploadedFileExtension);
             Registry::getRegistry()->getConfigWrapper()->saveConfig($configFieldWithFileName, $newFile->getName());
             move_uploaded_file($_FILES[$configFieldWithFileName]['tmp_name'], $newFile->getPath());
             Registry::getRegistry()->getMessenger()->addInfoMessage("File was uploaded to path[" . $newFile->getPath() . "]");
@@ -133,7 +154,8 @@ class FileUtils
         return true;
     }
 
-    protected static function generateRandomName() {
+    protected static function generateRandomName()
+    {
         //Generate a random string.
         $token = openssl_random_pseudo_bytes(16);
         //Convert the binary data into hexadecimal representation.

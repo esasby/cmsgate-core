@@ -2,7 +2,6 @@
 
 use esas\cmsgate\ConfigFields;
 use esas\cmsgate\messenger\Messages;
-use esas\cmsgate\utils\RequestParams;
 use esas\cmsgate\view\admin\AdminViewFields;
 use esas\cmsgate\view\ViewFields;
 
@@ -21,12 +20,13 @@ return array(
     ConfigFields::debugMode() . _DESC => 'Отображение деталей ошибок',
 
     AdminViewFields::CONFIG_FORM_COMMON => 'Общие настройки',
+    AdminViewFields::CONFIG_FORM_BUTTON_DOWNLOAD_LOG => 'Скачать логи',
+    AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Сохранить',
+    AdminViewFields::CONFIG_FORM_BUTTON_SAVE_AND_EXIT => 'Сохранить и выйти',
+    AdminViewFields::CONFIG_FORM_BUTTON_CANCEL => 'Отмена',
     AdminViewFields::SETTINGS => 'Настройки',
 
     ViewFields::BUTTON_CONTINUE => 'Продолжить',
-
-    RequestParams::SAVE_BUTTON => 'Сохранить',
-    RequestParams::SAVE_AND_EXIT_BUTTON => 'Сохранить и выйти',
 
     Messages::GENERAL_MODULE_ERROR => "Ошибка работы модуля",
     Messages::INCORRECT_INPUT => "Некорректные данные",

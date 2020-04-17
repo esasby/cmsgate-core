@@ -22,4 +22,7 @@ class AdminViewFields extends ViewFields
     const SETTINGS = 'settings';
     const CONFIG_FORM_COMMON = 'configform_common';
     const CONFIG_FORM_BUTTON_SAVE = 'configform_save';
+    const CONFIG_FORM_BUTTON_SAVE_AND_EXIT = 'configform_save_and_exit';
+    const CONFIG_FORM_BUTTON_CANCEL = 'configform_cancel';
+    const CONFIG_FORM_BUTTON_DOWNLOAD_LOG = 'configform_download_log';
 }
