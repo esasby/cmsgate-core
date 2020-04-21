@@ -12,7 +12,6 @@ namespace esas\cmsgate\view\admin;
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
-use esas\cmsgate\utils\RequestParams;
 use esas\cmsgate\view\admin\fields\ConfigFieldCheckbox;
 use esas\cmsgate\view\admin\fields\ConfigFieldFile;
 use esas\cmsgate\view\admin\fields\ConfigFieldList;
@@ -61,7 +60,12 @@ abstract class ConfigFormHtml extends ConfigForm
         parent::__construct($formKey, $managedFields);
         $this->headingTitle = Registry::getRegistry()->getTranslator()->translate($formKey);
         $this->submitUrl = $submitUrl;
-        $this->submitButtons = $submitButtons;
+        if (is_array($submitButtons))
+            foreach ($submitButtons as $submitButtonKey) {
+                $this->addSubmitButton($submitButtonKey);
+            }
+        elseif ($submitButtons != null)
+            $this->addSubmitButton($submitButtons);
     }
 
     /**
