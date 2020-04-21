@@ -32,6 +32,14 @@ abstract class ViewBuilder
         }
         return $ret;
     }
-    
-    public abstract static function elementMessage($class, $text);
+
+    /**
+     * Метод должен быть переопределен
+     * @param $class
+     * @param $text
+     * @return string
+     */
+    public static function elementMessage($class, $text) {
+        return "";
+    }
 }
