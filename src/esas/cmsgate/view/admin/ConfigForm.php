@@ -180,14 +180,19 @@ abstract class ConfigForm
     public function save()
     {
         foreach ($this->getManagedFields()->getFieldsToRender() as $configField) {
-            $value = array_key_exists($configField->getKey(), $_REQUEST) ? $_REQUEST[$configField->getKey()] : $configField->getValue();
+
             if ($configField instanceof ConfigFieldFile) {
                 $fileMeta = $_FILES[$configField->getKey()];
                 if ($fileMeta != null) {
                     FileUtils::uploadFile($configField->getKey());
                 }
-            } else
+            } else if ($configField instanceof ConfigFieldCheckbox) {
+                $value = array_key_exists($configField->getKey(), $_REQUEST) ? $_REQUEST[$configField->getKey()] : "";
                 Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
+            } else {
+                $value = array_key_exists($configField->getKey(), $_REQUEST) ? $_REQUEST[$configField->getKey()] : $configField->getValue();
+                Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
+            }
         }
         Registry::getRegistry()->getMessenger()->addInfoMessage(Messages::SETTINGS_SAVED);
     }
