@@ -111,6 +111,7 @@ class FileUtils
             $file = new UploadedFileWrapper(Registry::getRegistry()->getConfigWrapper()->getConfig($configFieldWithFileName));
             $file->deleteIfExists();
             $newFile = new UploadedFileWrapper(self::generateRandomName() . $uploadedFileExtension);
+            FileUtils::createSafeDir($newFile->getDir());
             Registry::getRegistry()->getConfigWrapper()->saveConfig($configFieldWithFileName, $newFile->getName());
             move_uploaded_file($_FILES[$configFieldWithFileName]['tmp_name'], $newFile->getPath());
             Registry::getRegistry()->getMessenger()->addInfoMessage("File was uploaded to path[" . $newFile->getPath() . "]");

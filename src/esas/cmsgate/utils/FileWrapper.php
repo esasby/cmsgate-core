@@ -16,6 +16,7 @@ class FileWrapper
 
     private $name;
     private $path;
+    private $dir;
     protected $logger;
 
     /**
@@ -27,6 +28,7 @@ class FileWrapper
     {
         $this->logger = Logger::getLogger(get_class($this));
         $this->name = pathinfo($path, PATHINFO_FILENAME) . '.' . pathinfo($path, PATHINFO_EXTENSION);
+        $this->dir = pathinfo($path, PATHINFO_DIRNAME);
         $this->path = $path;
     }
 
@@ -94,5 +96,11 @@ class FileWrapper
         return $this->path;
     }
 
-
+    /**
+     * @return mixed
+     */
+    public function getDir()
+    {
+        return $this->dir;
+    }
 }

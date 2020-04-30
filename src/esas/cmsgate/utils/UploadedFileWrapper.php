@@ -20,7 +20,6 @@ class UploadedFileWrapper extends FileWrapper
     public function __construct($name)
     {
         $dir = dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/upload/';
-        FileUtils::createSafeDir($dir);
         parent::__construct($dir . $name);
     }
 
