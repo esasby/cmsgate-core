@@ -12,10 +12,9 @@ use Exception;
 
 class UploadedFileWrapper extends FileWrapper
 {
-        /**
+    /**
      * FileWrapper constructor.
      * @param $name
-     * @throws Exception
      */
     public function __construct($name)
     {

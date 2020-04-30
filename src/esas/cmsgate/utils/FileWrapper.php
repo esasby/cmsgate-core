@@ -21,8 +21,7 @@ class FileWrapper
 
     /**
      * FileWrapper constructor.
-     * @param $name
-     * @throws \Exception
+     * @param $path
      */
     public function __construct($path)
     {
