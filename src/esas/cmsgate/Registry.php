@@ -219,4 +219,12 @@ abstract class Registry
     {
         return $this->cmsConnector;
     }
+
+    /**
+     * @return PaysystemConnector
+     */
+    public function getPaysystemConnector()
+    {
+        return $this->paysystemConnector;
+    }
 }
