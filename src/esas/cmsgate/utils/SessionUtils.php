@@ -47,7 +47,15 @@ class SessionUtils
         unset($_SESSION[self::SESSION_FROMS_ARRAY][$configForm->getFormKey()]);
     }
 
+    /**
+     * @deprecated naming mistake
+     */
     public static function removeAllFroms()
+    {
+        self::removeAllForms();
+    }
+
+    public static function removeAllForms()
     {
         unset($_SESSION[self::SESSION_FROMS_ARRAY]);
     }
