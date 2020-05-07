@@ -9,7 +9,10 @@
 namespace esas\cmsgate;
 
 
+use esas\cmsgate\lang\Translator;
 use esas\cmsgate\utils\Logger;
+use esas\cmsgate\view\admin\ManagedFieldsFactory;
+use esas\cmsgate\wrappers\ConfigWrapper;
 
 abstract class PaysystemConnector
 {
@@ -23,7 +26,18 @@ abstract class PaysystemConnector
         $this->logger = Logger::getLogger(get_class($this));
     }
 
+    /**
+     * @return ConfigWrapper
+     */
     public abstract function createConfigWrapper();
 
+    /**
+     * @return Translator
+     */
     public abstract function createTranslator();
+
+    /**
+     * @return ManagedFieldsFactory
+     */
+    public abstract function createManagedFieldsFactory();
 }

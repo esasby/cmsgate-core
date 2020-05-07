@@ -13,20 +13,18 @@ use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\fields\ConfigField;
 use esas\cmsgate\view\admin\validators\ValidationResult;
 
-abstract class ManagedFields
+/**
+ * Class ManagedFields используется для группировки настроек для одной формы
+ * @package esas\cmsgate\view\admin
+ */
+class ManagedFields
 {
     /**
      * Массив настроек, которые должны быть отображены для конкретного модуля
      * @var ConfigField[]
      */
     protected $fieldsToRender;
-
-    /**
-     * Массив для хранения всех возможнах настроек модуля
-     * @var ConfigField[]
-     */
-    protected $allFields;
-
+    
     /**
      * @var Logger
      */
@@ -49,45 +47,14 @@ abstract class ManagedFields
     {
         $this->logger = Logger::getLogger(get_class($this));
     }
-
-    /**
-     * Внутренний метод для заполнения массива всез настроек
-     * @param ConfigField $configField
-     */
-    protected function registerField(ConfigField $configField)
-    {
-        $configField->setSortOrder(++$this->sortOrderCounter);
-        $this->allFields[$configField->getKey()] = $configField;
-    }
-
-
-    /**
-     * Добавление всех полей
-     */
-    public function addAll()
-    {
-        unset($this->fieldsToRender);
-        $this->fieldsToRender = $this->allFields;
-    }
-
-    /**
-     * Добавление всех полей, исключая перечисленные
-     */
-    public function addAllExcept(array $exclude)
-    {
-        unset($this->fieldsToRender);
-        foreach ($this->allFields as $configField) {
-            if (!in_array($configField->getKey(), $exclude)) {
-                $this->addField($configField);
-            }
-        }
-    }
+        
 
     /**
      * Добавление одного поля. Может использоваться в CMS для добавления спец. полей
      */
     public function addField(ConfigField $configField)
     {
+        $configField->setSortOrder(++$this->sortOrderCounter);
         $this->fieldsToRender[$configField->getKey()] = $configField;
     }
 

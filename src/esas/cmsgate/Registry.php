@@ -15,9 +15,9 @@ use esas\cmsgate\utils\Logger;
 use esas\cmsgate\utils\SessionUtils;
 use esas\cmsgate\view\admin\AdminViewFields;
 use esas\cmsgate\view\admin\ConfigForm;
+use esas\cmsgate\view\admin\ManagedFieldsFactory;
 use esas\cmsgate\wrappers\ConfigWrapper;
 use esas\cmsgate\wrappers\OrderWrapper;
-use esas\cmsgate\wrappers\OrderWrapperFactory;
 use esas\cmsgate\wrappers\SystemSettingsWrapper;
 use Exception;
 
@@ -42,6 +42,10 @@ abstract class Registry
      * @var PaysystemConnector
      */
     protected $paysystemConnector;
+    /**
+     * @var ManagedFieldsFactory
+     */
+    protected $managedFieldsFactory;
 
     public function init() {
         $registryName = self::getUniqRegistryName();
@@ -74,6 +78,23 @@ abstract class Registry
     
     public function createConfigWrapper() {
         return $this->paysystemConnector->createConfigWrapper();
+    }
+
+    /**
+     * @return ManagedFieldsFactory
+     */
+    public function getManagedFieldsFactory()
+    {
+        if ($this->managedFieldsFactory == null)
+            $this->managedFieldsFactory = $this->createManagedFieldsFactory();
+        return $this->managedFieldsFactory;
+    }
+
+    /**
+     * @return ManagedFieldsFactory
+     */
+    public function createManagedFieldsFactory() {
+        return $this->paysystemConnector->createManagedFieldsFactory();
     }
 
     /**

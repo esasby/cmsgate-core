@@ -229,7 +229,6 @@ abstract class ConfigWrapper extends Wrapper
         return $this->configStorageCms->createCmsRelatedKey($key);
     }
 
-
     /**
      * Сохранение значения свойства в настройках.
      * @param $key - ключ (уже CMS Related)

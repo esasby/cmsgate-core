@@ -179,18 +179,21 @@ abstract class ConfigForm
      */
     public function save()
     {
+        if (array_key_exists($this->formKey, $_REQUEST)) // иногда настройки могут приходить сгруппированными по имени формы
+            $values = $_REQUEST[$this->formKey];
+        else
+            $values = $_REQUEST;
         foreach ($this->getManagedFields()->getFieldsToRender() as $configField) {
-
             if ($configField instanceof ConfigFieldFile) {
                 $fileMeta = $_FILES[$configField->getKey()];
                 if ($fileMeta != null) {
                     FileUtils::uploadFile($configField->getKey());
                 }
             } else if ($configField instanceof ConfigFieldCheckbox) {
-                $value = array_key_exists($configField->getKey(), $_REQUEST) ? $_REQUEST[$configField->getKey()] : "";
+                $value = array_key_exists($configField->getKey(), $values) ? $values[$configField->getKey()] : "";
                 Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
             } else {
-                $value = array_key_exists($configField->getKey(), $_REQUEST) ? $_REQUEST[$configField->getKey()] : $configField->getValue();
+                $value = array_key_exists($configField->getKey(), $values) ? $values[$configField->getKey()] : $configField->getValue();
                 Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
             }
         }
