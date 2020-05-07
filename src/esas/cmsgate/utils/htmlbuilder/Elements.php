@@ -37,6 +37,7 @@ class Elements
     const H3 = "h3";
     const H4 = "h4";
     const I = "i";
+    const B = "b";
     const P = "p";
     const FORM = "form";
     const FIELDSET = "fieldset";
@@ -196,6 +197,11 @@ class Elements
     public static function i(...$elementAndAttributes)
     {
         return new Element(self::I, $elementAndAttributes);
+    }
+
+    public static function b(...$elementAndAttributes)
+    {
+        return new Element(self::B, $elementAndAttributes);
     }
 
     public static function p(...$elementAndAttributes)
