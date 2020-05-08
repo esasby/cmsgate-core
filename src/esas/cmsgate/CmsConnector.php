@@ -13,6 +13,12 @@ namespace esas\cmsgate;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\wrappers\OrderWrapper;
 
+/**
+ * Class CmsConnector позволяющий решить проблему множественного неследования в Registry. Часть объектов, создаваемых в
+ * Registry относятся к платежной системе (PaySystem), а часть к Cms. Для упрощения создания таких объектов, созданы два
+ * класса: CmsConnector и PaysystemConnector.
+ * @package esas\cmsgate
+ */
 abstract class CmsConnector
 {
 
