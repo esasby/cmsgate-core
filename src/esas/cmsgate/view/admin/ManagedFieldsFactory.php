@@ -67,17 +67,17 @@ abstract class ManagedFieldsFactory
     }
 
     /**
-     * @param $configForm
+     * @param $configFormKey
      * @param array $exclude
      * @return ManagedFields
      * @throws Exception
      */
-    public function getManagedFieldsExcept($configForm, array $exclude)
+    public function getManagedFieldsExcept($configFormKey, array $exclude)
     {
-        if ($this->fieldsGroupedByForm == null || !array_key_exists($configForm, $this->fieldsGroupedByForm))
-            throw new Exception('Wrong config form name[' . $configForm . ']');
+        if ($this->fieldsGroupedByForm == null || !array_key_exists($configFormKey, $this->fieldsGroupedByForm))
+            throw new Exception('Wrong config form name[' . $configFormKey . ']');
         $mangedFields = new ManagedFields();
-        foreach ($this->allFields as $configField) {
+        foreach ($this->fieldsGroupedByForm[$configFormKey] as $configField) {
             if (!in_array($configField->getKey(), $exclude)) {
                 $mangedFields->addField($configField);
             }
