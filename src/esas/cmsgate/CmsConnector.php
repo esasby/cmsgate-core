@@ -10,6 +10,7 @@ namespace esas\cmsgate;
 
 
 
+use esas\cmsgate\descriptors\CmsConnectorDescriptor;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\wrappers\OrderWrapper;
 
@@ -21,11 +22,15 @@ use esas\cmsgate\wrappers\OrderWrapper;
  */
 abstract class CmsConnector
 {
-
     /**
      * @var Logger
      */
     protected $logger;
+
+    /**
+     * @var CmsConnectorDescriptor
+     */
+    protected $cmsConnectorDescriptor;
 
     public function __construct()
     {
@@ -70,4 +75,16 @@ abstract class CmsConnector
     public abstract function createConfigStorage();
 
     public abstract function createLocaleLoader();
+
+    /**
+     * @return CmsConnectorDescriptor
+     */
+    public function getCmsConnectorDescriptor()
+    {
+        if ($this->cmsConnectorDescriptor == null)
+            $this->cmsConnectorDescriptor = $this->createCmsConnectorDescriptor();
+        return $this->cmsConnectorDescriptor;
+    }
+
+    public abstract function createCmsConnectorDescriptor();
 }

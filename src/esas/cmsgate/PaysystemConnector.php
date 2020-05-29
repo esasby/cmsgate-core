@@ -9,6 +9,7 @@
 namespace esas\cmsgate;
 
 
+use esas\cmsgate\descriptors\PaySystemConnectorDescriptor;
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\ManagedFieldsFactory;
@@ -26,6 +27,11 @@ abstract class PaysystemConnector
      * @var Logger
      */
     protected $logger;
+
+    /**
+     * @var PaySystemConnectorDescriptor
+     */
+    protected $paySystemConnectorDescriptor;
 
     public function __construct()
     {
@@ -46,4 +52,16 @@ abstract class PaysystemConnector
      * @return ManagedFieldsFactory
      */
     public abstract function createManagedFieldsFactory();
+
+    /**
+     * @return PaySystemConnectorDescriptor
+     */
+    public function getPaySystemConnectorDescriptor()
+    {
+        if ($this->paySystemConnectorDescriptor == null)
+            $this->paySystemConnectorDescriptor = $this->createPaySystemConnectorDescriptor();
+        return $this->paySystemConnectorDescriptor;
+    }
+
+    public abstract function createPaySystemConnectorDescriptor();
 }

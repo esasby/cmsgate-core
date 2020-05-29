@@ -9,6 +9,7 @@
 namespace esas\cmsgate;
 
 
+use esas\cmsgate\descriptors\ModuleDescriptor;
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\messenger\Messenger;
 use esas\cmsgate\utils\Logger;
@@ -34,6 +35,10 @@ abstract class Registry
     protected $translator;
     protected $configForm;
     protected $messenger;
+    /**
+     * @var ModuleDescriptor
+     */
+    protected $moduleDescriptor;
     /**
      * @var CmsConnector
      */
@@ -213,7 +218,9 @@ abstract class Registry
      * Машинное название платежной системы
      * @return string
      */
-    public abstract function getPaySystemName();
+    public function getPaySystemName() {
+        return $this->getPaysystemConnector()->getPaySystemConnectorDescriptor()->getPaySystemMachinaName();
+    }
 
     /**
      * @return Messenger
@@ -248,4 +255,15 @@ abstract class Registry
     {
         return $this->paysystemConnector;
     }
+
+    /**
+     * @return ModuleDescriptor
+     */
+    public function getModuleDescriptor() {
+        if ($this->moduleDescriptor == null)
+            $this->moduleDescriptor = $this->createModuleDescriptor();
+        return $this->moduleDescriptor;
+    }
+    
+    public abstract function createModuleDescriptor();
 }

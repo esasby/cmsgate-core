@@ -15,4 +15,6 @@ class Messages
     const INCORRECT_INPUT = 'incorrect_input';
     const SETTINGS_SAVED = 'settings_saved';
     const SANDBOX_MODE_IS_ON = "sandbox_mode_is_on";
+    
+    const ERROR_CURL_NOT_INSTALLED = "ERROR_CURL_NOT_INSTALLED";
 }
