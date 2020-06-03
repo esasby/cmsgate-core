@@ -9,8 +9,6 @@
 namespace esas\cmsgate\utils;
 
 
-use Throwable;
-
 class CMSGateException extends \Exception
 {
     private $clientMsg;
@@ -41,5 +39,15 @@ class CMSGateException extends \Exception
         $this->clientMsg = $clientMsg;
     }
 
-
+    /**
+     * @param $objkectToCheck
+     * @param $logMsg
+     * @param string $clientMsg
+     * @throws CMSGateException
+     */
+    public static function throwIfNull($objkectToCheck, $logMsg, $clientMsg = "")
+    {
+        if ($objkectToCheck == null)
+            throw new CMSGateException($logMsg, $clientMsg);
+    }
 }
