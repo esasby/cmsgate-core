@@ -9,6 +9,8 @@
 namespace esas\cmsgate\view\admin\fields;
 
 
+use esas\cmsgate\Registry;
+
 class ConfigFieldList extends ConfigField
 {
     /**
@@ -34,9 +36,17 @@ class ConfigFieldList extends ConfigField
         return $this->options;
     }
 
-    public function addOption($key, $name)
+    /**
+     * @param $key
+     * @param null $name
+     * @return $this
+     */
+    public function addOption($key, $name = null)
     {
+        if ($name == null)
+            $name = Registry::getRegistry()->getTranslator()->translate($name);
         $this->options[] = new ListOption($key, $name);
+        return $this;
     }
 
     /**
