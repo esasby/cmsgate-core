@@ -85,4 +85,8 @@ abstract class ManagedFieldsFactory
         return $mangedFields;
     }
 
+    public function getGroups() {
+        return array_keys($this->fieldsGroupedByForm) ;
+    }
+
 }
