@@ -44,7 +44,7 @@ class ConfigFieldList extends ConfigField
     public function addOption($key, $name = null)
     {
         if ($name == null)
-            $name = Registry::getRegistry()->getTranslator()->translate($name);
+            $name = Registry::getRegistry()->getTranslator()->translate($key);
         $this->options[] = new ListOption($key, $name);
         return $this;
     }
