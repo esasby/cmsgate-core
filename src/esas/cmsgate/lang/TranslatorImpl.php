@@ -39,7 +39,7 @@ class TranslatorImpl extends Translator
 
     private function loadLocale($locale)
     {
-        if (null == $this->lang[$locale]) {
+        if (!isset($this->lang) || null == $this->lang[$locale]) {
             $this->loadLocaleFromDir(__DIR__, $locale); //загружаем локаль из каталога lang core
             foreach ($this->extraVocabularyDirs as $extraVocabularyDir) {
                 $this->loadLocaleFromDir($extraVocabularyDir, $locale); //загружаем локаль для каталога lang наследника
