@@ -76,6 +76,10 @@ abstract class CmsConnector
 
     public abstract function createLocaleLoader();
 
+    public function getCurrentEncoding() {
+        return "utf-8";
+    }
+
     /**
      * @return CmsConnectorDescriptor
      */
