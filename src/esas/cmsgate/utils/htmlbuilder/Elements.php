@@ -11,6 +11,7 @@ namespace esas\cmsgate\utils\htmlbuilder;
 class Elements
 {
     const DIV = "div";
+    const SECTION = "section";
     const INPUT = "input";
     const TEXTAREA = "textarea";
     const TABLE = "table";
@@ -52,6 +53,11 @@ class Elements
     public static function div(...$elementAndAttributes)
     {
         return new Element(self::DIV, $elementAndAttributes);
+    }
+
+    public static function section(...$elementAndAttributes)
+    {
+        return new Element(self::SECTION, $elementAndAttributes);
     }
 
     public static function input(...$attributes)

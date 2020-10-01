@@ -215,6 +215,13 @@ abstract class Registry
     public abstract function createConfigForm();
 
     /**
+     * @return ConfigForm[]
+     */
+    public function getConfigFormsArray() {
+        return array($this->getConfigForm());
+    }
+
+    /**
      * Машинное название платежной системы
      * @return string
      */

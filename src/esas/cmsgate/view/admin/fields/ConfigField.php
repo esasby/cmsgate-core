@@ -165,13 +165,16 @@ abstract class ConfigField
      * (чтобы в случае ошибки в каком-либо поле, администратору не пришлось повторно вводить все поля)
      * @return mixed
      */
-    public function getValue()
+    public function getValue($orDefaults = false)
     {
         //тут будет не null, если до этого для поля вызывался валидатор
         if (isset($this->validationResult) && $this->validationResult != null) {
             return $this->validationResult->getValidatedValue();
         } else {
-            return Registry::getRegistry()->getConfigWrapper()->get($this->key);
+            $ret = Registry::getRegistry()->getConfigWrapper()->get($this->key);
+            if (($ret == null || $ret == '') && $orDefaults && $this->hasDefault())
+                $ret = $this->getDefault();
+            return $ret;
         }
     }
 

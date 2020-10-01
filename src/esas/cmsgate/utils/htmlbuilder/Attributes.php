@@ -16,6 +16,7 @@ class Attributes
     const DATA = "data";
     const STYLE = "style";
     const WIDTH = "width";
+    const HEIGHT = "height";
     const SCOPE = "scope";
     const ALIGN = "align";
     const ACTION = "action";
@@ -65,9 +66,15 @@ class Attributes
     {
         return new Attribute(self::STYLE, $style);
     }
+
     public static function width($width)
     {
         return new Attribute(self::WIDTH, $width);
+    }
+
+    public static function height($height)
+    {
+        return new Attribute(self::HEIGHT, $height);
     }
 
     public static function scope($scope)
