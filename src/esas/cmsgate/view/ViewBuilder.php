@@ -10,6 +10,8 @@ namespace esas\cmsgate\view;
 
 
 use esas\cmsgate\Registry;
+use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
+use esas\cmsgate\utils\htmlbuilder\Elements as element;
 
 abstract class ViewBuilder
 {
@@ -41,5 +43,31 @@ abstract class ViewBuilder
      */
     public static function elementMessage($class, $text) {
         return "";
+    }
+
+    public static function elementModuleDetailsTable() {
+        return element::table(
+            element::tr(
+                element::td("Module: "),
+                element::td(
+                    element::a(
+                        attribute::href(Registry::getRegistry()->getModuleDescriptor()->getModuleUrl()),
+                        element::content(Registry::getRegistry()->getModuleDescriptor()->getModuleMachineName())
+                    ))
+            ),
+            element::tr(
+                element::td("Version: "),
+                element::td(Registry::getRegistry()->getModuleDescriptor()->getVersion()->getVersion())
+            ),
+            element::tr(
+                element::td("Vendor: "),
+                element::td(
+                    element::a(
+                        attribute::href(Registry::getRegistry()->getModuleDescriptor()->getVendor()->getUrl()),
+                        element::content(Registry::getRegistry()->getModuleDescriptor()->getVendor()->getFullName())
+                    )
+                )
+            )
+        );
     }
 }
