@@ -55,7 +55,7 @@ class VendorDescriptor
     public static function esas() {
         return new VendorDescriptor(
             "esas",
-            "Электронные системы и сервисы",
+            "Electronic Systems and Services LTD.",
             "http://www.esas.by"
         );
     }
