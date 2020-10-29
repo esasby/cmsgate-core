@@ -42,7 +42,7 @@ abstract class ProtocolCurl
 
 
     /**
-     * Подключение GET
+     * Отправка GET
      *
      * @param string $path
      * @param string $data
@@ -58,7 +58,7 @@ abstract class ProtocolCurl
     }
 
     /**
-     * Подключение POST
+     * Отправка POST
      *
      * @param string $path
      * @param string $data
@@ -73,7 +73,22 @@ abstract class ProtocolCurl
     }
 
     /**
-     * Подключение DELETE
+     * Отправка PUT
+     *
+     * @param string $path
+     * @param string $data
+     * @param int $rsType
+     * @internal param RsType $rqType
+     * @return bool
+     * @throws Exception
+     */
+    protected function requestPut($path, $data = '', $rsType = RsType::_ARRAY)
+    {
+        return $this->send($path, $data, RqMethod::_PUT, $rsType);
+    }
+
+    /**
+     * Отправка DELETE
      *
      * @param string $path
      * @param string $data

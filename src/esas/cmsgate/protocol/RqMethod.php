@@ -14,6 +14,7 @@ class RqMethod
     const _GET = 0;
     const _POST = 1;
     const _DELETE = 2;
+    const _PUT = 3;
 
     public static function toString($rqMethod) {
         switch ($rqMethod) {
@@ -23,6 +24,8 @@ class RqMethod
                 return "POST";
             case  self::_DELETE:
                 return "DELETE";
+            case  self::_PUT:
+                return "PUT";
             default:
                 return "UNKNOWN";
         }
