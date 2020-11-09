@@ -20,6 +20,7 @@ class OrderWrapperImpl extends OrderWrapper
     private $email;
     private $address;
     private $amount;
+    private $shippingAmount;
     private $currency;
     private $products;
     private $extId;
@@ -170,6 +171,7 @@ class OrderWrapperImpl extends OrderWrapper
         return $this->amount;
     }
 
+
     /**
      * @param mixed $amount
      * @return OrderWrapperImpl
@@ -179,6 +181,24 @@ class OrderWrapperImpl extends OrderWrapper
         $this->amount = $amount;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getShippingAmount()
+    {
+        return $this->shippingAmount;
+    }
+
+    /**
+     * @param mixed $shippingAmount
+     */
+    public function setShippingAmount($shippingAmount)
+    {
+        $this->shippingAmount = $shippingAmount;
+        return $this;
+    }
+
 
     /**
      * @return mixed

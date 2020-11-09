@@ -197,6 +197,27 @@ abstract class OrderSafeWrapper extends OrderWrapper
     public abstract function getAmountUnsafe();
 
     /**
+     * Стоимость доставки
+     * @return string
+     */
+    public function getShippingAmount()
+    {
+        try {
+            return $this->getShippingAmountUnsafe();
+        } catch (Throwable $e) {
+            $this->logger->error("Can not get shipping amount from order. Using 0!", $e);
+            return "0";
+        }
+    }
+
+    /**
+     * Стоимость доставки
+     * @throws Throwable
+     * @return string
+     */
+    public abstract function getShippingAmountUnsafe();
+
+    /**
      * Валюта заказа (буквенный код)
      * @return string
      */

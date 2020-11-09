@@ -72,6 +72,12 @@ abstract class OrderWrapper extends Wrapper
     public abstract function getAmount();
 
     /**
+     * Стоимость доставки
+     * @return string
+     */
+    public abstract function getShippingAmount();
+
+    /**
      * Валюта заказа (буквенный код)
      * @return string
      */
