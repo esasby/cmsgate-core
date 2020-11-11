@@ -67,4 +67,12 @@ class ConfigFields
         return self::getCmsRelatedKey("bill_status_canceled");
     }
 
+    /**
+     * Настройка определяет будет ли использоваться orderNumber или orderId при взаимодействии с внещней системой
+     * @return mixed
+     */
+    public static function useOrderNumber()
+    {
+        return self::getCmsRelatedKey("use_order_number");
+    }
 }

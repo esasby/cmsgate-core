@@ -9,6 +9,7 @@
 namespace esas\cmsgate\wrappers;
 
 use esas\cmsgate\protocol\Amount;
+use esas\cmsgate\Registry;
 use Throwable;
 
 abstract class OrderWrapper extends Wrapper
@@ -27,6 +28,15 @@ abstract class OrderWrapper extends Wrapper
     public function getOrderNumber()
     {
         return $this->getOrderId();
+    }
+
+    /**
+     * В зависимости от настройки возвращает orderNumber или orderId
+     * @return string
+     */
+    public function getOrderNumberOrId()
+    {
+        return Registry::getRegistry()->getConfigWrapper()->isUseOrderNumber() ? $this->getOrderNumber() : $this->getOrderId();
     }
 
     /**

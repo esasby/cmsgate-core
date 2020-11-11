@@ -19,6 +19,10 @@ return array(
     ConfigFields::debugMode() => 'Debug mode',
     ConfigFields::debugMode() . _DESC => 'Отображение деталей ошибок',
 
+    ConfigFields::useOrderNumber() => 'Использовать номер заказа',
+    ConfigFields::useOrderNumber() . _DESC => 'Если включен, то на платежный шлюз будет отпрпавлен локальным номером заказа (orderNumber), иначе - локальным идентификатор (orderId)',
+
+
     AdminViewFields::CONFIG_FORM_COMMON => 'Общие настройки',
     AdminViewFields::CONFIG_FORM_BUTTON_DOWNLOAD_LOG => 'Скачать логи',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Сохранить',

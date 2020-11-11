@@ -109,6 +109,15 @@ abstract class ConfigWrapper extends Wrapper
         return $this->getConfig(ConfigFields::billStatusCanceled());
     }
 
+    /**
+     * При взаимодействии с ПС использовать orderId или orderNumber
+     * @return boolean
+     */
+    public function isUseOrderNumber()
+    {
+        return $this->checkOn(ConfigFields::useOrderNumber());
+    }
+
     public function getConfig($key, $warn = false)
     {
         try {
@@ -188,6 +197,8 @@ abstract class ConfigWrapper extends Wrapper
                 return $this->getBillStatusFailed();
             case ConfigFields::billStatusCanceled():
                 return $this->getBillStatusCanceled();
+            case ConfigFields::useOrderNumber():
+                return $this->isUseOrderNumber();
             default:
                 return $this->getConfig($config_key);
         }
@@ -203,6 +214,7 @@ abstract class ConfigWrapper extends Wrapper
         return strtr($text, array(
             "@order_id" => $orderWrapper->getOrderId(),
             "@order_number" => $orderWrapper->getOrderNumber(),
+            "@order_number_or_id" => $orderWrapper->getOrderNumberOrId(),
             "@order_total" => $orderWrapper->getAmount(),
             "@order_currency" => $orderWrapper->getCurrency(),
             "@order_fullname" => $orderWrapper->getFullName(),

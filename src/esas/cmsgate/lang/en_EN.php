@@ -19,6 +19,10 @@ return array(
     ConfigFields::debugMode() => 'Debug mode',
     ConfigFields::debugMode() . _DESC => 'Debug mode. If *true* then extra messages will be shown',
 
+    ConfigFields::useOrderNumber() => 'Use order number',
+    ConfigFields::useOrderNumber() . _DESC => 'If *true* then bill will be added to the payment gate with local "order number", otherwise "order id" will be used',
+
+
     AdminViewFields::CONFIG_FORM_COMMON => 'Common settings',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE => 'Save',
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE_AND_EXIT => 'Save and exit',
