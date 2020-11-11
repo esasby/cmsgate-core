@@ -172,6 +172,18 @@ abstract class Registry
     }
 
     /**
+     * @param $orderNumberOrId
+     * @return OrderWrapper
+     * @throws Exception
+     */
+    public function getOrderWrapperByOrderNumberOrId($orderNumberOrId) {
+        if ($this->getConfigWrapper()->isUseOrderNumber())
+            return $this->getOrderWrapperByOrderNumber($orderNumberOrId);
+        else
+            return $this->getOrderWrapper($orderNumberOrId);
+    }
+
+    /**
      * По номеру транзакции внешней система возвращает wrapper
      * @param $extId
      * @return OrderWrapper
