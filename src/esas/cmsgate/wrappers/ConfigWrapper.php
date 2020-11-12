@@ -121,6 +121,9 @@ abstract class ConfigWrapper extends Wrapper
     public function getConfig($key, $warn = false)
     {
         try {
+            $value = Registry::getRegistry()->getConstantConfigValue($key);
+            if ($value != null)
+                return $value;
             $value = $this->configStorageCms->getConfig($key);
             if ($warn)
                 return $this->warnIfEmpty($value, $key);
@@ -143,6 +146,9 @@ abstract class ConfigWrapper extends Wrapper
     {
         $value = false;
         try {
+            $value = Registry::getRegistry()->getConstantConfigValue($key);
+            if ($value != null)
+                return $value;
             $value = $this->configStorageCms->getConfig($key);
             $this->warnIfEmpty($value, $key);
             if ((is_null($value) || "" == $value) && $this->needDefaults())

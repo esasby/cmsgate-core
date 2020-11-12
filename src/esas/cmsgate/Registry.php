@@ -285,4 +285,13 @@ abstract class Registry
     }
     
     public abstract function createModuleDescriptor();
+
+    /**
+     * Метод позволяет задать нередактируемые значения настроек
+     * @param $key
+     * @return null
+     */
+    public function getConstantConfigValue($key) {
+        return $this->getCmsConnector()->getConstantConfigValue($key);
+    }
 }

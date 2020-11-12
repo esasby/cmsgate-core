@@ -91,4 +91,8 @@ abstract class CmsConnector
     }
 
     public abstract function createCmsConnectorDescriptor();
+
+    public function getConstantConfigValue($key) {
+        return null;
+    }
 }
