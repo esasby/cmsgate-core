@@ -11,16 +11,18 @@ namespace esas\cmsgate\descriptors;
 
 class CmsConnectorDescriptor extends AbstractDescriptor
 {
+    private $defaultModuleType;
     private $cmsMachineName;
 
     /**
      * CmsConnectorDescriptor constructor.
      * @param $cmsMachineName
      */
-    public function __construct($moduleMachineName, $moduleVersion, $moduleFullName, $moduleUrl, $vendor, $cmsMachineName)
+    public function __construct($moduleMachineName, $moduleVersion, $moduleFullName, $moduleUrl, $vendor, $cmsMachineName, $defaultModuleType = "")
     {
         parent::__construct($moduleMachineName, $moduleVersion, $moduleFullName, $moduleUrl, $vendor);
         $this->cmsMachineName = $cmsMachineName;
+        $this->defaultModuleType = $defaultModuleType;
     }
 
 
@@ -30,6 +32,14 @@ class CmsConnectorDescriptor extends AbstractDescriptor
     public function getCmsMachineName()
     {
         return $this->cmsMachineName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultModuleType()
+    {
+        return $this->defaultModuleType;
     }
     
     

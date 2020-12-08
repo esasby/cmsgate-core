@@ -9,18 +9,22 @@
 namespace esas\cmsgate\descriptors;
 
 
+use esas\cmsgate\Registry;
+
 class ModuleDescriptor extends AbstractDescriptor
 {
+    private $moduleType;
     private $moduleDescription;
 
     /**
      * ModuleDescriptor constructor.
      * @param $moduleDescription
      */
-    public function __construct($moduleMachineName, $moduleVersion, $moduleFullName, $moduleUrl, $vendor, $moduleDescription)
+    public function __construct($moduleMachineName, $moduleVersion, $moduleFullName, $moduleUrl, $vendor, $moduleDescription, $moduleType = "")
     {
         parent::__construct($moduleMachineName, $moduleVersion, $moduleFullName, $moduleUrl, $vendor);
         $this->moduleDescription = $moduleDescription;
+        $this->moduleType = $moduleType;
     }
 
     /**
@@ -31,5 +35,16 @@ class ModuleDescriptor extends AbstractDescriptor
         return $this->moduleDescription;
     }
 
-    
+    /**
+     * @return string
+     */
+    public function getModuleType()
+    {
+        if (!empty($this->moduleType))
+            return $this->moduleType;
+        else //если не задан для модуля, берем тип для CMS-коннектора
+            return Registry::getRegistry()->getCmsConnector()->getCmsConnectorDescriptor()->getDefaultModuleType();
+    }
+
+
 }
