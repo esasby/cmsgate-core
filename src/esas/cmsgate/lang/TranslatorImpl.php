@@ -29,7 +29,7 @@ class TranslatorImpl extends Translator
      * @param LocaleLoaderCms $localeLoader
      * @param $psMsgDir - путь к дополнительным словарям
      */
-    public function __construct( $paySystemVocabularyDir)
+    public function __construct($paySystemVocabularyDir)
     {
         parent::__construct();
         $this->localeLoader = Registry::getRegistry()->createLocaleLoader();

@@ -85,7 +85,7 @@ abstract class ConfigForm
 
     /**
      * Производит формирование формы с настройками модуля
-     * @return string
+     * @return mixed
      */
     public abstract function generate();
 
