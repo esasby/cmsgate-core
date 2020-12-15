@@ -12,8 +12,11 @@ abstract class ProtocolCurl
 {
     protected $connectionUrl; // url api
     protected $ch; // curl object
-    
-    
+    /**
+     * @var array
+     */
+    protected $rsHeaders;
+
 
     /**
      * @var Logger
@@ -109,15 +112,27 @@ abstract class ProtocolCurl
         curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true); // возврат результата вместо вывода на экран
         if (Registry::getRegistry()->getConfigWrapper()->isDebugMode()) {
+            $this->rsHeaders = array(); 
+            curl_setopt($this->ch, CURLOPT_HEADERFUNCTION, array(&$this, 'collectRsHeaders'));
             curl_setopt($this->ch, CURLOPT_VERBOSE, true); // вывод доп. информации в STDERR
             curl_setopt($this->ch, CURLINFO_HEADER_OUT, true); // вывод отправленных заголовков
         }
     }
 
+    protected function collectRsHeaders($curl, $header_line ) {
+        $this->rsHeaders[] = trim($header_line);
+        return strlen($header_line);
+    }
+
     protected function execCurlAndLog() {
         $response = curl_exec($this->ch);
-        $this->logger->debug("Request headers[" . curl_getinfo($this->ch, CURLINFO_HEADER_OUT ) . ']');
+        if (Registry::getRegistry()->getConfigWrapper()->isDebugMode()) {
+            $this->logger->info("Request headers[" . curl_getinfo($this->ch, CURLINFO_HEADER_OUT) . ']');
+        }
         $this->logger->info('Got response: code[' . curl_getinfo($this->ch, CURLINFO_RESPONSE_CODE  ) . '] body[' . $response . "]");
+        if (Registry::getRegistry()->getConfigWrapper()->isDebugMode()) {
+            $this->logger->info("Response headers[" . implode("\n", $this->rsHeaders) . ']');
+        }
         if (curl_errno($this->ch)) {
             throw new Exception(curl_error($this->ch), curl_errno($this->ch));
         }
