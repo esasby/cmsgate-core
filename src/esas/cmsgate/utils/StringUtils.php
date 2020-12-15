@@ -18,16 +18,30 @@ class StringUtils
 
     static function substrBetween($string, $from, $to)
     {
-        $startIndex = min($from, $to);
-        $length = abs($from - $to);
-        return substr($string, $startIndex, $length);
+        if (is_int($from) && is_int($to)) { // если substring между позициями
+            $startIndex = min($from, $to);
+            $length = abs($from - $to);
+            return substr($string, $startIndex, $length);
+        } else { // если substring между строками
+            $string = ' ' . $string;
+            if ($from == '')
+                $ini = 1;
+            else
+                $ini = strpos($string, $from);
+            if ($ini == 0) return '';
+            $ini += strlen($from);
+            $len = strpos($string, $to, $ini) - $ini;
+            return substr($string, $ini, $len);
+        }
     }
 
     static function substrBefore($string, $to)
     {
-        return self::substrBetween($string, 0, $to);
+        if (is_int($to))
+            return self::substrBetween($string, 0, $to);
+        else
+            return self::substrBetween($string, "", $to);
     }
-
 
     /**
      * @param $format
