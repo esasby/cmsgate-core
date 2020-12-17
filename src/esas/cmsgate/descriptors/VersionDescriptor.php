@@ -41,5 +41,8 @@ class VersionDescriptor
         return $this->date;
     }
 
-    
+    public function __toString()
+    {
+        return $this->getVersion() . "[" . $this->getDate() . "]";
+    }
 }

@@ -45,6 +45,4 @@ class ModuleDescriptor extends AbstractDescriptor
         else //если не задан для модуля, берем тип для CMS-коннектора
             return Registry::getRegistry()->getCmsConnector()->getCmsConnectorDescriptor()->getDefaultModuleType();
     }
-
-
 }

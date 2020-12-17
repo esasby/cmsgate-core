@@ -56,7 +56,6 @@ abstract class Registry
         $registryName = self::getUniqRegistryName();
         global $$registryName;
         if ($$registryName == null) {
-//            Logger::getLogger(get_class($this))->debug("init");
             $$registryName = $this;
         }
     }

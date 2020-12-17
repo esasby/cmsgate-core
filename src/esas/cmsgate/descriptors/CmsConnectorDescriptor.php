@@ -41,6 +41,4 @@ class CmsConnectorDescriptor extends AbstractDescriptor
     {
         return $this->defaultModuleType;
     }
-    
-    
 }

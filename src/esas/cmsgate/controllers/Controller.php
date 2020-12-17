@@ -26,6 +26,10 @@ abstract class Controller
     public function __construct()
     {
         $this->logger = Logger::getLogger(get_class($this));
+        $this->logger->info("ModuleDescriptor: \n\t"
+            . Registry::getRegistry()->getModuleDescriptor() . "\n\t"
+            . Registry::getRegistry()->getPaysystemConnector()->getPaySystemConnectorDescriptor() . "\n\t"
+            . Registry::getRegistry()->getCmsConnector()->getCmsConnectorDescriptor());
     }
 
 }

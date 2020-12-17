@@ -31,6 +31,4 @@ class PaySystemConnectorDescriptor extends AbstractDescriptor
     {
         return $this->paySystemMachinaName;
     }
-    
-    
 }

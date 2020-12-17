@@ -82,5 +82,8 @@ abstract class AbstractDescriptor
         return $this->vendor;
     }
 
-
+    public function __toString()
+    {
+        return $this->getModuleMachineName() . ": " . $this->getVersion();
+    }
 }
