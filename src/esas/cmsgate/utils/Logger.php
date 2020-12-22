@@ -106,7 +106,7 @@ class Logger
     /**
      * В библиотеке log4php v 2.3.0 есть баг с вывводом trace, при работе с php 7
      */
-    private static function getStackTrace($th = null)
+    public static function getStackTrace($th = null)
     {
         if ($th != null && $th instanceof Throwable || $th instanceof Exception)
             return "\n#E " . $th->getFile() . "(" . $th->getLine() . "): " . $th->getMessage() . "\n" . $th->getTraceAsString();

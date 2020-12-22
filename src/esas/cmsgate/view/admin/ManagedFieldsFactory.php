@@ -62,7 +62,10 @@ abstract class ManagedFieldsFactory
      * @return ManagedFields
      * @throws Exception
      */
-    public function getManagedFields($configForm) {
+    public function getManagedFields($configForm = null)
+    {
+        if ($configForm == null)
+            return $this->allFields;
         return $this->getManagedFieldsExcept($configForm, array());
     }
 
@@ -85,8 +88,9 @@ abstract class ManagedFieldsFactory
         return $mangedFields;
     }
 
-    public function getGroups() {
-        return array_keys($this->fieldsGroupedByForm) ;
+    public function getGroups()
+    {
+        return array_keys($this->fieldsGroupedByForm);
     }
 
 }
