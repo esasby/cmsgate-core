@@ -151,6 +151,8 @@ abstract class Registry
      * @throws Exception если не удается получить
      */
     public function getOrderWrapper($orderId) {
+        if (empty($orderId))
+            throw new Exception('Incorrect orderId');
         $orderWrapper =  $this->cmsConnector->createOrderWrapperByOrderId($orderId);
         if ($orderWrapper == null)
             throw new Exception('Can not get orderWrapper by given orderId[' . $orderId . "]");
@@ -164,9 +166,11 @@ abstract class Registry
      * @throws Exception
      */
     public function getOrderWrapperByOrderNumber($orderNumber) {
+        if (empty($orderNumber))
+            throw new Exception('Incorrect orderNumber');
         $orderWrapper = $this->cmsConnector->createOrderWrapperByOrderNumber($orderNumber);
         if ($orderWrapper == null)
-            throw new Exception('Can not get orderWrapper by given orderТгьиук[' . $orderNumber . "]");
+            throw new Exception('Can not get orderWrapper by given orderNumber[' . $orderNumber . "]");
         return $orderWrapper;
     }
 
@@ -189,6 +193,8 @@ abstract class Registry
      * @throws Exception
      */
     public function getOrderWrapperByExtId($extId) {
+        if (empty($extId))
+            throw new Exception('Incorrect extId');
         $orderWrapper = $this->cmsConnector->createOrderWrapperByExtId($extId);
         if ($orderWrapper == null)
             throw new Exception('Can not get orderWrapper by given extId[' . $extId . "]");
