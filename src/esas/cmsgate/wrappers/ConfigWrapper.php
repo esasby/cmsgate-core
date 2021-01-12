@@ -142,7 +142,7 @@ abstract class ConfigWrapper extends Wrapper
         return htmlspecialchars_decode($text); // в некотрых CMS при сохранении в БД html-символы кодируются, и поэтому надо их декодировать обратно
     }
 
-    protected function checkOn($key)
+    protected function checkOn($key, $warn = false)
     {
         $value = false;
         try {
@@ -150,7 +150,8 @@ abstract class ConfigWrapper extends Wrapper
             if ($value != null)
                 return $value;
             $value = $this->configStorageCms->getConfig($key);
-            $this->warnIfEmpty($value, $key);
+            if ($warn)
+                $this->warnIfEmpty($value, $key);
             if ((is_null($value) || "" == $value) && $this->needDefaults())
                 $value = $this->getDefaultConfig($key);
             if (is_bool($value))
@@ -254,7 +255,7 @@ abstract class ConfigWrapper extends Wrapper
      */
     public function saveConfig($key, $value)
     {
-        $this->logger->warn("Storing config field[" . $key . "] value[" . $value . "]");
+        $this->logger->info("Storing config field[" . $key . "] value[" . $value . "]");
         $this->configStorageCms->saveConfig(
             $key,
             $value);

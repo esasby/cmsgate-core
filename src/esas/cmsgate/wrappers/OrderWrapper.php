@@ -112,6 +112,15 @@ abstract class OrderWrapper extends Wrapper
     public abstract function getStatus();
 
     /**
+     * @param $newStatus
+     * @throws Throwable
+     */
+    public function updateStatusWithLogging($newStatus) {
+        $this->logger->info("Setting new status[" . $newStatus . "] for order[" . $this->getOrderNumberOrId() . "]");
+        $this->updateStatus($newStatus);
+    }
+
+    /**
      * Обновляет статус заказа в БД
      * @param $newStatus
      * @throws Throwable
