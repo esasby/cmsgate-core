@@ -37,7 +37,13 @@ abstract class CmsConnector
         $this->logger = Logger::getLogger(get_class($this));
     }
 
-    public abstract function createSystemSettingsWrapper();
+    /**
+     * @deprecated use this class instead
+     * @return mixed
+     */
+    public function createSystemSettingsWrapper() {
+        return null; //deprecated
+    }
 
 
     public abstract function createCommonConfigForm($managedFields);

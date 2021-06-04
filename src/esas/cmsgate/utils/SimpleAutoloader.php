@@ -17,6 +17,7 @@ class SimpleAutoloader
     {
         $className = str_replace("\\", DIRECTORY_SEPARATOR, $class);
         $path = self::$rootPath . '/' . $className . '.php';
+        $path = preg_replace('/cmsgate_scope_[\w]*\//', '', $path); //replacing for scoper
         if (file_exists($path)) {
             require_once($path);
             if (class_exists($class)) {
@@ -32,7 +33,7 @@ class SimpleAutoloader
     public static function register($rootPath)
     {
         self::$rootPath = $rootPath;
-        spl_autoload_register('\esas\cmsgate\utils\SimpleAutoloader::loader');
+        spl_autoload_register('\\' . SimpleAutoloader::class .'::loader');
     }
 
 }

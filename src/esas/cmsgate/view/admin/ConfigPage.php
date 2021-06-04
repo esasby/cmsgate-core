@@ -8,8 +8,6 @@
 
 namespace esas\cmsgate\view\admin;
 
-use \JHTML;
-
 abstract class ConfigPage
 {
     /**
