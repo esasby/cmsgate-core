@@ -67,7 +67,7 @@ abstract class Registry
      * @return string
      */
     private static function getUniqRegistryName() {
-        return "cmsRegistry_" . hash('md5', getcwd());
+        return "cmsRegistry_" . hash('md5', __FILE__);
     }
 
     /**
