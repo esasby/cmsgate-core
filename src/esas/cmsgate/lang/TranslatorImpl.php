@@ -60,7 +60,7 @@ class TranslatorImpl extends Translator
             return;
         }
         $vocabulary = include $file;
-        if (is_array($this->lang[$locale]))
+        if (isset($this->lang) && is_array($this->lang[$locale]))
             $this->lang[$locale] = array_merge($this->lang[$locale], $vocabulary);
         else
             $this->lang[$locale] = $vocabulary;
