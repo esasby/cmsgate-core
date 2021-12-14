@@ -39,7 +39,7 @@ class ReadContentFile
         try {
             if ("" == $this->file)
                 return "";
-            if (file_exists($this->file))
+            if (file_exists($this->file) && !is_dir($this->file))
                 return file_get_contents($this->file);
             else
                 $this->logger->error("Can not read content from file " . $this->file);
