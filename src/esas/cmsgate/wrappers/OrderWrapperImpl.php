@@ -9,6 +9,7 @@
 namespace esas\cmsgate\wrappers;
 
 
+use esas\cmsgate\OrderStatus;
 use Throwable;
 
 class OrderWrapperImpl extends OrderWrapper
@@ -255,32 +256,22 @@ class OrderWrapperImpl extends OrderWrapper
     }
 
     /**
-     * @return mixed
+     * @return OrderStatus mixed
      */
     public function getStatus()
     {
         return $this->status;
     }
 
-    /**
-     * @param mixed $status
-     * @return OrderWrapperImpl
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-        return $this;
-    }
-
 
     /**
      * Обновляет статус заказа в БД
-     * @param $newStatus
+     * @param OrderStatus $newStatus
      * @throws Throwable
      */
     public function updateStatus($newStatus)
     {
-        // TODO: Implement updateStatus() method.
+        $this->status = $newStatus;
     }
 
     /**

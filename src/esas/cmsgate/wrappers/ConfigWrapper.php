@@ -74,39 +74,60 @@ abstract class ConfigWrapper extends Wrapper
     }
 
     /**
-     * Какой статус присвоить заказу после успешно выставления счета в ЕРИП (на шлюз Хуткигрош_
+     * Какой статус выставлять заказу при ожидании
      * @return string
      */
-    public function getBillStatusPending()
+    public function getOrderStatusPending()
     {
-        return $this->getConfig(ConfigFields::billStatusPending());
+        return $this->getConfig(ConfigFields::orderStatusPending());
     }
+
+    public function getOrderPaymentStatusPending()
+    {
+        return $this->getConfig(ConfigFields::orderPaymentStatusPending());
+    }
+
 
     /**
      * Какой статус присвоить заказу после успешно оплаты счета в ЕРИП (после вызова callback-а шлюзом ХуткиГрош)
      * @return string
      */
-    public function getBillStatusPayed()
+    public function getOrderStatusPayed()
     {
-        return $this->getConfig(ConfigFields::billStatusPayed());
+        return $this->getConfig(ConfigFields::orderStatusPayed());
+    }
+
+    public function getOrderPaymentStatusPayed()
+    {
+        return $this->getConfig(ConfigFields::orderPaymentStatusPayed());
     }
 
     /**
      * Какой статус присвоить заказу в случаче ошибки выставления счета в ЕРИП
      * @return string
      */
-    public function getBillStatusFailed()
+    public function getOrderStatusFailed()
     {
-        return $this->getConfig(ConfigFields::billStatusFailed());
+        return $this->getConfig(ConfigFields::orderStatusFailed());
+    }
+
+    public function getOrderPaymentStatusFailed()
+    {
+        return $this->getConfig(ConfigFields::orderPaymentStatusFailed());
     }
 
     /**
-     * Какой статус присвоить заказу после успешно оплаты счета в ЕРИП (после вызова callback-а шлюзом ХуткиГрош)
+     * Какой статус присвоить заказу, если оплата была отменена
      * @return string
      */
-    public function getBillStatusCanceled()
+    public function getOrderStatusCanceled()
     {
-        return $this->getConfig(ConfigFields::billStatusCanceled());
+        return $this->getConfig(ConfigFields::orderStatusCanceled());
+    }
+
+    public function getOrderPaymentStatusCanceled()
+    {
+        return $this->getConfig(ConfigFields::orderPaymentStatusCanceled());
     }
 
     /**
@@ -196,13 +217,15 @@ abstract class ConfigWrapper extends Wrapper
                 return $this->getPaymentMethodName();
             case ConfigFields::paymentMethodDetails():
                 return $this->getPaymentMethodDetails();
-            case ConfigFields::billStatusPending():
-                return $this->getBillStatusPending();
-            case ConfigFields::billStatusPayed():
-                return $this->getBillStatusPayed();
-            case ConfigFields::billStatusFailed():
+            case ConfigFields::orderStatusPending():
+                return $this->getOrderStatusPending();
+            case ConfigFields::orderPaymentStatusPending():
+                return $this->getOrderPaymentStatusPending();
+            case ConfigFields::orderStatusPayed():
+                return $this->getOrderStatusPayed();
+            case ConfigFields::orderStatusFailed():
                 return $this->getBillStatusFailed();
-            case ConfigFields::billStatusCanceled():
+            case ConfigFields::orderStatusCanceled():
                 return $this->getBillStatusCanceled();
             case ConfigFields::useOrderNumber():
                 return $this->isUseOrderNumber();

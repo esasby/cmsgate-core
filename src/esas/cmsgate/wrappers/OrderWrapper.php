@@ -8,6 +8,7 @@
 
 namespace esas\cmsgate\wrappers;
 
+use esas\cmsgate\OrderStatus;
 use esas\cmsgate\protocol\Amount;
 use esas\cmsgate\Registry;
 use Throwable;
@@ -19,7 +20,7 @@ abstract class OrderWrapper extends Wrapper
      * @return string
      */
     public abstract function getOrderId();
-    
+
     /**
      * Уникальный номер счета в рамках CMS отображаемый клиенту
      * (в некоторых CMS может не совпадать с OrderId и поэтому метод может быть переопределен)
@@ -72,9 +73,11 @@ abstract class OrderWrapper extends Wrapper
      */
     public abstract function getAddress();
 
-    public function getAmountObj() {
+    public function getAmountObj()
+    {
         return new Amount($this->getAmount(), $this->getCurrency());
     }
+
     /**
      * Общая сумма товаров в заказе
      * @return string
@@ -107,22 +110,30 @@ abstract class OrderWrapper extends Wrapper
 
     /**
      * Текущий статус заказа в CMS
-     * @return mixed
+     * @return OrderStatus
      */
     public abstract function getStatus();
 
     /**
-     * @param $newStatus
+     * @param OrderStatus $newStatus
      * @throws Throwable
      */
-    public function updateStatusWithLogging($newStatus) {
+    public function updateStatusWithLogging($newStatus)
+    {
+        if ($newStatus == null) {
+            $this->logger->fatal("New order status is null!!!");
+            return;
+        } elseif ($newStatus->equals($newStatus)) {
+            $this->logger->info("New order status is the same. Update skipping");
+            return;
+        }
         $this->logger->info("Setting new status[" . $newStatus . "] for order[" . $this->getOrderNumberOrId() . "]");
         $this->updateStatus($newStatus);
     }
 
     /**
      * Обновляет статус заказа в БД
-     * @param $newStatus
+     * @param OrderStatus $newStatus
      * @throws Throwable
      */
     public abstract function updateStatus($newStatus);

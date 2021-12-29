@@ -9,6 +9,7 @@
 namespace esas\cmsgate\wrappers;
 
 
+use esas\cmsgate\OrderStatus;
 use Throwable;
 
 /**
@@ -286,7 +287,7 @@ abstract class OrderSafeWrapper extends OrderWrapper
 
     /**
      * Текущий статус заказа в CMS
-     * @return mixed
+     * @return OrderStatus
      * @throws Throwable
      */
     public function getStatus()
@@ -301,7 +302,7 @@ abstract class OrderSafeWrapper extends OrderWrapper
 
     /**
      * Текущий статус заказа в CMS
-     * @return mixed
+     * @return OrderStatus
      * @throws Throwable
      */
     public abstract function getStatusUnsafe();

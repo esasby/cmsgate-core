@@ -47,24 +47,44 @@ class ConfigFields
         return self::getCmsRelatedKey("payment_method_details");
     }
 
-    public static function billStatusPending()
+    public static function orderStatusPending()
     {
-        return self::getCmsRelatedKey("bill_status_pending");
+        return self::getCmsRelatedKey("bill_status_pending"); // устаревший ключ, для совместимости
     }
 
-    public static function billStatusPayed()
+    public static function orderPaymentStatusPending()
+    {
+        return self::getCmsRelatedKey("order_payment_status_pending");
+    }
+
+    public static function orderStatusPayed()
     {
         return self::getCmsRelatedKey("bill_status_payed");
     }
 
-    public static function billStatusFailed()
+    public static function orderPaymentStatusPayed()
+    {
+        return self::getCmsRelatedKey("order_payment_status_payed");
+    }
+
+    public static function orderStatusFailed()
     {
         return self::getCmsRelatedKey("bill_status_failed");
     }
 
-    public static function billStatusCanceled()
+    public static function orderPaymentStatusFailed()
+    {
+        return self::getCmsRelatedKey("order_payment_status_failed");
+    }
+
+    public static function orderStatusCanceled()
     {
         return self::getCmsRelatedKey("bill_status_canceled");
+    }
+
+    public static function orderPaymentStatusCanceled()
+    {
+        return self::getCmsRelatedKey("order_payment_status_canceled");
     }
 
     /**
