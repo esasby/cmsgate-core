@@ -51,6 +51,10 @@ abstract class Registry
      * @var ManagedFieldsFactory
      */
     protected $managedFieldsFactory;
+    /**
+     * @var Hooks
+     */
+    protected $hooks;
 
     public function init() {
         $registryName = self::getUniqRegistryName();
@@ -298,5 +302,22 @@ abstract class Registry
      */
     public function getConstantConfigValue($key) {
         return $this->getCmsConnector()->getConstantConfigValue($key);
+    }
+
+    /**
+     * @return Hooks
+     */
+    public function getHooks()
+    {
+        if ($this->hooks == null)
+            $this->hooks = $this->createHooks();
+        return $this->hooks;
+    }
+
+    /**
+     * @return Hooks
+     */
+    public function createHooks() {
+        return $this->paysystemConnector->createHooks();
     }
 }

@@ -53,6 +53,12 @@ abstract class PaysystemConnector
      */
     public abstract function createManagedFieldsFactory();
 
+
+    /**
+     * @return Hooks
+     */
+    public abstract function createHooks();
+
     /**
      * @return PaySystemConnectorDescriptor
      */
