@@ -55,6 +55,10 @@ abstract class Registry
      * @var Hooks
      */
     protected $hooks;
+    /**
+     * @var ConfigStorageCms
+     */
+    protected $configStorage;
 
     public function init() {
         $registryName = self::getUniqRegistryName();
@@ -264,6 +268,16 @@ abstract class Registry
         return $this->cmsConnector->createLocaleLoader();
     }
 
+    /**
+     * @return ConfigStorageCms
+     */
+    public function getConfigStorage()
+    {
+        if ($this->configStorage == null)
+            $this->configStorage = $this->createConfigStorage();
+        return $this->configStorage;
+    }
+
     public function createConfigStorage() {
         return $this->cmsConnector->createConfigStorage();
     }
@@ -301,7 +315,7 @@ abstract class Registry
      * @return null
      */
     public function getConstantConfigValue($key) {
-        return $this->getCmsConnector()->getConstantConfigValue($key);
+        return $this->getConfigStorage()->getConstantConfigValue($key);
     }
 
     /**

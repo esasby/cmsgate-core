@@ -168,7 +168,7 @@ abstract class ConfigWrapper extends Wrapper
         $value = false;
         try {
             $value = Registry::getRegistry()->getConstantConfigValue($key);
-            if ($value != null)
+            if (is_bool($value) || $value != null)
                 return $value;
             $value = $this->configStorageCms->getConfig($key);
             if ($warn)
@@ -223,10 +223,16 @@ abstract class ConfigWrapper extends Wrapper
                 return $this->getOrderPaymentStatusPending();
             case ConfigFields::orderStatusPayed():
                 return $this->getOrderStatusPayed();
+            case ConfigFields::orderPaymentStatusPayed():
+                return $this->getOrderPaymentStatusPayed();
             case ConfigFields::orderStatusFailed():
-                return $this->getBillStatusFailed();
+                return $this->getOrderStatusFailed();
+            case ConfigFields::orderPaymentStatusFailed():
+                return $this->getOrderPaymentStatusFailed();
             case ConfigFields::orderStatusCanceled():
-                return $this->getBillStatusCanceled();
+                return $this->getOrderStatusCanceled();
+            case ConfigFields::orderPaymentStatusCanceled():
+                return $this->getOrderPaymentStatusCanceled();
             case ConfigFields::useOrderNumber():
                 return $this->isUseOrderNumber();
             default:

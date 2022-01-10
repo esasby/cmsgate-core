@@ -123,9 +123,6 @@ abstract class OrderWrapper extends Wrapper
         if ($newStatus == null) {
             $this->logger->fatal("New order status is null!!!");
             return;
-        } elseif ($newStatus->equals($newStatus)) {
-            $this->logger->info("New order status is the same. Update skipping");
-            return;
         }
         $this->logger->info("Setting new status[" . $newStatus . "] for order[" . $this->getOrderNumberOrId() . "]");
         $this->updateStatus($newStatus);

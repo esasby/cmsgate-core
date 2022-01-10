@@ -60,4 +60,8 @@ abstract class ConfigStorageCms
     public function createCmsRelatedKey($key) {
         return $key;
     }
+
+    public function getConstantConfigValue($key) {
+        return null;
+    }
 }

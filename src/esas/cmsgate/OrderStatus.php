@@ -30,7 +30,7 @@ class OrderStatus
 
     public function __toString()
     {
-        return $this->orderStatus . ($this->paymentStatus !== '' ? $this->paymentStatus : '');
+        return $this->orderStatus . ($this->paymentStatus !== '' ? ':' . $this->paymentStatus : '');
     }
 
     public function equals(OrderStatus $s2) {
