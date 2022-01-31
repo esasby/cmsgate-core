@@ -3,6 +3,7 @@
 use esas\cmsgate\ConfigFields;
 use esas\cmsgate\messenger\Messages;
 use esas\cmsgate\view\admin\AdminViewFields;
+use esas\cmsgate\view\client\ClientViewFields;
 use esas\cmsgate\view\ViewFields;
 
 if (!defined("_DESC")) define("_DESC", '_desc');
@@ -37,5 +38,12 @@ return array(
     Messages::SETTINGS_SAVED => "Настройки успешно сохранены!",
     Messages::SANDBOX_MODE_IS_ON => 'Внимание! Модуль включен в режиме тестирования. Средства с вашего счёта списываться не будут',
     
-    Messages::ERROR_CURL_NOT_INSTALLED => 'Для работы модуля необходима библиотека curl'
+    Messages::ERROR_CURL_NOT_INSTALLED => 'Для работы модуля необходима библиотека curl',
+
+    ClientViewFields::COMPLETION_PAGE_HEADER => 'Оплата заказа в ЕРИП',
+    ClientViewFields::COMPLETION_PAGE_HEADER_DETAILS => 'Для завершения оформления заказа необходимо оплатить счет',
+    ClientViewFields::COMPLETION_PAGE_FOOTER_ABOUT => 'О компании',
+    ClientViewFields::COMPLETION_PAGE_FOOTER_ADDRESS => 'Адрес',
+    ClientViewFields::COMPLETION_PAGE_FOOTER_CONTACTS => 'Контакты',
+    ClientViewFields::COMPLETION_PAGE_RETURN_TO_SHOP_BUTTON => 'Вернуться назад в магазин',
 );

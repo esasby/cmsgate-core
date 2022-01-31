@@ -43,6 +43,7 @@ class OrderWrapperImpl extends OrderWrapper
      */
     public function __construct($orderId, $clientId, $fullName, $mobilePhone, $email, $address, $amount, $currency, $products, $extId, $status)
     {
+        parent::__construct();
         $this->orderId = $orderId;
         $this->clientId = $clientId;
         $this->fullName = $fullName;

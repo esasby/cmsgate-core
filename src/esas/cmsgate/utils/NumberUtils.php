@@ -23,4 +23,16 @@ class NumberUtils
         $decimalPart = substr($number, $pointPos + 1, strlen($number));
         return intval($decimalPart);
     }
+
+    public static function formatDecimalWithDelimiter($decimal, $delimiter) {
+        return floatval(preg_replace(["/\./", "/\,/"], $delimiter, strval($decimal)));
+    }
+
+    public static function formatDecimalWithComma($decimal) {
+        return self::formatDecimalWithDelimiter($decimal, ',');
+    }
+
+    public static function formatDecimalWithPoint($decimal) {
+        return self::formatDecimalWithDelimiter($decimal, '.');
+    }
 }

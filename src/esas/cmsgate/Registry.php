@@ -9,9 +9,11 @@
 namespace esas\cmsgate;
 
 
+use esas\cmsgate\cache\CacheRepository;
 use esas\cmsgate\descriptors\ModuleDescriptor;
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\messenger\Messenger;
+use esas\cmsgate\utils\CMSGateException;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\utils\SessionUtils;
 use esas\cmsgate\view\admin\AdminViewFields;
@@ -35,6 +37,7 @@ abstract class Registry
     protected $translator;
     protected $configForm;
     protected $messenger;
+    protected $cacheRepository;
     /**
      * @var ModuleDescriptor
      */
@@ -333,5 +336,21 @@ abstract class Registry
      */
     public function createHooks() {
         return $this->paysystemConnector->createHooks();
+    }
+
+    /**
+     * @return CacheRepository
+     */
+    public function getCacheRepository() {
+        if ($this->cacheRepository == null)
+            $this->cacheRepository = $this->createCacheRepository();
+        return $this->cacheRepository;
+    }
+
+    /**
+     * @return CacheRepository
+     */
+    public function createCacheRepository() {
+        throw new CMSGateException('Method not implemented');
     }
 }

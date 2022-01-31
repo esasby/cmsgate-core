@@ -33,14 +33,22 @@ class Elements
     const A = "a";
     const BR = "br";
     const HR = "hr";
+    const HTML = "html";
+    const BODY = "body";
+    const HEAD = "head";
+    const TITLE = "title";
     const H1 = "h1";
     const H2 = "h2";
     const H3 = "h3";
     const H4 = "h4";
+    const H5 = "h5";
+    const H6 = "h6";
     const I = "i";
     const B = "b";
     const P = "p";
+    const SMALL = "small";
     const FORM = "form";
+    const FOOTER = "footer";
     const FIELDSET = "fieldset";
     const FONT = "font";
     const BUTTON = "button";
@@ -98,6 +106,11 @@ class Elements
     public static function label(...$elementAndAttributes)
     {
         return new Element(self::LABEL, $elementAndAttributes);
+    }
+
+    public static function script(...$elementAndAttributes)
+    {
+        return new Element(self::SCRIPT, $elementAndAttributes);
     }
 
     public static function styleFile($fileLocation)
@@ -180,6 +193,26 @@ class Elements
         return new ElementVoid(self::HR, null);
     }
 
+    public static function html(...$elementAndAttributes)
+    {
+        return new Element(self::HTML, $elementAndAttributes);
+    }
+
+    public static function head(...$elementAndAttributes)
+    {
+        return new Element(self::HEAD, $elementAndAttributes);
+    }
+
+    public static function body(...$elementAndAttributes)
+    {
+        return new Element(self::BODY, $elementAndAttributes);
+    }
+
+    public static function title(...$elementAndAttributes)
+    {
+        return new Element(self::TITLE, $elementAndAttributes);
+    }
+
     public static function h1(...$elementAndAttributes)
     {
         return new Element(self::H1, $elementAndAttributes);
@@ -200,6 +233,16 @@ class Elements
         return new Element(self::H4, $elementAndAttributes);
     }
 
+    public static function h5(...$elementAndAttributes)
+    {
+        return new Element(self::H5, $elementAndAttributes);
+    }
+
+    public static function h6(...$elementAndAttributes)
+    {
+        return new Element(self::H6, $elementAndAttributes);
+    }
+
     public static function i(...$elementAndAttributes)
     {
         return new Element(self::I, $elementAndAttributes);
@@ -215,9 +258,19 @@ class Elements
         return new Element(self::P, $elementAndAttributes);
     }
 
+    public static function small(...$elementAndAttributes)
+    {
+        return new Element(self::SMALL, $elementAndAttributes);
+    }
+
     public static function form(...$elementAndAttributes)
     {
         return new Element(self::FORM, $elementAndAttributes);
+    }
+
+    public static function footer(...$elementAndAttributes)
+    {
+        return new Element(self::FOOTER, $elementAndAttributes);
     }
 
     public static function fieldset(...$elementAndAttributes)

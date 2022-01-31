@@ -33,8 +33,8 @@ class TranslatorImpl extends Translator
     {
         parent::__construct();
         $this->localeLoader = Registry::getRegistry()->createLocaleLoader();
+        $this->extraVocabularyDirs = $this->localeLoader->getExtraVocabularyDirs();
         $this->extraVocabularyDirs[] = $paySystemVocabularyDir;
-        $this->extraVocabularyDirs[] = $this->localeLoader->getCmsVocabularyDir();
     }
 
     private function loadLocale($locale)

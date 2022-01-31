@@ -34,13 +34,22 @@ class Attributes
     const VALUE = "value";
     const VALIGN = "valign";
     const CHECKED = "checked";
+    const CHARSET = "charset";
+    const CONTENT = "content";
     const SELECTED = "selected";
     const DATA_TOGLE = "data-toggle";
+    const DATA_BS_TOGGLE = "data-bs-toggle";
+    const DATA_BS_TARGET = "data-bs-target";
+    const DATA_BS_PARENT = "data-bs-parent";
+    const ARIA_EXPANDED = "aria-expanded";
+    const ARIA_CONTROLS = "aria-controls";
+    const ARIA_LABELLEDBY = "aria-labelledby";
     const DATA_DISMISS = "data-dismiss";
     const TITLE = "title";
     const SRC = "src";
     const ALT = "alt";
     const HREF = "href";
+    const REL = "rel";
     const MAXLENGTH = "maxlength";
 
     /**
@@ -162,6 +171,16 @@ class Attributes
         return new AttributeBoolean(self::CHECKED, $checked);
     }
 
+    public static function charset($charset)
+    {
+        return new Attribute(self::CHARSET, $charset);
+    }
+
+    public static function content($content)
+    {
+        return new Attribute(self::CONTENT, $content);
+    }
+
     public static function selected($selected)
     {
         return new AttributeBoolean(self::SELECTED, $selected);
@@ -172,9 +191,39 @@ class Attributes
         return new Attribute(self::DATA_TOGLE, $dataToggle);
     }
 
+    public static function data_bs_toggle($dataBSToggle)
+    {
+        return new Attribute(self::DATA_BS_TOGGLE, $dataBSToggle);
+    }
+
+    public static function data_bs_target($dataBSTarget)
+    {
+        return new Attribute(self::DATA_BS_TARGET, $dataBSTarget);
+    }
+
+    public static function data_bs_parent($dataBSParent)
+    {
+        return new Attribute(self::DATA_BS_PARENT, $dataBSParent);
+    }
+
     public static function data_dismiss($dataDismiss)
     {
         return new Attribute(self::DATA_DISMISS, $dataDismiss);
+    }
+
+    public static function aria_controls($ariaControls)
+    {
+        return new Attribute(self::ARIA_CONTROLS, $ariaControls);
+    }
+
+    public static function aria_expanded($ariaExpanded)
+    {
+        return new Attribute(self::ARIA_EXPANDED, $ariaExpanded);
+    }
+
+    public static function aria_labelledby($ariaLabelledby)
+    {
+        return new Attribute(self::ARIA_LABELLEDBY, $ariaLabelledby);
     }
 
     public static function title($title)
@@ -195,6 +244,11 @@ class Attributes
     public static function href($href)
     {
         return new Attribute(self::HREF, $href);
+    }
+
+    public static function rel($rel)
+    {
+        return new Attribute(self::REL, $rel);
     }
 
     public static function maxlength($maxlength)

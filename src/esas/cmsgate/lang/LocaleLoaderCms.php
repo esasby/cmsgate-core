@@ -12,6 +12,11 @@ namespace esas\cmsgate\lang;
 abstract class LocaleLoaderCms
 {
     /**
+     * @var array
+     */
+    private $extraVocabularyDirs;
+
+    /**
      * Locale по умолчанию, может быть переопределен
      * @return string
      */
@@ -19,6 +24,28 @@ abstract class LocaleLoaderCms
     {
         return Locale::ru_RU;
     }
-    
-    public abstract function getCmsVocabularyDir();
+
+    protected function addExtraVocabularyDir($extraVocabularyDir) {
+        $this->extraVocabularyDirs[] = $extraVocabularyDir;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExtraVocabularyDirs()
+    {
+        // для совместимости с deprecated методом
+        $cmsVocabularyDir = $this->getCmsVocabularyDir();
+        if ($cmsVocabularyDir != null && $cmsVocabularyDir !== null)
+            $this->extraVocabularyDirs[] = $cmsVocabularyDir;
+        return $this->extraVocabularyDirs;
+    }
+
+    /**
+     * @deprecated use addExtraVocabularyDir instead
+     * @return mixed
+     */
+    public function getCmsVocabularyDir() {
+        return '';
+    }
 }

@@ -3,6 +3,7 @@
 use esas\cmsgate\ConfigFields;
 use esas\cmsgate\messenger\Messages;
 use esas\cmsgate\view\admin\AdminViewFields;
+use esas\cmsgate\view\client\ClientViewFields;
 use esas\cmsgate\view\ViewFields;
 
 if (!defined("_DESC")) define("_DESC", '_desc');
@@ -36,5 +37,12 @@ return array(
     Messages::INCORRECT_INPUT => "Incorrect input",
     Messages::SETTINGS_SAVED => "Settings were successfully saved!",
     Messages::SANDBOX_MODE_IS_ON => 'Payment Gateway in \'Sandbox \'. Funds from your account will not be removed.',
+
+    ClientViewFields::COMPLETION_PAGE_HEADER => 'Order payment via ERIP (Belarus)',
+    ClientViewFields::COMPLETION_PAGE_HEADER_DETAILS => 'You need to pay bill',
+    ClientViewFields::COMPLETION_PAGE_FOOTER_ABOUT => 'About',
+    ClientViewFields::COMPLETION_PAGE_FOOTER_ADDRESS => 'Address',
+    ClientViewFields::COMPLETION_PAGE_FOOTER_CONTACTS => 'Contacts',
+    ClientViewFields::COMPLETION_PAGE_RETURN_TO_SHOP_BUTTON => 'Back to the store',
 
 );
