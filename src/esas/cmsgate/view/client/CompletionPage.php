@@ -151,7 +151,9 @@ abstract class CompletionPage
         );
     }
 
-    public abstract function getReturnToShopButtonHref();
+    public function getReturnToShopButtonHref() {
+        return Registry::getRegistry()->getCmsConnector()->getReturnToShopURL();
+    }
 
     public function getReturnToShopButtonStyle()
     {

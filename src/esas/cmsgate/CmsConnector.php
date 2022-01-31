@@ -11,6 +11,7 @@ namespace esas\cmsgate;
 
 
 use esas\cmsgate\descriptors\CmsConnectorDescriptor;
+use esas\cmsgate\utils\CMSGateException;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\wrappers\OrderWrapper;
 
@@ -98,7 +99,11 @@ abstract class CmsConnector
 
     public abstract function createCmsConnectorDescriptor();
 
-    public function getConstantConfigValue($key) {
-        return null;
+    /**
+     * @return string
+     * @throws CMSGateException
+     */
+    public function getReturnToShopURL() {
+        throw new CMSGateException("Method is not implemented");
     }
 }
