@@ -38,6 +38,12 @@ abstract class CacheRepository
      */
     public abstract function getByExtId($extId);
 
+    /**
+     * @param $orderData
+     * @return Cache
+     */
+    public abstract function getByData($orderData);
+
     public abstract function saveExtId($cacheUUID, $extId);
 
     public abstract function setStatus($cacheUUID, $status);
@@ -51,8 +57,14 @@ abstract class CacheRepository
     public function addSessionCache($orderData) {
         if ($orderData == null || empty($orderData))
             throw new CMSGateException('Incorrect request');
-        $uuid = $this->add($orderData);
-        SessionUtils::setCacheUUID($uuid);
+        $cache = $this->getByData($orderData);
+        if ($cache != null) {
+            SessionUtils::setCacheUUID($cache->getUuid());
+            SessionUtils::setCacheObj($cache);
+        } else {
+            $uuid = $this->add($orderData);
+            SessionUtils::setCacheUUID($uuid);
+        }
     }
 
     /**

@@ -29,13 +29,19 @@ class CacheRepositoryPDO extends CacheRepository
     public function add($orderData)
     {
         $uuid = StringUtils::guidv4();
-        $sql = "INSERT INTO cache (id, order_data, status) VALUES (:uuid, :order_data, 'new')";
+        $orderData = json_encode($orderData);
+        $sql = "INSERT INTO cache (id, created_at, order_data, order_data_hash, status) VALUES (:uuid, CURRENT_TIMESTAMP,  :order_data, :order_data_hash, 'new')";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             'uuid' => $uuid,
-            'order_data' => json_encode($orderData),
+            'order_data' => $orderData,
+            'order_data_hash' => self::hashData($orderData),
         ]);
         return $uuid;
+    }
+
+    private static function hashData($data) {
+        return hash('md5', $data);
     }
 
     public function getByUUID($cacheUUID)
@@ -68,6 +74,21 @@ class CacheRepositoryPDO extends CacheRepository
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             'extid' => $extId,
+        ]);
+        $cache = null;
+        while ($row = $stmt->fetch(PDO::FETCH_LAZY)) {
+            $cache = new Cache($row['id'], json_decode($row['order_data'], true), $row['ext_id'], $row['status']);
+        }
+        return $cache;
+    }
+
+    public function getByData($orderData)
+    {
+        $orderData = json_encode($orderData);
+        $sql = "select id, order_data, ext_id, status from cache where order_data_hash = :order_data_hash";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'order_data_hash' => self::hashData($orderData),
         ]);
         $cache = null;
         while ($row = $stmt->fetch(PDO::FETCH_LAZY)) {
