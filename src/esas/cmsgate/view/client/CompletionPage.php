@@ -207,7 +207,7 @@ abstract class CompletionPage
 
     public function getReturnToShopButtonClass()
     {
-        return "btn col-sm-3 mt-3 text-center " . ($this->isErrorPage ? "btn-outline-danger" : "text-white");
+        return "btn col-sm-3 mt-3 mb-3 text-center " . ($this->isErrorPage ? "btn-outline-danger" : "text-white");
     }
 
     public function getReturnToShopButtonStyle()
