@@ -78,7 +78,7 @@ class CacheRepositoryPDO extends CacheRepository
 
     public function setStatus($cacheUUID, $status)
     {
-        $sql = "update cache set status = :status where id = :status";
+        $sql = "update cache set status = :status where id = :uuid";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             'uuid' => $cacheUUID,

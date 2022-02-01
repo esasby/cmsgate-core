@@ -84,6 +84,13 @@ class Messenger
     }
 
     /**
+     * @return bool
+     */
+    public function hasErrorMessages() {
+        return sizeof($this->errorMessages) > 0;
+    }
+
+    /**
      * @return array
      */
     public function getErrorMessagesArray()

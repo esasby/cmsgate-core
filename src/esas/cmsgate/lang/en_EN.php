@@ -38,11 +38,14 @@ return array(
     Messages::SETTINGS_SAVED => "Settings were successfully saved!",
     Messages::SANDBOX_MODE_IS_ON => 'Payment Gateway in \'Sandbox \'. Funds from your account will not be removed.',
 
-    ClientViewFields::COMPLETION_PAGE_HEADER => 'Order payment via ERIP (Belarus)',
+    ClientViewFields::COMPLETION_PAGE_HEADER => 'Order payment',
     ClientViewFields::COMPLETION_PAGE_HEADER_DETAILS => 'You need to pay bill',
     ClientViewFields::COMPLETION_PAGE_FOOTER_ABOUT => 'About',
     ClientViewFields::COMPLETION_PAGE_FOOTER_ADDRESS => 'Address',
     ClientViewFields::COMPLETION_PAGE_FOOTER_CONTACTS => 'Contacts',
     ClientViewFields::COMPLETION_PAGE_RETURN_TO_SHOP_BUTTON => 'Back to the store',
+
+    ClientViewFields::ERROR => "Error",
+    ClientViewFields::ERROR_APOLOGIZING => "Sorry, payment can not be finished!",
 
 );

@@ -13,6 +13,8 @@ use esas\cmsgate\view\ViewFields;
 
 class ClientViewFields extends ViewFields
 {
+    const ERROR = 'error';
+    const ERROR_APOLOGIZING = 'error_apologizing';
     const COMPLETION_PAGE_HEADER = 'completion_page_header';
     const COMPLETION_PAGE_HEADER_DETAILS = 'completion_page_header_details';
     const COMPLETION_PAGE_FOOTER_ABOUT = 'completion_page_footer_about';

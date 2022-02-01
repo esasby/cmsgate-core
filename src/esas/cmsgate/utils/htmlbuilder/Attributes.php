@@ -32,6 +32,7 @@ class Attributes
     const COLOR = "color";
     const ONCLICK = "onclick";
     const VALUE = "value";
+    const ROLE = "role";
     const VALIGN = "valign";
     const CHECKED = "checked";
     const CHARSET = "charset";
@@ -159,6 +160,11 @@ class Attributes
     public static function value($value)
     {
         return new Attribute(self::VALUE, $value);
+    }
+
+    public static function role($role)
+    {
+        return new Attribute(self::ROLE, $role);
     }
 
     public static function valign($valign)

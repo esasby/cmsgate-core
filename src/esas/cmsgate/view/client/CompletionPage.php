@@ -35,6 +35,8 @@ abstract class CompletionPage
 
     protected $completionPanel;
 
+    protected $isErrorPage = false;
+
     /**
      * ViewData constructor.
      * @param OrderWrapper $orderWrapper
@@ -46,6 +48,7 @@ abstract class CompletionPage
         $this->translator = Registry::getRegistry()->getTranslator();
         $this->orderWrapper = $orderWrapper;
         $this->completionPanel = $completionPanel;
+        $this->isErrorPage = Registry::getRegistry()->getMessenger()->hasErrorMessages();
     }
 
     public function __toString()
@@ -93,6 +96,7 @@ abstract class CompletionPage
     public function elementPageBody()
     {
         return element::body(
+            attribute::clazz("d-flex flex-column min-vh-100"),
             $this->elementSectionHeader(),
             $this->elementSectionBody(),
             $this->elementSectionFooter()
@@ -121,18 +125,63 @@ abstract class CompletionPage
         return $this->translator->translate(ClientViewFields::COMPLETION_PAGE_HEADER);
     }
 
-    public function getElementSectionHeaderDetails()
+    public function getElementSectionHeaderDetails() {
+        return $this->isErrorPage ? $this->getElementSectionHeaderOnErrorDetails() :$this->getElementSectionHeaderOnSuccessDetails();
+    }
+
+
+    public function getElementSectionHeaderOnSuccessDetails()
     {
         return $this->translator->translate(ClientViewFields::COMPLETION_PAGE_HEADER_DETAILS);
+    }
+
+    public function getElementSectionHeaderOnErrorDetails()
+    {
+        return "";
     }
 
     public function elementSectionBody()
     {
         return element::div(
             attribute::clazz('container mt-5'),
-            $this->completionPanel,
+            ($this->isErrorPage ? $this->elementErrorMessages() : $this->completionPanel),
             $this->elementReturnToShopButton()
         );
+    }
+
+    public function elementErrorMessages()
+    {
+        $messages = "";
+        foreach (Registry::getRegistry()->getMessenger()->getErrorMessagesArray() as $errorText) {
+            $messages .= $this->elementErrorMessage($errorText);
+        }
+        return element::div(
+            attribute::clazz("alert alert-danger"),
+            attribute::role("alert"),
+            element::h4(
+                attribute::clazz("alert-heading"),
+                $this->translator->translate(ClientViewFields::ERROR)
+            ),
+            element::p(
+                $this->getErrorSorryText()
+            ),
+            element::hr(),
+            element::p(
+                Registry::getRegistry()->getMessenger()->getErrorMessages()
+            )
+        );
+    }
+
+    public function elementErrorMessage($errorText)
+    {
+        return element::p(
+            $errorText
+        );
+    }
+
+    public function getErrorSorryText()
+    {
+        return $this->translator->translate(ClientViewFields::ERROR_APOLOGIZING);
     }
 
     public function elementReturnToShopButton()
@@ -141,7 +190,7 @@ abstract class CompletionPage
             attribute::clazz("row justify-content-center"),
             element::a(
                 attribute::href($this->getReturnToShopButtonHref()),
-                attribute::clazz("btn col-sm-3 mt-3 text-white text-center"),
+                attribute::clazz($this->getReturnToShopButtonClass()),
                 attribute::style($this->getReturnToShopButtonStyle()),
                 element::h5(
                     element::i(attribute::clazz("bi bi-arrow-left-short")),
@@ -151,13 +200,19 @@ abstract class CompletionPage
         );
     }
 
-    public function getReturnToShopButtonHref() {
+    public function getReturnToShopButtonHref()
+    {
         return Registry::getRegistry()->getCmsConnector()->getReturnToShopURL();
+    }
+
+    public function getReturnToShopButtonClass()
+    {
+        return "btn col-sm-3 mt-3 text-center " . ($this->isErrorPage ? "btn-outline-danger" : "text-white");
     }
 
     public function getReturnToShopButtonStyle()
     {
-        return "background: #adad85";
+        return $this->isErrorPage ? "" : "background: #adad85";
     }
 
     public function getReturnToShopButtonLabel()
@@ -169,7 +224,7 @@ abstract class CompletionPage
     {
         return
             element::footer(
-                attribute::clazz("text-center text-lg-start bg-light text-muted"),
+                attribute::clazz("text-center text-lg-start bg-light text-muted mt-auto"),
                 element::div(
                     attribute::clazz("container mt-5"),
                     element::div(
