@@ -37,4 +37,18 @@ class ArrayUtils
             return $objects->__toString();
 
     }
+
+    public static function maskValues(array $array, array $keysToMask) {
+        $ret = [];
+        foreach ($array as $key => $value) {
+            if (is_array($value))
+                $ret[$key] = self::maskValues($value, $keysToMask);
+            else {
+                if (in_array($key, $keysToMask))
+                    $value = "******";
+                $ret[$key] = $value;
+            }
+        }
+        return $ret;
+    }
 }

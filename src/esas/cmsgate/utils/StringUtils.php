@@ -30,7 +30,11 @@ class StringUtils
                 $ini = strpos($string, $from);
             if ($ini == 0) return '';
             $ini += strlen($from);
-            $len = strpos($string, $to, $ini) - $ini;
+            $toPosition = strpos($string, $to, $ini);
+            if ($toPosition > 0)
+                $len = strpos($string, $to, $ini) - $ini;
+            else
+                $len = strlen($string);
             return substr($string, $ini, $len);
         }
     }
@@ -41,6 +45,15 @@ class StringUtils
             return self::substrBetween($string, 0, $to);
         else
             return self::substrBetween($string, "", $to);
+    }
+
+    static function substrAfter($string, $after)
+    {
+        $afterPos = strpos($string, $after);
+        if ($afterPos == 0)
+            return "";
+        else
+            return substr($string, $afterPos + 1, strlen($string));
     }
 
     /**
