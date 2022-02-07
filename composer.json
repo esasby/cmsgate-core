@@ -18,6 +18,9 @@
     "php": ">= 5.6.0",
     "ext-curl": "*",
     "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-xml": "*",
+    "ext-simplexml": "*",
     "apache/log4php": "2.3.0",
     "defuse/php-encryption": "2.3.1"
   },

@@ -103,7 +103,15 @@ abstract class CmsConnector
      * @return string
      * @throws CMSGateException
      */
-    public function getReturnToShopURL() {
+    public function getReturnToShopSuccessURL() {
+        throw new CMSGateException("Method is not implemented");
+    }
+
+    /**
+     * @return string
+     * @throws CMSGateException
+     */
+    public function getReturnToShopFailedURL() {
         throw new CMSGateException("Method is not implemented");
     }
 }

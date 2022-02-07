@@ -202,7 +202,9 @@ abstract class CompletionPage
 
     public function getReturnToShopButtonHref()
     {
-        return Registry::getRegistry()->getCmsConnector()->getReturnToShopURL();
+        return $this->isErrorPage ?
+            Registry::getRegistry()->getCmsConnector()->getReturnToShopFailedURL()
+            : Registry::getRegistry()->getCmsConnector()->getReturnToShopSuccessURL();
     }
 
     public function getReturnToShopButtonClass()
