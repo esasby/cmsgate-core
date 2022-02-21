@@ -53,6 +53,7 @@ class Attributes
     const REL = "rel";
     const MAXLENGTH = "maxlength";
     const REQUIRED = "required";
+    const READONLY = "readonly";
 
     /**
      * @param $id
@@ -266,5 +267,10 @@ class Attributes
     public static function required()
     {
         return new Attribute(self::REQUIRED, "required");
+    }
+
+    public static function readOnly($readOnly = true)
+    {
+        return $readOnly ? new AttributeBoolean(self::READONLY, $readOnly) : "";
     }
 }

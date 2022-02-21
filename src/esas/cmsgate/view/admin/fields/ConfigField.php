@@ -33,10 +33,16 @@ abstract class ConfigField
      * @var string
      */
     private $description;
+
     /**
      * @var boolean
      */
     private $required;
+
+    /**
+     * @var boolean
+     */
+    private $readOnly;
 
     /**
      * @var mixed
@@ -67,7 +73,7 @@ abstract class ConfigField
      * @param bool $required
      * @return ConfigField
      */
-    public function __construct($key, $name = null, $description = null, $required = false, Validator $validator = null)
+    public function __construct($key, $name = null, $description = null, $required = false, Validator $validator = null, $readOnly = false)
     {
         $this->setKey($key);
         if ($name != null)
@@ -79,6 +85,7 @@ abstract class ConfigField
         else
             $this->description = Registry::getRegistry()->getTranslator()->getConfigFieldDescription($key);
         $this->required = $required;
+        $this->readOnly = $readOnly;
         if ($validator != null)
             $this->validator = $validator;
         else
@@ -157,6 +164,24 @@ abstract class ConfigField
     public function setRequired($required)
     {
         $this->required = $required;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReadOnly(): bool
+    {
+        return $this->readOnly;
+    }
+
+    /**
+     * @param bool $readOnly
+     * @return ConfigField
+     */
+    public function setReadOnly(bool $readOnly): ConfigField
+    {
+        $this->readOnly = $readOnly;
         return $this;
     }
 
