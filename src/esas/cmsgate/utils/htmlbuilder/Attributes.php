@@ -52,6 +52,7 @@ class Attributes
     const HREF = "href";
     const REL = "rel";
     const MAXLENGTH = "maxlength";
+    const REQUIRED = "required";
 
     /**
      * @param $id
@@ -260,5 +261,10 @@ class Attributes
     public static function maxlength($maxlength)
     {
         return new Attribute(self::MAXLENGTH, $maxlength);
+    }
+
+    public static function required()
+    {
+        return new Attribute(self::REQUIRED, "required");
     }
 }

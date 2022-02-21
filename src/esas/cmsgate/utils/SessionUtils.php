@@ -9,7 +9,6 @@
 namespace esas\cmsgate\utils;
 
 
-use esas\cmsgate\cache\Cache;
 use esas\cmsgate\view\admin\ConfigForm;
 
 class SessionUtils
@@ -59,28 +58,5 @@ class SessionUtils
     public static function removeAllForms()
     {
         unset($_SESSION[self::SESSION_FROMS_ARRAY]);
-    }
-
-    const SESSION_CACHE_UUID = 'cache_UUID';
-
-    public static function getCacheUUID() {
-        return $_SESSION[self::SESSION_CACHE_UUID];
-    }
-
-    public static function setCacheUUID($uuid) {
-        $_SESSION[self::SESSION_CACHE_UUID] = $uuid;
-    }
-
-    const SESSION_CACHE_OBJECT = 'cache_obj';
-
-    /**
-     * @return Cache
-     */
-    public static function getCacheObj() {
-        return $_SESSION[self::SESSION_CACHE_OBJECT];
-    }
-
-    public static function setCacheObj($obj) {
-        $_SESSION[self::SESSION_CACHE_OBJECT] = $obj;
     }
 }

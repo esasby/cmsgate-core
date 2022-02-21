@@ -8,20 +8,20 @@
 
 namespace esas\cmsgate;
 
-use esas\cmsgate\cache\Cache;
+use esas\cmsgate\utils\CMSGateException;
 use Exception;
 
-class ConfigStorageCached extends ConfigStorageCms
+class ConfigStorageCmsArray extends ConfigStorageCms
 {
     /**
-     * @var Cache
+     * @var array
      */
-    protected $orderCache;
+    protected $configArray;
 
-    public function __construct($orderCache)
+    public function __construct($configArray)
     {
         parent::__construct();
-        $this->orderCache = $orderCache;
+        $this->configArray = $configArray;
     }
 
 
@@ -32,8 +32,8 @@ class ConfigStorageCached extends ConfigStorageCms
      */
     public function getConfig($key)
     {
-        if (array_key_exists($key, $this->orderCache->getOrderData()))
-            return $this->orderCache->getOrderData()[$key];
+        if (array_key_exists($key, $this->configArray))
+            return $this->configArray[$key];
         else
             return "";
     }
@@ -56,6 +56,6 @@ class ConfigStorageCached extends ConfigStorageCms
      */
     public function saveConfig($key, $value)
     {
-        // not implemented
+        throw new CMSGateException("Not implemented");
     }
 }

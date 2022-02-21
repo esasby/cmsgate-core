@@ -69,5 +69,7 @@ abstract class PaysystemConnector
         return $this->paySystemConnectorDescriptor;
     }
 
+    public abstract function checkAuth($login, $password, $sandbox);
+
     public abstract function createPaySystemConnectorDescriptor();
 }

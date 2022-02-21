@@ -31,10 +31,13 @@ abstract class ProtocolCurl
     /**
      * @throws Exception
      */
-    public function __construct($realUrl, $testUrl)
+    public function __construct($realUrl, $testUrl, $configWrapper = null)
     {
         $this->logger = Logger::getLogger(get_class($this));
-        $this->configurationWrapper = Registry::getRegistry()->getConfigWrapper();
+        if ($configWrapper == null)
+            $this->configurationWrapper = Registry::getRegistry()->getConfigWrapper();
+        else
+            $this->configurationWrapper = $configWrapper;
         if ($this->configurationWrapper->isSandbox()) {
             $this->connectionUrl = $testUrl;
             $this->logger->info("Test mode is on");
@@ -111,7 +114,7 @@ abstract class ProtocolCurl
         curl_setopt($this->ch, CURLOPT_URL, $url);
         curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true); // возврат результата вместо вывода на экран
-        if (Registry::getRegistry()->getConfigWrapper()->isDebugMode()) {
+        if ($this->configurationWrapper->isDebugMode()) {
             $this->rsHeaders = array(); 
             curl_setopt($this->ch, CURLOPT_HEADERFUNCTION, array(&$this, 'collectRsHeaders'));
             curl_setopt($this->ch, CURLOPT_VERBOSE, true); // вывод доп. информации в STDERR
@@ -126,11 +129,11 @@ abstract class ProtocolCurl
 
     protected function execCurlAndLog() {
         $response = curl_exec($this->ch);
-        if (Registry::getRegistry()->getConfigWrapper()->isDebugMode()) {
+        if ($this->configurationWrapper->isDebugMode()) {
             $this->logger->info("Request headers[" . curl_getinfo($this->ch, CURLINFO_HEADER_OUT) . ']');
         }
         $this->logger->info('Got response: code[' . curl_getinfo($this->ch, CURLINFO_RESPONSE_CODE  ) . '] body[' . $response . "]");
-        if (Registry::getRegistry()->getConfigWrapper()->isDebugMode()) {
+        if ($this->configurationWrapper->isDebugMode()) {
             $this->logger->info("Response headers[" . implode("\n", $this->rsHeaders) . ']');
         }
         if (curl_errno($this->ch)) {
