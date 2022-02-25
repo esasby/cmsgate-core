@@ -39,6 +39,7 @@ class Attributes
     const CONTENT = "content";
     const SELECTED = "selected";
     const DATA_TOGLE = "data-toggle";
+    const DATA_PLACEMENT = "data-placement";
     const DATA_BS_TOGGLE = "data-bs-toggle";
     const DATA_BS_TARGET = "data-bs-target";
     const DATA_BS_PARENT = "data-bs-parent";
@@ -197,6 +198,11 @@ class Attributes
     public static function data_toggle($dataToggle)
     {
         return new Attribute(self::DATA_TOGLE, $dataToggle);
+    }
+
+    public static function data_placement($dataPlacement)
+    {
+        return new Attribute(self::DATA_PLACEMENT, $dataPlacement);
     }
 
     public static function data_bs_toggle($dataBSToggle)
