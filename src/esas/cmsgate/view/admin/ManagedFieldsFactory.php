@@ -88,6 +88,20 @@ abstract class ManagedFieldsFactory
         return $mangedFields;
     }
 
+    public function getManagedFieldsOnly($configFormKey, array $include)
+    {
+        if ($this->fieldsGroupedByForm == null || !array_key_exists($configFormKey, $this->fieldsGroupedByForm))
+            throw new Exception('Wrong config form name[' . $configFormKey . ']');
+        $mangedFields = new ManagedFields();
+        foreach ($this->fieldsGroupedByForm[$configFormKey] as $configField) {
+            if (in_array($configField->getKey(), $include)) {
+                $mangedFields->addField($configField);
+
+            }
+        }
+        return $mangedFields;
+    }
+
     public function getGroups()
     {
         return array_keys($this->fieldsGroupedByForm);

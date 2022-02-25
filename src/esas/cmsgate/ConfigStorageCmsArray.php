@@ -38,6 +38,11 @@ class ConfigStorageCmsArray extends ConfigStorageCms
             return "";
     }
 
+    public function isStorageInitialised($marker)
+    {
+        return $this->configArray != null && sizeof($this->configArray) > 0;
+    }
+
     /**
      * @param $cmsConfigValue
      * @return bool
@@ -45,7 +50,7 @@ class ConfigStorageCmsArray extends ConfigStorageCms
      */
     public function convertToBoolean($cmsConfigValue)
     {
-        return strtolower($cmsConfigValue) == '1';
+        return strtolower($cmsConfigValue) == '1' || strtolower($cmsConfigValue) == 'yes';
     }
 
     /**

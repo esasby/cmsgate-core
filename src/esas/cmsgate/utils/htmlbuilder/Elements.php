@@ -51,6 +51,8 @@ class Elements
     const FOOTER = "footer";
     const FIELDSET = "fieldset";
     const FONT = "font";
+    const NAV = "nav";
+    const MAIN = "main";
     const BUTTON = "button";
     const SCRIPT = "script";
     const STYLE = "style";
@@ -111,6 +113,11 @@ class Elements
     public static function script(...$elementAndAttributes)
     {
         return new Element(self::SCRIPT, $elementAndAttributes);
+    }
+
+    public static function scriptFile($fileLocation)
+    {
+        return new Element(self::SCRIPT, [new ReadContentFile($fileLocation)]);
     }
 
     public static function styleFile($fileLocation)
@@ -306,5 +313,15 @@ class Elements
     public static function includeFileNoData($includeFileLocation)
     {
         return new IncludeFile($includeFileLocation, null);
+    }
+
+    public static function nav(...$elementAndAttributes)
+    {
+        return new Element(self::NAV, $elementAndAttributes);
+    }
+
+    public static function main(...$elementAndAttributes)
+    {
+        return new Element(self::MAIN, $elementAndAttributes);
     }
 }

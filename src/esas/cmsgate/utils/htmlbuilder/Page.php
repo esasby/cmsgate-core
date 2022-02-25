@@ -39,21 +39,13 @@ abstract class Page
             attribute::charset($charset));
     }
 
-    public function elementHeadLinkStylesheet($href) {
-        return element::link(
-            attribute::href($href),
-            attribute::rel("stylesheet"));
-    }
-
-    public function elementHeadScript($src) {
-        return element::script(
-            attribute::src($src)
-        );
-    }
-
     public abstract function elementPageHead();
 
     public abstract function getPageTitle();
 
     public abstract function elementPageBody();
+
+    public function aTop() {
+
+    }
 }

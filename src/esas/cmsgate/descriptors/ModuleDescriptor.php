@@ -45,4 +45,10 @@ class ModuleDescriptor extends AbstractDescriptor
         else //если не задан для модуля, берем тип для CMS-коннектора
             return Registry::getRegistry()->getCmsConnector()->getCmsConnectorDescriptor()->getDefaultModuleType();
     }
+
+    public function getCmsAndPaysystemName($delimiter = '_') {
+        return Registry::getRegistry()->getCmsConnector()->getCmsConnectorDescriptor()->getCmsMachineName()
+            . $delimiter
+            . Registry::getRegistry()->getPaySystemName();
+    }
 }

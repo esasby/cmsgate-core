@@ -32,15 +32,18 @@ class Messenger
     }
 
     public function addInfoMessage($msg) {
-        $this->infoMessages[] = $this->translator->translate($msg);
+        if (!in_array($msg, $this->infoMessages))
+            $this->infoMessages[] = $this->translator->translate($msg);
     }
 
     public function addWarnMessage($msg) {
-        $this->warnMessages[] = $this->translator->translate($msg);
+        if (!in_array($msg, $this->warnMessages))
+            $this->warnMessages[] = $this->translator->translate($msg);
     }
 
     public function addErrorMessage($msg) {
-        $this->errorMessages[] = $this->translator->translate($msg);
+        if (!in_array($msg, $this->errorMessages))
+            $this->errorMessages[] = $this->translator->translate($msg);
     }
 
     /**

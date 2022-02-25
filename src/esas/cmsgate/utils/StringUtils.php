@@ -20,31 +20,32 @@ class StringUtils
     {
         if (is_int($from) && is_int($to)) { // если substring между позициями
             $startIndex = min($from, $to);
-            $length = abs($from - $to);
+            $length = abs($from - $to) - 1;
             return substr($string, $startIndex, $length);
         } else { // если substring между строками
-            $string = ' ' . $string;
-            if ($from == '')
-                $ini = 1;
-            else
-                $ini = strpos($string, $from);
-            if ($ini == 0) return '';
-            $ini += strlen($from);
-            $toPosition = strpos($string, $to, $ini);
-            if ($toPosition > 0)
-                $len = strpos($string, $to, $ini) - $ini;
+            if (!is_int($from)) {
+                $start = strpos($string, $from);
+                if ($start > 0)
+                    $start += strlen($from);
+            } else
+                $start = $from;
+            $toPosition = strpos($string, $to, $start);
+            if ($toPosition === 0)
+                $len = 0;
+            elseif ($toPosition > 0)
+                $len = $toPosition - $start;
             else
                 $len = strlen($string);
-            return substr($string, $ini, $len);
+            return substr($string, $start, $len);
         }
     }
 
-    static function substrBefore($string, $to)
+    static function substrBefore($string, $to, $start = 0)
     {
         if (is_int($to))
-            return self::substrBetween($string, 0, $to);
+            return self::substrBetween($string, $start, $to);
         else
-            return self::substrBetween($string, "", $to);
+            return self::substrBetween($string, $start, $to);
     }
 
     static function substrAfter($string, $after)
@@ -66,19 +67,22 @@ class StringUtils
         return str_replace(array_keys($data), array_values($data), $format);
     }
 
-    static function isNullOrEmptyString($str){
+    static function isNullOrEmptyString($str)
+    {
         return (!isset($str) || trim($str) === '');
     }
 
-    static function endsWith($haystack, $needle) {
-        $length = strlen( $needle );
-        if( !$length ) {
+    static function endsWith($haystack, $needle)
+    {
+        $length = strlen($needle);
+        if (!$length) {
             return true;
         }
-        return substr( $haystack, -$length ) === $needle;
+        return substr($haystack, -$length) === $needle;
     }
 
-    static function guidv4($data = null) {
+    static function guidv4($data = null)
+    {
         // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
         $data = $data ?? random_bytes(16);
         assert(strlen($data) == 16);

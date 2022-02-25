@@ -183,6 +183,7 @@ abstract class ConfigForm
             $values = $_REQUEST[$this->formKey];
         else
             $values = $_REQUEST;
+        $configs = array();
         foreach ($this->getManagedFields()->getFieldsToRender() as $configField) {
             if ($configField instanceof ConfigFieldFile) {
                 $fileMeta = $_FILES[$configField->getKey()];
@@ -191,12 +192,15 @@ abstract class ConfigForm
                 }
             } else if ($configField instanceof ConfigFieldCheckbox) {
                 $value = array_key_exists($configField->getKey(), $values) ? $values[$configField->getKey()] : "";
-                Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
+                $configs[$configField->getKey()] = $value;
+//                Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
             } else {
                 $value = array_key_exists($configField->getKey(), $values) ? $values[$configField->getKey()] : $configField->getValue();
-                Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
+                $configs[$configField->getKey()] = $value;
+//                Registry::getRegistry()->getConfigWrapper()->saveConfig($configField->getKey(), $value);
             }
         }
+        Registry::getRegistry()->getConfigWrapper()->saveConfigs($configs);
         Registry::getRegistry()->getMessenger()->addInfoMessage(Messages::SETTINGS_SAVED);
     }
 }

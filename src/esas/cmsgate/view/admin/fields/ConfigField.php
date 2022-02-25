@@ -64,7 +64,10 @@ abstract class ConfigField
      */
     private $sortOrder;
 
-
+    /**
+     * @var mixed
+     */
+    private $value = null;
     /**
      * ConfigField constructor.
      * @param string $key
@@ -186,12 +189,24 @@ abstract class ConfigField
     }
 
     /**
+     * @param mixed $value
+     * @return ConfigField
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+        return $this;
+    }
+
+    /**
      * Возвращает значения настройки из хранилища или текущее, значение указаное администратором перед сохранением
      * (чтобы в случае ошибки в каком-либо поле, администратору не пришлось повторно вводить все поля)
      * @return mixed
      */
     public function getValue($orDefaults = false)
     {
+        if ($this->value != null)
+            return $this->value;
         //тут будет не null, если до этого для поля вызывался валидатор
         if (isset($this->validationResult) && $this->validationResult != null) {
             return $this->validationResult->getValidatedValue();

@@ -8,6 +8,8 @@
 
 namespace esas\cmsgate;
 
+use esas\cmsgate\messenger\Messages;
+use esas\cmsgate\utils\FileUtils;
 use esas\cmsgate\utils\Logger;
 
 abstract class ConfigStorageCms
@@ -34,6 +36,20 @@ abstract class ConfigStorageCms
      */
     public abstract function getConfig($key);
 
+
+    public function isStorageInitialised($marker) {
+        $paymentMethodName = $this->isStorageInitialised($marker);
+        return empty($paymentMethodName);
+    }
+
+    public function saveConfigs($keyValueArray)
+    {
+        foreach ($keyValueArray as $key => $value) {
+            $this->saveConfig($key, $value);
+        }
+        Registry::getRegistry()->getMessenger()->addInfoMessage(Messages::SETTINGS_SAVED);
+        FileUtils::uploadFiles();
+    }
 
     /**
      * Сохранение значения свойства в харнилища настроек конкретной CMS.

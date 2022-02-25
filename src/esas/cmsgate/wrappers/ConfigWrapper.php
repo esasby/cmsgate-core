@@ -196,7 +196,7 @@ abstract class ConfigWrapper extends Wrapper
     protected function needDefaults()
     {
         // предполагаем, что если в хранилище есть названием платежного метода, это не первая инциализация и значения по умолчанию не нужны
-        $paymentMethodName = $this->configStorageCms->getConfig(ConfigFields::paymentMethodName());
+        $paymentMethodName = $this->configStorageCms->isStorageInitialised(ConfigFields::paymentMethodName());
         return empty($paymentMethodName);
     }
 
@@ -296,11 +296,7 @@ abstract class ConfigWrapper extends Wrapper
      */
     public function saveConfigs($keyValueArray)
     {
-        foreach ($keyValueArray as $key => $value) {
-            $this->saveConfig($key, $value);
-        }
-        Registry::getRegistry()->getMessenger()->addInfoMessage(Messages::SETTINGS_SAVED);
-        FileUtils::uploadFiles();
+        $this->configStorageCms->saveConfigs($keyValueArray);
     }
 
     /**

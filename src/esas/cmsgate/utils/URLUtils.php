@@ -13,4 +13,9 @@ class URLUtils
     public static function getCurrentURLNoParams() {
         return StringUtils::substrBefore(self::getCurrentURL(), "?");
     }
+
+    public static function getCurrentURLMainPart() {
+        $mainPart = "/" . StringUtils::substrBefore($_SERVER['REQUEST_URI'], "/", 1);
+        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$mainPart";
+    }
 }
