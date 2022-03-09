@@ -256,6 +256,10 @@ abstract class ConfigField
         return $this->validationResult;
     }
 
+    public function isValid() {
+        return $this->validationResult == null || $this->validationResult->isValid();
+    }
+
     /**
      * @param ValidationResult $validationResult
      */

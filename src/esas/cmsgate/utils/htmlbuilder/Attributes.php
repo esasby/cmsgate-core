@@ -44,6 +44,8 @@ class Attributes
     const DATA_BS_TARGET = "data-bs-target";
     const DATA_BS_PARENT = "data-bs-parent";
     const ARIA_EXPANDED = "aria-expanded";
+    const ARIA_HIDDEN = "aria-hidden";
+    const ARIA_LABEL = "aria-label";
     const ARIA_CONTROLS = "aria-controls";
     const ARIA_LABELLEDBY = "aria-labelledby";
     const DATA_DISMISS = "data-dismiss";
@@ -233,6 +235,16 @@ class Attributes
     public static function aria_expanded($ariaExpanded)
     {
         return new Attribute(self::ARIA_EXPANDED, $ariaExpanded);
+    }
+
+    public static function aria_hidden($ariaHidden = true)
+    {
+        return $ariaHidden ? new AttributeBoolean(self::ARIA_HIDDEN, $ariaHidden) : "";
+    }
+
+    public static function aria_label($ariaLabel)
+    {
+        return new Attribute(self::ARIA_LABEL, $ariaLabel);
     }
 
     public static function aria_labelledby($ariaLabelledby)
