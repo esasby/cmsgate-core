@@ -31,6 +31,7 @@ use Exception;
 abstract class Registry
 {
     protected $configWrapper;
+    protected $systemSettingsWrapper;
     protected $translator;
     protected $configForm;
     protected $messenger;

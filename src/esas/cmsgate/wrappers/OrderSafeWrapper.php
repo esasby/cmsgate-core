@@ -307,9 +307,4 @@ abstract class OrderSafeWrapper extends OrderWrapper
      */
     public abstract function getStatusUnsafe();
 
-    /**
-     * Обновляет статус заказа в БД
-     * @param $newStatus
-     * @return mixed
-     */
 }
