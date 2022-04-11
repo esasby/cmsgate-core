@@ -38,8 +38,8 @@ abstract class ConfigStorageCms
 
 
     public function isStorageInitialised($marker) {
-        $paymentMethodName = $this->isStorageInitialised($marker);
-        return empty($paymentMethodName);
+        $markerValue = $this->getConfig($marker);
+        return empty($markerValue);
     }
 
     public function saveConfigs($keyValueArray)
