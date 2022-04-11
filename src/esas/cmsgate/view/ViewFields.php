@@ -13,4 +13,5 @@ class ViewFields
 {
     const BUTTON_SAVE = 'button_save';
     const BUTTON_CONTINUE = 'button_continue';
+    const BUTTON_CONFIRM = 'button_confirm';
 }

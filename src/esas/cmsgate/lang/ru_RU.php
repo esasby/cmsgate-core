@@ -32,6 +32,7 @@ return array(
     AdminViewFields::SETTINGS => 'Настройки',
 
     ViewFields::BUTTON_CONTINUE => 'Продолжить',
+    ViewFields::BUTTON_CONFIRM => 'Подтвердить',
 
     Messages::GENERAL_MODULE_ERROR => "Ошибка работы модуля",
     Messages::INCORRECT_INPUT => "Некорректные данные",

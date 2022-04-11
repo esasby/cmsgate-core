@@ -32,6 +32,7 @@ return array(
     AdminViewFields::SETTINGS => 'Settings',
 
     ViewFields::BUTTON_CONTINUE => 'Continue',
+    ViewFields::BUTTON_CONFIRM => 'Confirm',
 
     Messages::GENERAL_MODULE_ERROR => "General module error",
     Messages::INCORRECT_INPUT => "Incorrect input",
