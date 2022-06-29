@@ -11,6 +11,7 @@ namespace esas\cmsgate\wrappers;
 use esas\cmsgate\OrderStatus;
 use esas\cmsgate\protocol\Amount;
 use esas\cmsgate\Registry;
+use esas\cmsgate\utils\CMSGateException;
 use Throwable;
 
 abstract class OrderWrapper extends Wrapper
@@ -107,6 +108,12 @@ abstract class OrderWrapper extends Wrapper
      * @return mixed
      */
     public abstract function getExtId();
+
+    public function getExtIdNotEmpty() {
+        $extId = $this->getExtId();
+        if ($extId == null || $extId == '')
+            throw new CMSGateException("ExtId is empty");
+    }
 
     /**
      * Текущий статус заказа в CMS
