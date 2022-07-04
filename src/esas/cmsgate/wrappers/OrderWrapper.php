@@ -113,6 +113,7 @@ abstract class OrderWrapper extends Wrapper
         $extId = $this->getExtId();
         if ($extId == null || $extId == '')
             throw new CMSGateException("ExtId is empty");
+        return $extId;
     }
 
     /**
