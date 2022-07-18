@@ -278,6 +278,15 @@ abstract class OrderSafeWrapper extends OrderWrapper
         }
     }
 
+    public function isExtIdFilled() {
+        try {
+            $extId = $this->getExtIdUnsafe();
+            return $extId != null && $extId != '';
+        } catch (Throwable $e) {
+            return false;
+        }
+    }
+
     /**
      * Идентификатор платежа внешней системы
      * @throws Throwable

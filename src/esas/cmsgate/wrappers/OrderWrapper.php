@@ -109,6 +109,11 @@ abstract class OrderWrapper extends Wrapper
      */
     public abstract function getExtId();
 
+    public function isExtIdFilled() {
+        $extId = $this->getExtId();
+        return $extId != null && $extId != '';
+    }
+
     public function getExtIdNotEmpty() {
         $extId = $this->getExtId();
         if ($extId == null || $extId == '')
