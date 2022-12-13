@@ -60,6 +60,11 @@ abstract class Registry
      */
     protected $configStorage;
 
+    /**
+     * @var array
+     */
+    protected $extServices;
+
     public function init() {
         $registryName = self::getUniqRegistryName();
         global $$registryName;
@@ -81,13 +86,12 @@ abstract class Registry
     /**
      * @return ConfigWrapper
      */
-    public function getConfigWrapper()
-    {
+    public function getConfigWrapper() {
         if ($this->configWrapper == null)
             $this->configWrapper = $this->createConfigWrapper();
         return $this->configWrapper;
     }
-    
+
     public function createConfigWrapper() {
         return $this->paysystemConnector->createConfigWrapper();
     }
@@ -95,8 +99,7 @@ abstract class Registry
     /**
      * @return ManagedFieldsFactory
      */
-    public function getManagedFieldsFactory()
-    {
+    public function getManagedFieldsFactory() {
         if ($this->managedFieldsFactory == null)
             $this->managedFieldsFactory = $this->createManagedFieldsFactory();
         return $this->managedFieldsFactory;
@@ -112,8 +115,7 @@ abstract class Registry
     /**
      * @return SystemSettingsWrapper
      */
-    public function getSystemSettingsWrapper()
-    {
+    public function getSystemSettingsWrapper() {
         if ($this->systemSettingsWrapper == null)
             $this->systemSettingsWrapper = $this->createSystemSettingsWrapper();
         return $this->systemSettingsWrapper;
@@ -126,8 +128,7 @@ abstract class Registry
     /**
      * @return Translator
      */
-    public function getTranslator()
-    {
+    public function getTranslator() {
         if ($this->translator == null)
             $this->translator = $this->createTranslator();
         return $this->translator;
@@ -161,7 +162,7 @@ abstract class Registry
     public function getOrderWrapper($orderId) {
         if (empty($orderId))
             throw new Exception('Incorrect orderId');
-        $orderWrapper =  $this->cmsConnector->createOrderWrapperByOrderId($orderId);
+        $orderWrapper = $this->cmsConnector->createOrderWrapperByOrderId($orderId);
         if ($orderWrapper == null)
             throw new Exception('Can not get orderWrapper by given orderId[' . $orderId . "]");
         return $orderWrapper;
@@ -226,8 +227,7 @@ abstract class Registry
      * Получение формы с настройками сделано через Registry, т.к. в некоторых CMS создание формы и ее валидация разнесены в разные хуки
      * @return ConfigForm
      */
-    public function getConfigForm()
-    {
+    public function getConfigForm() {
         if ($this->configForm != null)
             return $this->configForm;
         else if (SessionUtils::getForm(AdminViewFields::CONFIG_FORM_COMMON) != null)
@@ -257,8 +257,7 @@ abstract class Registry
     /**
      * @return Messenger
      */
-    public function getMessenger()
-    {
+    public function getMessenger() {
         if ($this->messenger == null)
             $this->messenger = new Messenger($this->createTranslator());
         return $this->messenger;
@@ -271,8 +270,7 @@ abstract class Registry
     /**
      * @return ConfigStorageCms
      */
-    public function getConfigStorage()
-    {
+    public function getConfigStorage() {
         if ($this->configStorage == null)
             $this->configStorage = $this->createConfigStorage();
         return $this->configStorage;
@@ -285,16 +283,14 @@ abstract class Registry
     /**
      * @return CmsConnector
      */
-    public function getCmsConnector()
-    {
+    public function getCmsConnector() {
         return $this->cmsConnector;
     }
 
     /**
      * @return PaysystemConnector
      */
-    public function getPaysystemConnector()
-    {
+    public function getPaysystemConnector() {
         return $this->paysystemConnector;
     }
 
@@ -306,7 +302,7 @@ abstract class Registry
             $this->moduleDescriptor = $this->createModuleDescriptor();
         return $this->moduleDescriptor;
     }
-    
+
     public abstract function createModuleDescriptor();
 
     /**
@@ -321,8 +317,7 @@ abstract class Registry
     /**
      * @return Hooks
      */
-    public function getHooks()
-    {
+    public function getHooks() {
         if ($this->hooks == null)
             $this->hooks = $this->createHooks();
         return $this->hooks;
@@ -333,5 +328,15 @@ abstract class Registry
      */
     public function createHooks() {
         return $this->paysystemConnector->createHooks();
+    }
+
+    protected function registerService($serviceName, $service) {
+        $this->extServices[$serviceName] = $service;
+    }
+
+    public function getService($serviceName) {
+        if (in_array($serviceName, $this->extServices))
+            $this->extServices[$serviceName];
+        throw new Exception('Service [' . $serviceName . '] was not registered');
     }
 }
