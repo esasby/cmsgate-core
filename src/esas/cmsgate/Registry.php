@@ -334,9 +334,14 @@ abstract class Registry
         $this->extServices[$serviceName] = $service;
     }
 
+    /**
+     * @param $serviceName
+     * @return mixed
+     * @throws Exception
+     */
     public function getService($serviceName) {
         if (in_array($serviceName, $this->extServices))
-            $this->extServices[$serviceName];
+            return $this->extServices[$serviceName];
         throw new Exception('Service [' . $serviceName . '] was not registered');
     }
 }
