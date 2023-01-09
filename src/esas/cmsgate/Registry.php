@@ -340,7 +340,7 @@ abstract class Registry
      * @throws Exception
      */
     public function getService($serviceName) {
-        if (in_array($serviceName, $this->extServices))
+        if (array_key_exists($serviceName, $this->extServices))
             return $this->extServices[$serviceName];
         throw new Exception('Service [' . $serviceName . '] was not registered');
     }

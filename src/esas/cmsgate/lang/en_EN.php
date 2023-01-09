@@ -49,4 +49,5 @@ return array(
     ClientViewFields::ERROR => "Error",
     ClientViewFields::ERROR_APOLOGIZING => "Sorry, payment can not be finished!",
 
+    ClientViewFields::SHIPMENT => 'Shipment'
 );

@@ -17,17 +17,27 @@ use Throwable;
 abstract class OrderWrapper extends Wrapper
 {
     /**
-     * Уникальный номер заказ в рамках CMS
+     * Уникальный идентификатор заказ в рамках CMS
      * @return string
      */
     public abstract function getOrderId();
 
     /**
-     * Уникальный номер счета в рамках CMS отображаемый клиенту
+     * Уникальный номер заказа в рамках CMS отображаемый клиенту
      * (в некоторых CMS может не совпадать с OrderId и поэтому метод может быть переопределен)
      * @return string
      */
     public function getOrderNumber()
+    {
+        return $this->getOrderId();
+    }
+
+    /**
+     * Уникальный номер платежа за заказ в рамках CMS
+     * (в некоторых CMS для одного заказа может быть несколько оплат и поэтому метод может быть переопределен)
+     * @return string
+     */
+    public function getPaymentId()
     {
         return $this->getOrderId();
     }

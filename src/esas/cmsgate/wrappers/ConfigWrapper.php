@@ -31,7 +31,7 @@ abstract class ConfigWrapper extends Wrapper
     {
         parent::__construct();
         if ($configStorageCms == null) {
-            $configStorageCms = Registry::getRegistry()->createConfigStorage();
+            $configStorageCms = Registry::getRegistry()->getConfigStorage();
         }
         $this->configStorageCms = $configStorageCms;
     }

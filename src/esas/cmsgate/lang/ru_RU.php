@@ -50,4 +50,6 @@ return array(
 
     ClientViewFields::ERROR => "Ошибка",
     ClientViewFields::ERROR_APOLOGIZING => "Извините, во время оплаты заказа, возникли проблемы",
+
+    ClientViewFields::SHIPMENT => 'Доставка'
 );

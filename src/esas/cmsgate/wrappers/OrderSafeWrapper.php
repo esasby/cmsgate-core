@@ -37,14 +37,14 @@ abstract class OrderSafeWrapper extends OrderWrapper
     }
 
     /**
-     * Уникальный номер заказ в рамках CMS
+     * Уникальный идентификатор заказ в рамках CMS
      * @return string
      * @throws Throwable
      */
     public abstract function getOrderIdUnsafe();
 
     /**
-     * Уникальный номер счета в рамках CMS отображаемый клиенту
+     * Уникальный номер заказа в рамках CMS отображаемый клиенту
      * (в некоторых CMS может не совпадать с OrderId и поэтому метод может быть переопределен)
      * @return string
      * @throws Throwable
@@ -64,6 +64,30 @@ abstract class OrderSafeWrapper extends OrderWrapper
      * @throws Throwable
      */
     public function getOrderNumberUnsafe() {
+        return $this->getOrderIdUnsafe();
+    }
+
+    /**
+     * Уникальный идентифкатор счета в рамках CMS отображаемый клиенту
+     * (в некоторых CMS может не совпадать с OrderId и поэтому метод может быть переопределен)
+     * @return string
+     * @throws Throwable
+     */
+    public function getPaymentId()
+    {
+        try {
+            return $this->getPaymentIdUnsafe();
+        } catch (Throwable $e) {
+            $this->logger->fatal("Can not get payment id!", $e);
+            throw $e;
+        }
+    }
+
+    /**
+     * @return string
+     * @throws Throwable
+     */
+    public function getPaymentIdUnsafe() {
         return $this->getOrderIdUnsafe();
     }
 
