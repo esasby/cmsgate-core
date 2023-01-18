@@ -26,13 +26,14 @@ class Logger
      */
     public function __construct($name)
     {
+        $this->createRQUID();
         $this->logger = Log4php::getLogger($name);
         //удялем все appender-ы, т.к. если делать конфигурацию через статическую конфигурацию, то логи могут писаться
         //в файл, который был сконифигурирован в другом плагине (видимо из-за статичности)
         $this->logger->removeAllAppenders();
         $this->logger->setAdditivity(false);
         $layout = new LoggerLayoutPattern();
-        $layout->setConversionPattern("%date{Y-m-d H:i:s,u} | %logger{0} | %-5level | %msg %n");
+        $layout->setConversionPattern("%date{Y-m-d H:i:s,u} | %logger{0} | %-5level | %session{CMSGATE_RQID} | %msg %n");
         $layout->activateOptions();
         $appFile = new LoggerAppenderFile('cmsFileAppender');
         $appFile->setFile(self::getLogFilePath());
@@ -118,5 +119,26 @@ class Logger
             return $ret;
         } else
             return '';
+    }
+
+    const RQUID = 'CMSGATE_RQID';
+
+    private function createRQUID() {
+        if (!empty($_SESSION) && array_key_exists(self::RQUID, $_SESSION))
+            return;
+        $_SESSION[self::RQUID] = self::generateRQUID();
+    }
+
+    static function generateRQUID($data = null)
+    {
+        // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
+        $data = $data ?? random_bytes(16);
+        assert(strlen($data) == 16);
+        // Set version to 0100
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+        // Set bits 6-7 to 10
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+        // Output the 36 character UUID.
+        return bin2hex($data);
     }
 }
