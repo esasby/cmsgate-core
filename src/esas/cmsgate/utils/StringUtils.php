@@ -81,6 +81,11 @@ class StringUtils
         return substr($haystack, -$length) === $needle;
     }
 
+    static function contains($haystack, $needle)
+    {
+        return strpos($haystack, $needle) >= 0;
+    }
+
     static function guidv4($data = null)
     {
         // Generate 16 bytes (128 bits) of random data or use the data passed into the function.

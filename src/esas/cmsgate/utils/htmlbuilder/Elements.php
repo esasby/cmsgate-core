@@ -15,6 +15,8 @@ class Elements
     const INPUT = "input";
     const TEXTAREA = "textarea";
     const TABLE = "table";
+    const THEAD = "thead";
+    const TBODY = "tbody";
     const TR = "tr";
     const TD = "td";
     const TH = "th";
@@ -88,6 +90,16 @@ class Elements
     public static function table(...$elementAndAttributes)
     {
         return new Element(self::TABLE, $elementAndAttributes);
+    }
+
+    public static function thead(...$elementAndAttributes)
+    {
+        return new Element(self::THEAD, $elementAndAttributes);
+    }
+
+    public static function tbody(...$elementAndAttributes)
+    {
+        return new Element(self::TBODY, $elementAndAttributes);
     }
 
     public static function tr(...$elementAndAttributes)
