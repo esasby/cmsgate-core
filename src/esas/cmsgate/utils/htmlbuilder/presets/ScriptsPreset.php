@@ -23,7 +23,19 @@ class ScriptsPreset
         return self::elementScript("https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js");
     }
 
+    public static function elementScriptBootstrap5Min() {
+        return self::elementScript("https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js");
+    }
+
+    public static function elementScriptBootstrapMin() {
+        return BootstrapPreset::isBootstrapV4() ? self::elementScriptBootstrap4Min() : self::elementScriptBootstrap5Min();
+    }
+
     public static function elementScriptPopper1Min() {
         return self::elementScript("https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js");
+    }
+
+    public static function elementScriptClickableTable() {
+        return element::scriptFile(dirname(__FILE__) . "/js/clickableTable.js");;
     }
 }

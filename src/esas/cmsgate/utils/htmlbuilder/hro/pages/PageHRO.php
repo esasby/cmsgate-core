@@ -1,21 +1,18 @@
 <?php
 
 
-namespace esas\cmsgate\utils\htmlbuilder;
+namespace esas\cmsgate\utils\htmlbuilder\hro\pages;
 
 
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
+use esas\cmsgate\utils\htmlbuilder\hro\HRO;
 use esas\cmsgate\utils\htmlbuilder\page\AbstractPage;
 use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset;
 use esas\cmsgate\utils\Logger;
 
-/**
- * Class Page
- * @package esas\cmsgate\utils\htmlbuilder
- */
-abstract class Page implements AbstractPage
+class PageHRO implements HRO
 {
     /**
      * @var Logger
@@ -67,4 +64,11 @@ abstract class Page implements AbstractPage
         return $ret;
     }
 
+    public static function builder() {
+        // TODO: Implement builder() method.
+    }
+
+    public function build() {
+        // TODO: Implement build() method.
+    }
 }

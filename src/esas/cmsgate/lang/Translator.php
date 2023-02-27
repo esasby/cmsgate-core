@@ -8,6 +8,7 @@
 
 namespace esas\cmsgate\lang;
 
+use esas\cmsgate\Registry;
 use esas\cmsgate\utils\Logger;
 
 abstract class Translator
@@ -20,6 +21,13 @@ abstract class Translator
     public function __construct()
     {
         $this->logger = Logger::getLogger(get_class($this));
+    }
+
+    /**
+     * @return Translator
+     */
+    public static function fromRegistry() {
+        return Registry::getRegistry()->getTranslator();
     }
 
     public abstract function translate($msg, $locale = null);

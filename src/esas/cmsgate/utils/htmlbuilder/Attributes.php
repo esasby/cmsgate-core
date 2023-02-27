@@ -35,14 +35,17 @@ class Attributes
     const ROLE = "role";
     const VALIGN = "valign";
     const CHECKED = "checked";
+    const DISABLED = "disabled";
     const CHARSET = "charset";
     const CONTENT = "content";
     const SELECTED = "selected";
     const DATA_TOGLE = "data-toggle";
+    const DATA_HREF = "data-href";
     const DATA_PLACEMENT = "data-placement";
     const DATA_BS_TOGGLE = "data-bs-toggle";
     const DATA_BS_TARGET = "data-bs-target";
     const DATA_BS_PARENT = "data-bs-parent";
+    const DATA_BS_DISMISS = "data-bs-dismiss";
     const ARIA_EXPANDED = "aria-expanded";
     const ARIA_HIDDEN = "aria-hidden";
     const ARIA_LABEL = "aria-label";
@@ -182,6 +185,11 @@ class Attributes
         return new AttributeBoolean(self::CHECKED, $checked);
     }
 
+    public static function disabled($disabled)
+    {
+        return new AttributeBoolean(self::DISABLED, $disabled);
+    }
+
     public static function charset($charset)
     {
         return new Attribute(self::CHARSET, $charset);
@@ -202,6 +210,11 @@ class Attributes
         return new Attribute(self::DATA_TOGLE, $dataToggle);
     }
 
+    public static function data_href($dataHref)
+    {
+        return new Attribute(self::DATA_HREF, $dataHref);
+    }
+
     public static function data_placement($dataPlacement)
     {
         return new Attribute(self::DATA_PLACEMENT, $dataPlacement);
@@ -220,6 +233,11 @@ class Attributes
     public static function data_bs_parent($dataBSParent)
     {
         return new Attribute(self::DATA_BS_PARENT, $dataBSParent);
+    }
+
+    public static function data_bs_dismiss($dataDismiss)
+    {
+        return new Attribute(self::DATA_BS_DISMISS, $dataDismiss);
     }
 
     public static function data_dismiss($dataDismiss)

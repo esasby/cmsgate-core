@@ -13,7 +13,7 @@ if (!defined("_ERROR_VALIDATION")) define("_ERROR_VALIDATION", 'error_validation
 return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNotEmpty::class => 'Значение не может быть пустым',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorInteger::class => 'Значение должно быть число в диапазоне от %d до %d',
-    _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNumeric::class => 'Значение должно быть целым числом',
+    _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNumeric::class => 'Значение должно быть числом',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Неверный формат email',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorUploadFileExtension::class => 'Некорректное расширение файла. Ожидается *.[%s] файл',
 
@@ -30,6 +30,10 @@ return array(
     AdminViewFields::CONFIG_FORM_BUTTON_SAVE_AND_EXIT => 'Сохранить и выйти',
     AdminViewFields::CONFIG_FORM_BUTTON_CANCEL => 'Отмена',
     AdminViewFields::SETTINGS => 'Настройки',
+    AdminViewFields::LOGOUT => 'Выход',
+    AdminViewFields::CANCEL => 'Отмена',
+    AdminViewFields::DELETE => 'Удалить',
+    AdminViewFields::ADD => 'Добавить',
 
     ViewFields::BUTTON_CONTINUE => 'Продолжить',
     ViewFields::BUTTON_CONFIRM => 'Подтвердить',

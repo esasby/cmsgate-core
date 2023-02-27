@@ -83,7 +83,7 @@ class StringUtils
 
     static function contains($haystack, $needle)
     {
-        return strpos($haystack, $needle) >= 0;
+        return strpos($haystack, $needle) !== false ;
     }
 
     static function guidv4($data = null)

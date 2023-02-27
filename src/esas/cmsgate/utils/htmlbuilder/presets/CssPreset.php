@@ -15,8 +15,16 @@ class CssPreset
             attribute::rel("stylesheet"));
     }
 
+    public static function elementLinkCssBootstrapMin() {
+        return BootstrapPreset::isBootstrapV4() ? self::elementLinkCssBootstrap4Min() : self::elementLinkCssBootstrap5Min();
+    }
+
     public static function elementLinkCssBootstrap4Min() {
         return self::elementHeadLinkStylesheet("https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css");
+    }
+
+    public static function elementLinkCssBootstrap5Min() {
+        return self::elementHeadLinkStylesheet("https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css");
     }
 
     public static function elementLinkCssFontAwesome4Min() {

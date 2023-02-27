@@ -12,6 +12,8 @@ namespace esas\cmsgate;
 use esas\cmsgate\descriptors\ModuleDescriptor;
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\messenger\Messenger;
+use esas\cmsgate\properties\Properties;
+use esas\cmsgate\utils\CMSGateException;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\utils\SessionUtils;
 use esas\cmsgate\view\admin\AdminViewFields;
@@ -64,6 +66,11 @@ abstract class Registry
      * @var array
      */
     protected $extServices;
+
+    /**
+     * @var Properties
+     */
+    protected $properties;
 
     public function init() {
         $registryName = self::getUniqRegistryName();
@@ -343,5 +350,21 @@ abstract class Registry
         if (array_key_exists($serviceName, $this->extServices))
             return $this->extServices[$serviceName];
         throw new Exception('Service [' . $serviceName . '] was not registered');
+    }
+
+    /**
+     * @return Properties
+     */
+    public function getProperties() {
+        if ($this->properties == null)
+            $this->properties = $this->createProperties();
+        return $this->properties;
+    }
+
+    /**
+     * @return Properties
+     */
+    public function createProperties() {
+        throw new CMSGateException('Not implemented');
     }
 }

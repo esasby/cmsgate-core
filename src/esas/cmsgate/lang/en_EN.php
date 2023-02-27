@@ -30,6 +30,10 @@ return array(
     AdminViewFields::CONFIG_FORM_BUTTON_CANCEL => 'Cancel',
     AdminViewFields::CONFIG_FORM_BUTTON_DOWNLOAD_LOG => 'Download logs',
     AdminViewFields::SETTINGS => 'Settings',
+    AdminViewFields::LOGOUT => 'Logout',
+    AdminViewFields::CANCEL => 'Cancel',
+    AdminViewFields::DELETE => 'Delete',
+    AdminViewFields::ADD => 'Add',
 
     ViewFields::BUTTON_CONTINUE => 'Continue',
     ViewFields::BUTTON_CONFIRM => 'Confirm',
