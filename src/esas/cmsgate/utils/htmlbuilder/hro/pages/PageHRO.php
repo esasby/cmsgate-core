@@ -12,7 +12,7 @@ use esas\cmsgate\utils\htmlbuilder\page\AbstractPage;
 use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset;
 use esas\cmsgate\utils\Logger;
 
-class PageHRO implements HRO
+abstract class PageHRO implements HRO, AbstractPage
 {
     /**
      * @var Logger
@@ -24,7 +24,7 @@ class PageHRO implements HRO
         $this->logger = Logger::getLogger(get_class($this));
     }
 
-    public function __toString()
+    public function build()
     {
         return '<!DOCTYPE html>'
             . element::html(
@@ -33,10 +33,15 @@ class PageHRO implements HRO
             );
     }
 
-    public function render()
+    public function buildAndDisplay()
     {
-        echo $this->__toString();
+        echo $this->build();
     }
+
+    public function render() {
+        $this->buildAndDisplay();
+    }
+
 
     public function elementHeadMetaCharset($charset) {
         return element::meta(
@@ -62,13 +67,5 @@ class PageHRO implements HRO
             $ret .= BootstrapPreset::elementAlertWarn($message);
         }
         return $ret;
-    }
-
-    public static function builder() {
-        // TODO: Implement builder() method.
-    }
-
-    public function build() {
-        // TODO: Implement build() method.
     }
 }

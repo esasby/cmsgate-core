@@ -3,69 +3,27 @@
 
 namespace esas\cmsgate\utils\htmlbuilder\hro\cards;
 
-use esas\cmsgate\lang\Translator;
-use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset as bootstrap;
 use esas\cmsgate\utils\htmlbuilder\hro\HRO;
 
-class CardHRO implements HRO
+interface CardHRO extends HRO
 {
-    protected $cardHeader;
-    protected $cardBody;
-    protected $cardFooter;
+    /**
+     * @param $cardHeader
+     * @param bool $translate
+     * @return $this
+     */
+    public function setCardHeader($cardHeader, $translate = true) ;
 
     /**
-     * @param mixed $cardHeader
-     * @return CardHRO
+     * @param $cardBody
+     * @return $this
      */
-    public function setCardHeader($cardHeader) {
-        $this->cardHeader = $cardHeader;
-        return $this;
-    }
-
-    public function setCardHeaderI18n($headerLabel) {
-        return $this->setCardHeader(Translator::fromRegistry()->translate($headerLabel));
-    }
+    public function setCardBody($cardBody);
 
     /**
-     * @param mixed $cardBody
-     * @return CardHRO
+     * @param $cardFooter
+     * @return $this
      */
-    public function setCardBody($cardBody) {
-        $this->cardBody = $cardBody;
-        return $this;
-    }
+    public function setCardFooter($cardFooter);
 
-    /**
-     * @param mixed $cardFooter
-     * @return CardHRO
-     */
-    public function setCardFooter($cardFooter) {
-        $this->cardFooter = $cardFooter;
-        return $this;
-    }
-
-
-    public function build() {
-        return bootstrap::elementCard(
-            bootstrap::elementCardHeader($this->elementCardHeader()),
-            bootstrap::elementCardBody($this->elementCardBody()),
-            bootstrap::elementCardFooter($this->elementCardFooter())
-        );
-    }
-
-    public function elementCardHeader() {
-        return $this->cardHeader;
-    }
-
-    public function elementCardBody() {
-        return $this->cardBody;
-    }
-
-    public function elementCardFooter() {
-        return $this->cardFooter;
-    }
-
-    public static function builder() {
-        return new CardHRO();
-    }
 }

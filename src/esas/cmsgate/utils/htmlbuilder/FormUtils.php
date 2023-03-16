@@ -10,24 +10,21 @@ use esas\cmsgate\utils\CMSGateException;
 use esas\cmsgate\view\admin\ConfigForm;
 use esas\cmsgate\view\admin\fields\ConfigFieldCheckbox;
 use esas\cmsgate\view\admin\fields\ConfigFieldFile;
+use esas\cmsgate\view\admin\ManagedFields;
 use Exception;
 
 class FormUtils
 {
     /**
-     * @param $form ConfigForm
+     * @param $managedFields ManagedFields
      * @param $exceptFields array fields to skip
      * @return array
      * @throws CMSGateException
      */
-    public static function extractInputsFromRequest($form, $exceptFields = null)
-    {
-        if (array_key_exists($form->getFormKey(), $_REQUEST)) // иногда настройки могут приходить сгруппированными по имени формы
-            $values = $_REQUEST[$form->getFormKey()];
-        else
-            $values = $_REQUEST;
+    public static function extractInputsFromRequest($managedFields, $exceptFields = null) {
+        $values = $_REQUEST;
         $configs = array();
-        foreach ($form->getManagedFields()->getFieldsToRender() as $configField) {
+        foreach ($managedFields->getFieldsToRender() as $configField) {
             if ($exceptFields != null && in_array($configField->getKey(), $exceptFields))
                 continue; //skipping field
             if ($configField instanceof ConfigFieldFile) {
@@ -49,8 +46,7 @@ class FormUtils
      * @param array $filesMeta
      * @throws Exception
      */
-    public static function validateInputs($form, $fieldValues = null, $filesMeta = null)
-    {
+    public static function validateInputs($form, $fieldValues = null, $filesMeta = null) {
         $fieldsAreValid = $form->getManagedFields()->validateAll($fieldValues != null ? $fieldValues : $_REQUEST);
         $filesAreValid = $form->getManagedFields()->validateAll($filesMeta != null ? $filesMeta : $_FILES);
         if (!$fieldsAreValid || !$filesAreValid) {

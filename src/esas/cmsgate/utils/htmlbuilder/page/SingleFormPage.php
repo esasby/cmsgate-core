@@ -4,7 +4,12 @@
 namespace esas\cmsgate\utils\htmlbuilder\page;
 
 
+use esas\cmsgate\view\admin\ManagedFields;
+
 interface SingleFormPage extends AbstractPage
 {
-    public function getForm();
+    /**
+     * @return ManagedFields
+     */
+    public function getFormFields();
 }

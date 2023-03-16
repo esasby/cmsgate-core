@@ -56,6 +56,7 @@ class ManagedFields
     {
         $configField->setSortOrder(++$this->sortOrderCounter);
         $this->fieldsToRender[$configField->getKey()] = $configField;
+        return $this;
     }
 
     /**
