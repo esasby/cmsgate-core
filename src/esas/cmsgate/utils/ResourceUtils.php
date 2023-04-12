@@ -11,14 +11,10 @@ namespace esas\cmsgate\utils;
 
 class ResourceUtils
 {
-    private static $imageDirUrl;
 
-    public static function getImageUrl($imageFileName)
+    public static function getImageUrl($dir, $imageFileName)
     {
-        if (self::$imageDirUrl == "") {
-            self::$imageDirUrl = self::getResourceUrl(dirname(dirname(__FILE__)) . "/image/");
-        }
-        return self::$imageDirUrl . $imageFileName;
+        return self::getResourceUrl($dir) . $imageFileName;
     }
 
     public static function getResourceUrl($resourcePath)
@@ -42,11 +38,9 @@ class ResourceUtils
         return $url; // = http://example.com/path/directory
     }
 
-    private static $real_part;
-    private static $virtual_part;
-
-    private static function findSymlink()
+    private static function getVirtualPath($path)
     {
+        // finding symlink
         $script_path = $_SERVER["SCRIPT_FILENAME"];
         $script_real_path = realpath($script_path);
         if ($script_path != $script_real_path) {
@@ -54,19 +48,14 @@ class ResourceUtils
                  $script_path_i >= 0 && $script_real_path_i >= 0;
                  $script_path_i--, $script_real_path_i--) {
                 if ($script_path[$script_path_i] != $script_real_path[$script_real_path_i]) {
-                    self::$real_part = StringUtils::substrBefore($script_real_path, $script_real_path_i + 1);
-                    self::$virtual_part = StringUtils::substrBefore($script_path, $script_path_i + 1);
-                    return;
+                    $real_part = StringUtils::substrBefore($script_real_path, $script_real_path_i + 2);
+                    $virtual_part = StringUtils::substrBefore($script_path, $script_path_i + 2);
+                    break;
                 }
             }
         }
-    }
 
-    private static function getVirtualPath($path)
-    {
-        if (self::$real_part == "" || self::$virtual_part == "")
-            self::findSymlink();
-        return str_replace(self::$real_part, self::$virtual_part, $path);
+        return str_replace($real_part, $virtual_part, $path);
     }
 
     public static function getResourceDirUrl($resourcePath)

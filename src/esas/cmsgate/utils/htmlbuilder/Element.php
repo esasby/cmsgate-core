@@ -10,7 +10,6 @@ namespace esas\cmsgate\utils\htmlbuilder;
 
 
 use esas\cmsgate\utils\ArrayUtils;
-use esas\cmsgate\utils\Logger;
 use esas\cmsgate\utils\StringUtils;
 
 class Element

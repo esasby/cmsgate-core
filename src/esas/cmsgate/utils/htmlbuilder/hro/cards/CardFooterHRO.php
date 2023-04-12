@@ -4,12 +4,7 @@
 namespace esas\cmsgate\utils\htmlbuilder\hro\cards;
 
 
-use esas\cmsgate\lang\Translator;
-use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
-use esas\cmsgate\utils\htmlbuilder\Elements as element;
 use esas\cmsgate\utils\htmlbuilder\hro\HRO;
-use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset as bootstrap;
-use esas\cmsgate\view\admin\AdminViewFields;
 
 interface CardFooterHRO extends HRO
 {

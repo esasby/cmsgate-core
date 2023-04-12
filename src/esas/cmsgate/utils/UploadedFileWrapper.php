@@ -8,8 +8,6 @@
 
 namespace esas\cmsgate\utils;
 
-use Exception;
-
 class UploadedFileWrapper extends FileWrapper
 {
     /**

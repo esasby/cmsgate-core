@@ -386,7 +386,7 @@ abstract class Registry
     /**
      * @return HROFactory
      */
-    public function createHROFactory() {
+    protected function createHROFactory() {
         return new HROFactory();
     }
 }

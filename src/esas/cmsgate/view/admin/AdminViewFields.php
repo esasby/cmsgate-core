@@ -29,4 +29,5 @@ class AdminViewFields extends ViewFields
     const CANCEL = 'cancel';
     const DELETE = 'delete';
     const ADD = 'add';
+    const COPY = 'copy';
 }

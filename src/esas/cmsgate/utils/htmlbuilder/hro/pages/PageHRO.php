@@ -33,6 +33,11 @@ abstract class PageHRO implements HRO, AbstractPage
             );
     }
 
+    public function __toString()
+    {
+        return $this->build();
+    }
+
     public function buildAndDisplay()
     {
         echo $this->build();
@@ -41,7 +46,6 @@ abstract class PageHRO implements HRO, AbstractPage
     public function render() {
         $this->buildAndDisplay();
     }
-
 
     public function elementHeadMetaCharset($charset) {
         return element::meta(

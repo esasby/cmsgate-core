@@ -11,6 +11,9 @@ namespace esas\cmsgate\utils\htmlbuilder;
 class Elements
 {
     const DIV = "div";
+    const DL = "dl";
+    const DT = "dt";
+    const DD = "dd";
     const SECTION = "section";
     const INPUT = "input";
     const TEXTAREA = "textarea";
@@ -65,6 +68,21 @@ class Elements
     public static function div(...$elementAndAttributes)
     {
         return new Element(self::DIV, $elementAndAttributes);
+    }
+
+    public static function dl(...$elementAndAttributes)
+    {
+        return new Element(self::DL, $elementAndAttributes);
+    }
+
+    public static function dt(...$elementAndAttributes)
+    {
+        return new Element(self::DT, $elementAndAttributes);
+    }
+
+    public static function dd(...$elementAndAttributes)
+    {
+        return new Element(self::DD, $elementAndAttributes);
     }
 
     public static function section(...$elementAndAttributes)

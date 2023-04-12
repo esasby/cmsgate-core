@@ -3,10 +3,7 @@
 
 namespace esas\cmsgate\utils\htmlbuilder\hro\tables;
 
-use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
-use esas\cmsgate\utils\htmlbuilder\Elements as element;
 use esas\cmsgate\utils\htmlbuilder\hro\HRO;
-use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset as bootstrap;
 
 interface TableHRO extends HRO
 {

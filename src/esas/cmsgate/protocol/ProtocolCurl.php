@@ -3,10 +3,9 @@
 namespace esas\cmsgate\protocol;
 
 use esas\cmsgate\Registry;
+use esas\cmsgate\utils\Logger;
 use esas\cmsgate\wrappers\ConfigWrapper;
 use Exception;
-use esas\cmsgate\utils\Logger;
-use Throwable;
 
 abstract class ProtocolCurl
 {

@@ -34,6 +34,7 @@ return array(
     AdminViewFields::CANCEL => 'Отмена',
     AdminViewFields::DELETE => 'Удалить',
     AdminViewFields::ADD => 'Добавить',
+    AdminViewFields::COPY => 'Копировать',
 
     ViewFields::BUTTON_CONTINUE => 'Продолжить',
     ViewFields::BUTTON_CONFIRM => 'Подтвердить',
@@ -47,13 +48,17 @@ return array(
 
     ClientViewFields::COMPLETION_PAGE_HEADER => 'Оплата заказа',
     ClientViewFields::COMPLETION_PAGE_HEADER_DETAILS => 'Для завершения оформления заказа необходимо оплатить счет',
+    ClientViewFields::COMPLETION_ERROR_PAGE_HEADER_DETAILS => 'Ошибка оформления заказа',
     ClientViewFields::COMPLETION_PAGE_FOOTER_ABOUT => 'О компании',
     ClientViewFields::COMPLETION_PAGE_FOOTER_ADDRESS => 'Адрес',
     ClientViewFields::COMPLETION_PAGE_FOOTER_CONTACTS => 'Контакты',
-    ClientViewFields::COMPLETION_PAGE_RETURN_TO_SHOP_BUTTON => 'Вернуться назад в магазин',
+    ClientViewFields::COMPLETION_PAGE_RETURN_TO_SHOP_BUTTON => 'Назад в магазин',
 
     ClientViewFields::ERROR => "Ошибка",
     ClientViewFields::ERROR_APOLOGIZING => "Извините, во время оплаты заказа, возникли проблемы",
 
-    ClientViewFields::SHIPMENT => 'Доставка'
+    ClientViewFields::SHIPMENT => 'Доставка',
+    ClientViewFields::BACK => 'Назад',
+    ClientViewFields::PLACE_ORDER => 'Оформить заказ',
+    ClientViewFields::CONTACTS => "Контакты"
 );

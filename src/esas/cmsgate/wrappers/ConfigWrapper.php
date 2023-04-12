@@ -11,8 +11,6 @@ namespace esas\cmsgate\wrappers;
 use esas\cmsgate\ConfigFields;
 use esas\cmsgate\ConfigStorageCms;
 use esas\cmsgate\Registry;
-use esas\cmsgate\utils\FileUtils;
-use esas\cmsgate\messenger\Messages;
 use Exception;
 use Throwable;
 

@@ -11,7 +11,6 @@ namespace esas\cmsgate\view\admin;
 
 use esas\cmsgate\messenger\Messages;
 use esas\cmsgate\Registry;
-use esas\cmsgate\utils\CMSGateException;
 use esas\cmsgate\utils\FileUtils;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\view\admin\fields\ConfigField;

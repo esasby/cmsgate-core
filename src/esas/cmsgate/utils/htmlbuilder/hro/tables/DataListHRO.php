@@ -4,10 +4,7 @@
 namespace esas\cmsgate\utils\htmlbuilder\hro\tables;
 
 
-use esas\cmsgate\Registry;
 use esas\cmsgate\utils\htmlbuilder\hro\HRO;
-use esas\cmsgate\utils\htmlbuilder\hro\HROFactory;
-use esas\cmsgate\view\admin\AdminViewFields;
 
 interface DataListHRO extends HRO
 {

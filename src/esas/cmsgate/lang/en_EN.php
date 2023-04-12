@@ -34,6 +34,7 @@ return array(
     AdminViewFields::CANCEL => 'Cancel',
     AdminViewFields::DELETE => 'Delete',
     AdminViewFields::ADD => 'Add',
+    AdminViewFields::COPY => 'Copy',
 
     ViewFields::BUTTON_CONTINUE => 'Continue',
     ViewFields::BUTTON_CONFIRM => 'Confirm',
@@ -45,6 +46,7 @@ return array(
 
     ClientViewFields::COMPLETION_PAGE_HEADER => 'Order payment',
     ClientViewFields::COMPLETION_PAGE_HEADER_DETAILS => 'You need to pay bill',
+    ClientViewFields::COMPLETION_ERROR_PAGE_HEADER_DETAILS => 'Order confirmation failed',
     ClientViewFields::COMPLETION_PAGE_FOOTER_ABOUT => 'About',
     ClientViewFields::COMPLETION_PAGE_FOOTER_ADDRESS => 'Address',
     ClientViewFields::COMPLETION_PAGE_FOOTER_CONTACTS => 'Contacts',
@@ -53,5 +55,8 @@ return array(
     ClientViewFields::ERROR => "Error",
     ClientViewFields::ERROR_APOLOGIZING => "Sorry, payment can not be finished!",
 
-    ClientViewFields::SHIPMENT => 'Shipment'
+    ClientViewFields::SHIPMENT => 'Shipment',
+    ClientViewFields::BACK => 'Back',
+    ClientViewFields::PLACE_ORDER => 'Place order',
+    ClientViewFields::CONTACTS => "Contacts"
 );

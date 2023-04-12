@@ -34,4 +34,8 @@ class CssPreset
     public static function elementLinkCssGoogleFonts($point) {
         return self::elementHeadLinkStylesheet("https://fonts.googleapis.com/" . $point);
     }
+
+    public static function elementAccordionV1() {
+        return element::styleFile(dirname(__FILE__) . "/css/accordion_v1.css");;
+    }
 }

@@ -8,7 +8,6 @@ use esas\cmsgate\lang\Translator;
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
-use esas\cmsgate\utils\htmlbuilder\hro\HRO;
 use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset as bootstrap;
 use esas\cmsgate\view\admin\AdminViewFields;
 
@@ -24,12 +23,12 @@ class CardFooterHRO_v1 implements CardFooterHRO
     protected $elementCardButtonCancel; // it must be always on the right
 
     public function addButton($label, $href, $classAppend, $translateLabel = true) {
-        $this->elementCardButtons .= bootstrap::elementCardFooterButton($translateLabel ? Translator::fromRegistry()->translate($label) : $label, $href, $classAppend);
+        $this->elementCardButtons .= bootstrap::elementAButton($translateLabel ? Translator::fromRegistry()->translate($label) : $label, $href, $classAppend);
         return $this;
     }
 
     public function addButtonCancel($redirectHref) {
-        $this->elementCardButtonCancel = bootstrap::elementCardFooterButton(Translator::fromRegistry()->translate(AdminViewFields::CANCEL), $redirectHref, 'btn-secondary');
+        $this->elementCardButtonCancel = bootstrap::elementAButton(Translator::fromRegistry()->translate(AdminViewFields::CANCEL), $redirectHref, 'btn-secondary');
         return $this;
     }
 

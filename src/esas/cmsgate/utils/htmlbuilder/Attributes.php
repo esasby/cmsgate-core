@@ -25,12 +25,16 @@ class Attributes
     const TYPE = "type";
     const NAME = "name";
     const FORR = "for";
+    const MIN = "min";
+    const MAX = "max";
     const PLACEHOLDER = "placeholder";
     const ROWS = "rows";
     const COLS = "cols";
     const COLSPAN = "colspan";
     const COLOR = "color";
     const ONCLICK = "onclick";
+    const ONKEYUP = "onKeyUp";
+    const ONINPUT = "oninput";
     const VALUE = "value";
     const ROLE = "role";
     const VALIGN = "valign";
@@ -145,6 +149,16 @@ class Attributes
         return new Attribute(self::COLS, $cols);
     }
 
+    public static function min($min)
+    {
+        return new Attribute(self::MIN, $min);
+    }
+
+    public static function max($max)
+    {
+        return new Attribute(self::MAX, $max);
+    }
+
     public static function colspan($colspan)
     {
         return new Attribute(self::COLSPAN, $colspan);
@@ -158,6 +172,16 @@ class Attributes
     public static function onclick($onclick)
     {
         return new Attribute(self::ONCLICK, $onclick);
+    }
+
+    public static function onKeyUp($onKeyUp)
+    {
+        return new Attribute(self::ONKEYUP, $onKeyUp);
+    }
+
+    public static function onInput($onInput)
+    {
+        return new Attribute(self::ONINPUT, $onInput);
     }
 
     public static function forr($forr)

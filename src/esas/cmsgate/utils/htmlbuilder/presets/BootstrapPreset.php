@@ -43,18 +43,15 @@ class BootstrapPreset
         );
     }
 
-    public static function elementAlertInfo($message)
-    {
+    public static function elementAlertInfo($message) {
         return self::elementAlert($message, "alert-info");
     }
 
-    public static function elementAlertError($message)
-    {
+    public static function elementAlertError($message) {
         return self::elementAlert($message, "alert-danger");
     }
 
-    public static function elementAlertWarn($message)
-    {
+    public static function elementAlertWarn($message) {
         return self::elementAlert($message, "alert-warning");
     }
 
@@ -112,6 +109,61 @@ class BootstrapPreset
             );
     }
 
+    public static function elementContainer(...$elementAndAttributes) {
+        return
+            element::div(
+                attribute::clazz('container'),
+                $elementAndAttributes
+            );
+    }
+
+    public static function elementRow(...$elementAndAttributes) {
+        return
+            element::div(
+                attribute::clazz('row'),
+                $elementAndAttributes
+            );
+    }
+
+    public static function elementRowExt($extClass, ...$elementAndAttributes) {
+        return
+            element::div(
+                attribute::clazz('row ' . $extClass),
+                $elementAndAttributes
+            );
+    }
+
+    public static function elementCol(...$elementAndAttributes) {
+        return
+            element::div(
+                attribute::clazz('col'),
+                $elementAndAttributes
+            );
+    }
+
+    public static function elementColX($colX, ...$elementAndAttributes) {
+        return
+            element::div(
+                attribute::clazz('col-' . $colX),
+                $elementAndAttributes
+            );
+    }
+
+    public static function elementDiv($class, ...$elementAndAttributes) {
+        return
+            element::div(
+                attribute::clazz($class),
+                $elementAndAttributes
+            );
+    }
+
+    public static function elementPMuted(...$elementAndAttributes) {
+        return
+            element::p(
+                attribute::clazz('text-muted'),
+                $elementAndAttributes);
+    }
+
     public static function elementCardFooterButtons(...$elementAndAttributes) {
         return
             element::div(
@@ -123,13 +175,75 @@ class BootstrapPreset
             );
     }
 
-    public static function elementCardFooterButton($label, $href, $classAppend = '') {
+    public static function elementAButton($label, $href, $classAppend = '') {
         return
             element::a(
-            attribute::href($href),
-            attribute::clazz('btn me-1 ' . $classAppend),
-            element::content($label)
+                attribute::href($href),
+                attribute::clazz('btn me-1 ' . $classAppend),
+                element::content($label)
+            );
+    }
+
+    public static function elementClickablePhone($phone, ...$elementAndAttributes) {
+        return self::elementClickablePhoneExt('', $phone, $elementAndAttributes);
+    }
+
+    public static function elementClickablePhoneExt($extClass, $phone, ...$elementAndAttributes) {
+        return
+            element::a(
+                attribute::href('tel:' . $phone),
+                attribute::clazz($extClass),
+                $elementAndAttributes == null ? $phone : $elementAndAttributes
+            );
+    }
+
+    public static function elementClickableEmail($email, ...$elementAndAttributes) {
+        return self::elementClickablePhoneExt('', $email, $elementAndAttributes);
+    }
+
+    public static function elementClickableEmailExt($extClass, $email, ...$elementAndAttributes) {
+        return
+            element::a(
+                attribute::href('mailto:' . $email),
+                attribute::clazz($extClass),
+                $elementAndAttributes == null ? $email : $elementAndAttributes
+            );
+    }
+
+    public static function elementAHrefNoDecoration($label, $href, $classAppend = '') {
+        return
+            element::a(
+                attribute::href($href),
+                attribute::clazz("text-decoration-none " . $classAppend),
+                element::content($label)
+            );
+    }
+
+    public static function elementAHref($label, $href, $classAppend = '') {
+        return
+            element::a(
+                attribute::href($href),
+                attribute::clazz($classAppend),
+                element::content($label)
+            );
+    }
+
+    public static function elementInputHidden($key, $value) {
+        return element::input(
+            attribute::name($key),
+            attribute::type('hidden'),
+            attribute::id($key),
+            attribute::value($value)
         );
+    }
+
+    public static function elementButtonSubmit($label, $classAppend = '') {
+        return
+            element::button(
+                attribute::type('submit'),
+                attribute::clazz('btn me-1 ' . $classAppend),
+                element::content($label)
+            );
     }
 
     public static function elementTableHead($labelsArray, $translate = true) {

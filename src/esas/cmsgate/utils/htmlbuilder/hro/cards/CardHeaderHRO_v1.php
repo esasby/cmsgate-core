@@ -7,7 +7,6 @@ namespace esas\cmsgate\utils\htmlbuilder\hro\cards;
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
-use esas\cmsgate\utils\htmlbuilder\hro\HRO;
 use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset as bootstrap;
 
 /**
@@ -31,7 +30,7 @@ class CardHeaderHRO_v1 implements CardHeaderHRO
 
 
     public function addButton($label, $href, $classAppend, $translateLabel = false) {
-        $this->elementCardButtons .= bootstrap::elementCardFooterButton($translateLabel ? Translator::fromRegistry()->translate($label) : $label, $href, $classAppend);
+        $this->elementCardButtons .= bootstrap::elementAButton($translateLabel ? Translator::fromRegistry()->translate($label) : $label, $href, $classAppend);
         return $this;
     }
 

@@ -4,7 +4,6 @@
 namespace esas\cmsgate\utils\htmlbuilder\hro\cards;
 
 use esas\cmsgate\lang\Translator;
-use esas\cmsgate\utils\htmlbuilder\hro\HRO;
 use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset as bootstrap;
 
 class CardHRO_v1 implements CardHRO
@@ -43,9 +42,9 @@ class CardHRO_v1 implements CardHRO
 
     public function build() {
         return bootstrap::elementCard(
-            bootstrap::elementCardHeader($this->cardHeader),
+            $this->cardHeader != null ? bootstrap::elementCardHeader($this->cardHeader) : '',
             bootstrap::elementCardBody($this->cardBody),
-            bootstrap::elementCardFooter($this->cardFooter)
+            $this->cardFooter != null ? bootstrap::elementCardFooter($this->cardFooter) : ''
         );
     }
 

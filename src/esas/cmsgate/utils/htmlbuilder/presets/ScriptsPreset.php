@@ -38,4 +38,20 @@ class ScriptsPreset
     public static function elementScriptClickableTable() {
         return element::scriptFile(dirname(__FILE__) . "/js/clickableTable.js");;
     }
+
+    public static function elementScriptCopyToClipboard() {
+        return element::scriptFile(dirname(__FILE__) . "/js/copyToClipboard.js");;
+    }
+
+    public static function elementScriptBootstrapInputSpinner() {
+        return element::scriptFile(dirname(__FILE__) . "/js/bootstrap-input-spinner.js");;
+    }
+
+    public static function elementScriptMultiply() {
+        return element::scriptFile(dirname(__FILE__) . "/js/multiply.js");
+    }
+
+    public static function elementScriptBasketTotal() {
+        return element::scriptFile(dirname(__FILE__) . "/js/basketTotal.js");
+    }
 }

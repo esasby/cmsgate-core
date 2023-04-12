@@ -11,7 +11,6 @@ namespace esas\cmsgate\controllers;
 
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\Logger;
-use esas\cmsgate\wrappers\ConfigWrapper;
 
 abstract class Controller
 {

@@ -49,6 +49,6 @@ class CardButtonHRO implements HRO
     }
 
     public function build() {
-        return bootstrap::elementCardFooterButton($this->label, $this->href, $this->classAppend);
+        return bootstrap::elementAButton($this->label, $this->href, $this->classAppend);
     }
 }
