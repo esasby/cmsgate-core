@@ -6,8 +6,7 @@ namespace esas\cmsgate\utils\htmlbuilder\hro\forms;
 
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
-use esas\cmsgate\utils\htmlbuilder\hro\HROFactory;
-use esas\cmsgate\view\admin\ConfigFormBridge;
+use esas\cmsgate\utils\htmlbuilder\hro\HROFactoryCmsGate;
 use esas\cmsgate\view\admin\fields\ConfigField;
 
 class FormFieldTextHRO_v1 implements FormFieldTextHRO
@@ -48,9 +47,9 @@ class FormFieldTextHRO_v1 implements FormFieldTextHRO
     }
 
     public function build() {
-        $formGroupBuilder = HROFactory::fromRegistry()->createFormGroupBuilder()
+        $formGroupBuilder = HROFactoryCmsGate::fromRegistry()->createFormGroupBuilder()
             ->setField($this->fieldDescriptor)
-            ->setInput(ConfigFormBridge::elementInput($this->fieldDescriptor, "text"))
+            ->setInput(FormHRO_v1::elementInput($this->fieldDescriptor, "text"))
             ->setOneRow($this->oneRow);
         if ($this->onFieldAction != null)
             $formGroupBuilder->addExtraElements(element::div(

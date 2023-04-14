@@ -11,14 +11,12 @@ namespace esas\cmsgate\view\client;
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
-use esas\cmsgate\utils\htmlbuilder\hro\HROFactory;
+use esas\cmsgate\utils\htmlbuilder\hro\HROFactoryCmsGate;
 use esas\cmsgate\utils\htmlbuilder\hro\pages\PageHRO;
 use esas\cmsgate\utils\htmlbuilder\page\AdditionalCssPage;
 use esas\cmsgate\utils\htmlbuilder\page\DisplayErrorPage;
-use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset as bootstrap;
 use esas\cmsgate\utils\htmlbuilder\presets\CssPreset as css;
 use esas\cmsgate\utils\htmlbuilder\presets\ScriptsPreset as script;
-use esas\cmsgate\view\HROFactoryBuyNow;
 
 abstract class ClientPageHRO extends PageHRO implements AdditionalCssPage, DisplayErrorPage
 {
@@ -63,7 +61,7 @@ abstract class ClientPageHRO extends PageHRO implements AdditionalCssPage, Displ
     }
 
     public function elementSectionHeader() {
-        return HROFactory::fromRegistry()->createHeaderSectionLogoContactsBuilder()
+        return HROFactoryCmsGate::fromRegistry()->createHeaderSectionLogoContactsBuilder()
             ->setTitle($this->getElementSectionHeaderTitle())
             ->setTitleDetails($this->getElementSectionHeaderDetails())
             ->build();
@@ -139,7 +137,7 @@ abstract class ClientPageHRO extends PageHRO implements AdditionalCssPage, Displ
 
     public function elementSectionFooter() {
         return
-            HROFactoryBuyNow::fromRegistry()->createFooterSectionComponyInfoBuilder()
+            HROFactoryCmsGate::fromRegistry()->createFooterSectionCompanyInfoBuilder()
                 ->build();
     }
 

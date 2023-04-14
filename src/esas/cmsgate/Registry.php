@@ -14,7 +14,7 @@ use esas\cmsgate\lang\Translator;
 use esas\cmsgate\messenger\Messenger;
 use esas\cmsgate\properties\Properties;
 use esas\cmsgate\utils\CMSGateException;
-use esas\cmsgate\utils\htmlbuilder\hro\HROFactory;
+use esas\cmsgate\utils\htmlbuilder\hro\HROFactoryCmsGate;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\utils\SessionUtils;
 use esas\cmsgate\view\admin\AdminViewFields;
@@ -370,12 +370,12 @@ abstract class Registry
     }
 
     /**
-     * @var HROFactory
+     * @var HROFactoryCmsGate
      */
     protected $hroFactory;
 
     /**
-     * @return HROFactory
+     * @return HROFactoryCmsGate
      */
     public function getHROFactory() {
         if ($this->hroFactory == null)
@@ -384,9 +384,9 @@ abstract class Registry
     }
 
     /**
-     * @return HROFactory
+     * @return HROFactoryCmsGate
      */
     protected function createHROFactory() {
-        return new HROFactory();
+        return new HROFactoryCmsGate();
     }
 }

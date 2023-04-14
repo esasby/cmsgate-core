@@ -8,7 +8,7 @@ use esas\cmsgate\lang\Translator;
 use esas\cmsgate\utils\htmlbuilder\hro\cards\CardFooterHRO;
 use esas\cmsgate\utils\htmlbuilder\hro\cards\CardFormHRO;
 use esas\cmsgate\utils\htmlbuilder\hro\cards\CardHeaderHRO;
-use esas\cmsgate\utils\htmlbuilder\hro\HROFactory;
+use esas\cmsgate\utils\htmlbuilder\hro\HROFactoryCmsGate;
 use esas\cmsgate\view\admin\AdminViewFields;
 
 class FormHRO_v2 extends FormHRO_v1 implements CardFormHRO
@@ -28,8 +28,8 @@ class FormHRO_v2 extends FormHRO_v1 implements CardFormHRO
     }
 
     public function __construct() {
-        $this->cardHeader = HROFactory::fromRegistry()->createCardHeaderBuilder();
-        $this->cardFooter = HROFactory::fromRegistry()->createCardFooterBuilder();
+        $this->cardHeader = HROFactoryCmsGate::fromRegistry()->createCardHeaderBuilder();
+        $this->cardFooter = HROFactoryCmsGate::fromRegistry()->createCardFooterBuilder();
     }
 
     public function addFooterButton($label, $href, $classAppend = '') {
@@ -64,7 +64,7 @@ class FormHRO_v2 extends FormHRO_v1 implements CardFormHRO
     }
 
     public function elementFormBody() {
-        return HROFactory::fromRegistry()->createCardBuilder()
+        return HROFactoryCmsGate::fromRegistry()->createCardBuilder()
             ->setCardHeader(
                 $this->cardHeader->build())
             ->setCardBody($this->elementFormFields() . $this->hiddenInput)

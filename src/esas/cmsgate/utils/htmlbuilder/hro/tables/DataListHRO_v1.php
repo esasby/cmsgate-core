@@ -5,7 +5,7 @@ namespace esas\cmsgate\utils\htmlbuilder\hro\tables;
 
 
 use esas\cmsgate\Registry;
-use esas\cmsgate\utils\htmlbuilder\hro\HROFactory;
+use esas\cmsgate\utils\htmlbuilder\hro\HROFactoryCmsGate;
 use esas\cmsgate\view\admin\AdminViewFields;
 
 class DataListHRO_v1 implements DataListHRO
@@ -19,9 +19,9 @@ class DataListHRO_v1 implements DataListHRO
     }
 
     public function __construct() {
-        $this->cardHeader = HROFactory::fromRegistry()->createCardHeaderBuilder();
-        $this->cardBody = HROFactory::fromRegistry()->createTableBuilder();
-        $this->cardFooter = HROFactory::fromRegistry()->createCardFooterBuilder();
+        $this->cardHeader = HROFactoryCmsGate::fromRegistry()->createCardHeaderBuilder();
+        $this->cardBody = HROFactoryCmsGate::fromRegistry()->createTableBuilder();
+        $this->cardFooter = HROFactoryCmsGate::fromRegistry()->createCardFooterBuilder();
     }
 
     public function setMainLabel($headerLabel, $translate = true) {

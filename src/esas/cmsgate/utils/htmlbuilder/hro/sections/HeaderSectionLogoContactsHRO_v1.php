@@ -7,7 +7,7 @@ namespace esas\cmsgate\utils\htmlbuilder\hro\sections;
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
-use esas\cmsgate\utils\htmlbuilder\hro\HROFactory;
+use esas\cmsgate\utils\htmlbuilder\hro\HROFactoryCmsGate;
 use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset as bootstrap;
 use esas\cmsgate\view\client\ClientViewFields;
 
@@ -24,7 +24,7 @@ class HeaderSectionLogoContactsHRO_v1 implements HeaderSectionLogoContactsHRO
     }
 
     public function build() {
-        $builder = HROFactory::fromRegistry()->createHeaderSection3ColBuilder();
+        $builder = HROFactoryCmsGate::fromRegistry()->createHeaderSection3ColBuilder();
         $builder
             ->setElementStartColumn(
                     element::img(
