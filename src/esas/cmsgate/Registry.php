@@ -14,7 +14,7 @@ use esas\cmsgate\lang\Translator;
 use esas\cmsgate\messenger\Messenger;
 use esas\cmsgate\properties\Properties;
 use esas\cmsgate\utils\CMSGateException;
-use esas\cmsgate\utils\htmlbuilder\hro\HROFactoryCmsGate;
+use esas\cmsgate\hro\HROManager;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\utils\SessionUtils;
 use esas\cmsgate\view\admin\AdminViewFields;
@@ -98,6 +98,11 @@ abstract class Registry
         if ($this->configWrapper == null)
             $this->configWrapper = $this->createConfigWrapper();
         return $this->configWrapper;
+    }
+
+    public function flushConfigWrapper() {
+        $this->configWrapper = null;
+        $this->configStorage = null;
     }
 
     public function createConfigWrapper() {
@@ -370,23 +375,23 @@ abstract class Registry
     }
 
     /**
-     * @var HROFactoryCmsGate
+     * @var HROManager
      */
-    protected $hroFactory;
+    protected $hroManager;
 
     /**
-     * @return HROFactoryCmsGate
+     * @return HROManager
      */
-    public function getHROFactory() {
-        if ($this->hroFactory == null)
-            $this->hroFactory = $this->createHROFactory();
-        return $this->hroFactory;
+    public function getHROManager() {
+        if ($this->hroManager == null)
+            $this->hroManager = $this->createHROManager();
+        return $this->hroManager;
     }
 
     /**
-     * @return HROFactoryCmsGate
+     * @return HROManager
      */
-    protected function createHROFactory() {
-        return new HROFactoryCmsGate();
+    protected function createHROManager() {
+        return new HROManager();
     }
 }
