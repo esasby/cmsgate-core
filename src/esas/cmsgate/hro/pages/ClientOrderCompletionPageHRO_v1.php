@@ -44,58 +44,79 @@ class ClientOrderCompletionPageHRO_v1 extends ClientPageHRO implements ClientOrd
     }
 
     public function getElementSectionHeaderTitle() {
-        return Translator::fromRegistry()->translate(ClientViewFields::COMPLETION_PAGE_HEADER);
+        switch ($this->orderWrapper->getStatus()->getOrderStatus()) {
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusPayed():
+                $msg = ClientViewFields::COMPLETION_PAGE_ORDER_PAYED_HEADER;
+                break;
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusFailed():
+                $msg = ClientViewFields::COMPLETION_PAGE_ORDER_FAILED_HEADER;
+                break;
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusCanceled():
+                $msg = ClientViewFields::COMPLETION_PAGE_ORDER_CANCELED_HEADER;
+                break;
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusPending():
+            default:
+                $msg = ClientViewFields::COMPLETION_PAGE_ORDER_PENDING_HEADER;
+                break;
+        }
+        return Translator::fromRegistry()->translate($msg);
     }
 
     public function getElementSectionHeaderDetails() {
-        return !$this->isErrorPage() ?
-            Translator::fromRegistry()->translate(ClientViewFields::COMPLETION_PAGE_HEADER_DETAILS) :
-            Translator::fromRegistry()->translate(ClientViewFields::COMPLETION_ERROR_PAGE_HEADER_DETAILS);
+        if ($this->isErrorPage())
+            return Translator::fromRegistry()->translate(ClientViewFields::COMPLETION_ERROR_PAGE_HEADER_DETAILS);
+        switch ($this->orderWrapper->getStatus()->getOrderStatus()) {
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusPayed():
+                $msg = ClientViewFields::COMPLETION_PAGE_ORDER_PAYED_HEADER_DETAILS;
+                break;
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusFailed():
+                $msg = ClientViewFields::COMPLETION_PAGE_ORDER_FAILED_HEADER_DETAILS;
+                break;
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusCanceled():
+                $msg = ClientViewFields::COMPLETION_PAGE_ORDER_CANCELED_HEADER_DETAILS;
+                break;
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusPending():
+            default:
+                $msg = ClientViewFields::COMPLETION_PAGE_ORDER_PENDING_HEADER_DETAILS;
+                break;
+        }
+        return Translator::fromRegistry()->translate($msg);
     }
 
     public function elementPageContent() {
-        return $this->elementCompletionPanel
+        return $this->elementOrderStatusOrCompletionPanel()
             . element::br()
             . $this->elementReturnToShopButton()
             . element::br();
     }
 
-    public function elementPageErrorContent() {
-        return $this->elementReturnToShopButton()
-            . element::br();
-    }
-
-//    public function elementErrorMessages()
-//    {
-//        $messages = "";
-//        foreach (Registry::getRegistry()->getMessenger()->getErrorMessagesArray() as $errorText) {
-//            $messages .= $this->elementErrorMessage($errorText);
-//        }
-//        return element::div(
-//            attribute::clazz("alert alert-danger"),
-//            attribute::role("alert"),
-//            element::h4(
-//                attribute::clazz("alert-heading"),
-//                Translator::fromRegistry()->translate(ClientViewFields::ERROR)
-//            ),
-//            element::p(
-//                $this->getErrorSorryText()
-//            ),
-//            element::hr(),
-//            element::p(
-//                Registry::getRegistry()->getMessenger()->getErrorMessages()
-//            )
-//        );
-//    }
-
-    public function elementErrorMessage($errorText) {
-        return element::p(
-            $errorText
+    public function elementOrderStatusOrCompletionPanel() {
+        switch ($this->orderWrapper->getStatus()->getOrderStatus()) {
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusPayed():
+                $alert = ClientViewFields::COMPLETION_PAGE_ORDER_PAYED_ALERT;
+                $alertType = bootstrap::ALERT_TYPE_SUCCESS;
+                break;
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusFailed():
+                $alert = ClientViewFields::COMPLETION_PAGE_ORDER_FAILED_ALERT;
+                $alertType = bootstrap::ALERT_TYPE_DANGER;
+                break;
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusCanceled():
+                $alert = ClientViewFields::COMPLETION_PAGE_ORDER_CANCELED_ALERT;
+                $alertType = bootstrap::ALERT_TYPE_WARNING;
+                break;
+            case Registry::getRegistry()->getConfigWrapper()->getOrderStatusPending():
+            default:
+                return $this->elementCompletionPanel;
+        }
+        return bootstrap::elementAlert(
+            Registry::getRegistry()->getConfigWrapper()->cookText(Translator::fromRegistry()->translate($alert), $this->orderWrapper),
+            $alertType
         );
     }
 
-    public function getErrorSorryText() {
-        return Translator::fromRegistry()->translate(ClientViewFields::ERROR_APOLOGIZING);
+    public function elementPageErrorContent() {
+        return $this->elementReturnToShopButton()
+            . element::br();
     }
 
     public function elementReturnToShopButton() {

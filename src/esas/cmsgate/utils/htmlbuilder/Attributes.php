@@ -49,9 +49,13 @@ class Attributes
     const DATA_BS_TOGGLE = "data-bs-toggle";
     const DATA_BS_TARGET = "data-bs-target";
     const DATA_BS_PARENT = "data-bs-parent";
+    const DATA_BS_RIDE = "data-bs-ride";
+    const DATA_BS_SLIDE = "data-bs-slide";
+    const DATA_BS_SLIDE_TO = "data-bs-slide-to";
     const DATA_BS_DISMISS = "data-bs-dismiss";
     const ARIA_EXPANDED = "aria-expanded";
     const ARIA_HIDDEN = "aria-hidden";
+    const ARIA_CURRENT = "aria-current";
     const ARIA_LABEL = "aria-label";
     const ARIA_CONTROLS = "aria-controls";
     const ARIA_LABELLEDBY = "aria-labelledby";
@@ -259,6 +263,21 @@ class Attributes
         return new Attribute(self::DATA_BS_PARENT, $dataBSParent);
     }
 
+    public static function data_bs_ride($dataBSRide)
+    {
+        return new Attribute(self::DATA_BS_RIDE, $dataBSRide);
+    }
+
+    public static function data_bs_slide($dataBSSlide)
+    {
+        return new Attribute(self::DATA_BS_SLIDE, $dataBSSlide);
+    }
+
+    public static function data_bs_slide_to($dataBSSlideTo)
+    {
+        return new Attribute(self::DATA_BS_SLIDE_TO, $dataBSSlideTo);
+    }
+
     public static function data_bs_dismiss($dataDismiss)
     {
         return new Attribute(self::DATA_BS_DISMISS, $dataDismiss);
@@ -282,6 +301,11 @@ class Attributes
     public static function aria_hidden($ariaHidden = true)
     {
         return $ariaHidden ? new AttributeBoolean(self::ARIA_HIDDEN, $ariaHidden) : "";
+    }
+
+    public static function aria_current($ariaCurrent = true)
+    {
+        return $ariaCurrent ? new AttributeBoolean(self::ARIA_CURRENT, $ariaCurrent) : "";
     }
 
     public static function aria_label($ariaLabel)

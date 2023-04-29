@@ -43,16 +43,25 @@ class BootstrapPreset
         );
     }
 
+    const ALERT_TYPE_INFO = "alert-info";
+    const ALERT_TYPE_DANGER = "alert-danger";
+    const ALERT_TYPE_WARNING = "alert-warning";
+    const ALERT_TYPE_SUCCESS = "alert-success";
+
     public static function elementAlertInfo($message) {
-        return self::elementAlert($message, "alert-info");
+        return self::elementAlert($message, self::ALERT_TYPE_INFO);
     }
 
     public static function elementAlertError($message) {
-        return self::elementAlert($message, "alert-danger");
+        return self::elementAlert($message, self::ALERT_TYPE_DANGER);
     }
 
     public static function elementAlertWarn($message) {
-        return self::elementAlert($message, "alert-warning");
+        return self::elementAlert($message, self::ALERT_TYPE_WARNING);
+    }
+
+    public static function elementAlertSuccess($message) {
+        return self::elementAlert($message, self::ALERT_TYPE_SUCCESS);
     }
 
     public static function elementAlert($message, $class) {
