@@ -35,12 +35,20 @@ class ScriptsPreset
         return self::elementScript("https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js");
     }
 
+    public static function elementScriptGoogleRecaptcha() {
+        return self::elementScript("https://www.google.com/recaptcha/api.js");
+    }
+
     public static function elementScriptClickableTable() {
         return element::scriptFile(dirname(__FILE__) . "/js/clickableTable.js");;
     }
 
     public static function elementScriptCopyToClipboard() {
         return element::scriptFile(dirname(__FILE__) . "/js/copyToClipboard.js");;
+    }
+
+    public static function elementScriptGoogleRecaptchaSubmit() {
+        return element::scriptFile(dirname(__FILE__) . "/js/googleRecaptchaSubmit.js");;
     }
 
     public static function elementScriptBootstrapInputSpinner() {

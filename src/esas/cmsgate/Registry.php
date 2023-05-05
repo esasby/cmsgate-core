@@ -13,8 +13,8 @@ use esas\cmsgate\descriptors\ModuleDescriptor;
 use esas\cmsgate\lang\Translator;
 use esas\cmsgate\messenger\Messenger;
 use esas\cmsgate\properties\Properties;
+use esas\cmsgate\service\Service;
 use esas\cmsgate\utils\CMSGateException;
-use esas\cmsgate\hro\HROManager;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\utils\SessionUtils;
 use esas\cmsgate\view\admin\AdminViewFields;
@@ -66,7 +66,7 @@ abstract class Registry
     /**
      * @var array
      */
-    protected $extServices;
+    protected $services;
 
     /**
      * @var Properties
@@ -343,19 +343,25 @@ abstract class Registry
         return $this->paysystemConnector->createHooks();
     }
 
-    protected function registerService($serviceName, $service) {
-        $this->extServices[$serviceName] = $service;
+    public function registerService($serviceParentClass, $serviceInstance) {
+        $this->services[$serviceParentClass] = $serviceInstance;
     }
 
     /**
-     * @param $serviceName
-     * @return mixed
-     * @throws Exception
+     * @param $serviceParentClass
+     * @param $defaultServiceImpl
+     * @return Service
+     * @throws CMSGateException
      */
-    public function getService($serviceName) {
-        if (array_key_exists($serviceName, $this->extServices))
-            return $this->extServices[$serviceName];
-        throw new Exception('Service [' . $serviceName . '] was not registered');
+    public function getService($serviceParentClass, $defaultServiceImpl = null) {
+        $service = $defaultServiceImpl;
+        if (array_key_exists($serviceParentClass, $this->services))
+            $service = $this->services[$serviceParentClass];
+        if ($service == null)
+            throw new CMSGateException("Service[" . $serviceParentClass . "] is not configured");
+        if (!array_key_exists($serviceParentClass, $this->services))
+            $this->registerService($serviceParentClass, $service);
+        return $service;
     }
 
     /**
@@ -372,26 +378,5 @@ abstract class Registry
      */
     public function createProperties() {
         throw new CMSGateException('Not implemented');
-    }
-
-    /**
-     * @var HROManager
-     */
-    protected $hroManager;
-
-    /**
-     * @return HROManager
-     */
-    public function getHROManager() {
-        if ($this->hroManager == null)
-            $this->hroManager = $this->createHROManager();
-        return $this->hroManager;
-    }
-
-    /**
-     * @return HROManager
-     */
-    protected function createHROManager() {
-        return new HROManager();
     }
 }

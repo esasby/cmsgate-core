@@ -25,7 +25,7 @@ class HROManager extends Service
      */
     public static function fromRegistry()
     {
-        return Registry::getRegistry()->getHROManager();
+        return Registry::getRegistry()->getService(HROManager::class, new HROManager());
     }
 
     public function addImplementation($hroParentClass, $hroChildClass) {

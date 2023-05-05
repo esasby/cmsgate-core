@@ -53,6 +53,9 @@ class Attributes
     const DATA_BS_SLIDE = "data-bs-slide";
     const DATA_BS_SLIDE_TO = "data-bs-slide-to";
     const DATA_BS_DISMISS = "data-bs-dismiss";
+    const DATA_SITEKEY = "data-sitekey";
+    const DATA_ACTION = "data-action";
+    const DATA_CALLBACK = "data-callback";
     const ARIA_EXPANDED = "aria-expanded";
     const ARIA_HIDDEN = "aria-hidden";
     const ARIA_CURRENT = "aria-current";
@@ -281,6 +284,21 @@ class Attributes
     public static function data_bs_dismiss($dataDismiss)
     {
         return new Attribute(self::DATA_BS_DISMISS, $dataDismiss);
+    }
+
+    public static function data_sitekey($dataSiteKey)
+    {
+        return new Attribute(self::DATA_SITEKEY, $dataSiteKey);
+    }
+
+    public static function data_action($dataAction)
+    {
+        return new Attribute(self::DATA_ACTION, $dataAction);
+    }
+
+    public static function data_callback($dataCallback)
+    {
+        return new Attribute(self::DATA_CALLBACK, $dataCallback);
     }
 
     public static function data_dismiss($dataDismiss)

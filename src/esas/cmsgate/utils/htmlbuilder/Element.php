@@ -44,6 +44,7 @@ class Element
             else
                 $this->children[] = $obj;
         }
+        return $this;
     }
 
     public function __toString()
