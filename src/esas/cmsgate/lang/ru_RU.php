@@ -16,6 +16,8 @@ return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNumeric::class => 'Значение должно быть числом',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Неверный формат email',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorUploadFileExtension::class => 'Некорректное расширение файла. Ожидается *.[%s] файл',
+    _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorDateTime::class => 'Некорректный формат даты. Допустимый формат [%s]',
+    _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorDateTimeLocal::class => 'Некорректный формат даты.',
 
     ConfigFields::debugMode() => 'Debug mode',
     ConfigFields::debugMode() . _DESC => 'Отображение деталей ошибок',

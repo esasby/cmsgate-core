@@ -20,4 +20,11 @@ abstract class Service
     {
         $this->logger = Logger::getLogger(get_class($this));
     }
+
+    /**
+     * @return $this
+     */
+    public static abstract function fromRegistry();
+
+    public function postConstruct() {}
 }

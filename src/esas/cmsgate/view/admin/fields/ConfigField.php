@@ -205,7 +205,7 @@ abstract class ConfigField
      */
     public function getValue($orDefaults = false)
     {
-        if ($this->value != null)
+        if ($this->value != null || is_int($this->value))
             return $this->value;
         //тут будет не null, если до этого для поля вызывался валидатор
         if (isset($this->validationResult) && $this->validationResult != null) {

@@ -10,8 +10,10 @@ namespace esas\cmsgate\messenger;
 
 
 use esas\cmsgate\lang\Translator;
+use esas\cmsgate\Registry;
+use esas\cmsgate\service\Service;
 
-class Messenger
+class Messenger extends Service
 {
     /**
      * @var Translator
@@ -29,6 +31,13 @@ class Messenger
     public function __construct($translator)
     {
         $this->translator = $translator;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function fromRegistry() {
+        return Registry::getRegistry()->getService(Messenger::class, Registry::getRegistry()->getMessenger()); //to fix
     }
 
     public function addInfoMessage($msg) {

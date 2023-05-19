@@ -16,6 +16,8 @@ return array(
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorNumeric::class => 'Value had to be numeric',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorEmail::class => 'Wrong email format',
     _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorUploadFileExtension::class => 'Wrong file extension. *.[%s] file is expected',
+    _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorDateTime::class => 'Wrong datetime format. *.[%s] must be used',
+    _ERROR_VALIDATION . esas\cmsgate\view\admin\validators\ValidatorDateTimeLocal::class => 'Wrong datetime format.',
 
     ConfigFields::debugMode() => 'Debug mode',
     ConfigFields::debugMode() . _DESC => 'Debug mode. If *true* then extra messages will be shown',

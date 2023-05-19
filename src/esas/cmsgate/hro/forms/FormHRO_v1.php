@@ -14,6 +14,7 @@ use esas\cmsgate\utils\UploadedFileWrapper;
 use esas\cmsgate\view\admin\AdminViewFields;
 use esas\cmsgate\view\admin\fields\ConfigField;
 use esas\cmsgate\view\admin\fields\ConfigFieldCheckbox;
+use esas\cmsgate\view\admin\fields\ConfigFieldDateTime;
 use esas\cmsgate\view\admin\fields\ConfigFieldFile;
 use esas\cmsgate\view\admin\fields\ConfigFieldList;
 use esas\cmsgate\view\admin\fields\ConfigFieldNumber;
@@ -135,6 +136,9 @@ class FormHRO_v1 implements FormHRO
             } elseif ($configField instanceof ConfigFieldFile) {
                 $ret .= $this->elementFormFieldFile($configField);
                 continue;
+            } elseif ($configField instanceof ConfigFieldDateTime) {
+                $ret .= $this->elementFormFieldDateTime($configField);
+                continue;
             } else
                 $ret .= $this->elementFormFieldText($configField);
         }
@@ -169,6 +173,14 @@ class FormHRO_v1 implements FormHRO
             self::elementFormGroup(
                 $configField,
                 self::elementInput($configField, "text")
+            );
+    }
+
+    public function elementFormFieldDateTime(ConfigField $configField) {
+        return
+            self::elementFormGroup(
+                $configField,
+                self::elementInput($configField, "datetime-local")
             );
     }
 

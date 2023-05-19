@@ -1,10 +1,19 @@
 <?php
 namespace esas\cmsgate\service;
 
+use esas\cmsgate\Registry;
 use esas\cmsgate\utils\URLUtils;
 
-class RedirectService
+class RedirectService extends Service
 {
+    /**
+     * @return $this
+     * @throws \esas\cmsgate\utils\CMSGateException
+     */
+    public static function fromRegistry() {
+        return Registry::getRegistry()->getService(RedirectService::class);
+    }
+
     public static function redirect($location) {
         header('Location: '. $location);
         die();

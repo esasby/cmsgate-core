@@ -14,6 +14,7 @@ use esas\cmsgate\lang\Translator;
 use esas\cmsgate\messenger\Messenger;
 use esas\cmsgate\properties\Properties;
 use esas\cmsgate\service\Service;
+use esas\cmsgate\service\ServiceProvider;
 use esas\cmsgate\utils\CMSGateException;
 use esas\cmsgate\utils\Logger;
 use esas\cmsgate\utils\SessionUtils;
@@ -67,6 +68,11 @@ abstract class Registry
      * @var array
      */
     protected $services;
+
+    /**
+     * @var array
+     */
+    protected $servicesPostConstructed;
 
     /**
      * @var Properties
@@ -343,6 +349,14 @@ abstract class Registry
         return $this->paysystemConnector->createHooks();
     }
 
+    /**
+     * @param $serviceProvider ServiceProvider
+     */
+    public function registerServicesFromProvider($serviceProvider) {
+        foreach ($serviceProvider->getServiceArray() as $key => $value)
+            $this->registerService($key, $value);
+    }
+
     public function registerService($serviceParentClass, $serviceInstance) {
         $this->services[$serviceParentClass] = $serviceInstance;
     }
@@ -354,6 +368,7 @@ abstract class Registry
      * @throws CMSGateException
      */
     public function getService($serviceParentClass, $defaultServiceImpl = null) {
+        /** @var Service $service */
         $service = $defaultServiceImpl;
         if (array_key_exists($serviceParentClass, $this->services))
             $service = $this->services[$serviceParentClass];
@@ -361,6 +376,10 @@ abstract class Registry
             throw new CMSGateException("Service[" . $serviceParentClass . "] is not configured");
         if (!array_key_exists($serviceParentClass, $this->services))
             $this->registerService($serviceParentClass, $service);
+        if (!array_key_exists(get_class($service), $this->servicesPostConstructed)) {
+            $service->postConstruct();
+            $this->servicesPostConstructed[get_class($service)] = true;
+        }
         return $service;
     }
 
