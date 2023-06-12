@@ -178,7 +178,7 @@ class BasketItemHRO_v1 implements BasketItemHRO
                 element::span(
                     attribute::id($this->productTotalId()),
                     attribute::clazz('basket_item_total'),
-                    $this->price
+                    $this->price * $this->count
                 ),
                 ' ' . $this->currency
             ),
