@@ -25,8 +25,9 @@ abstract class LocaleLoaderCms
         return Locale::ru_RU;
     }
 
-    protected function addExtraVocabularyDir($extraVocabularyDir) {
+    public function addExtraVocabularyDir($extraVocabularyDir) {
         $this->extraVocabularyDirs[] = $extraVocabularyDir;
+        return $this;
     }
 
     /**
