@@ -4,12 +4,11 @@
 namespace esas\cmsgate\hro\pages;
 
 
-use esas\cmsgate\Registry;
+use esas\cmsgate\hro\panels\MessagesPanelHROFactory;
 use esas\cmsgate\utils\htmlbuilder\Attributes as attribute;
 use esas\cmsgate\utils\htmlbuilder\Elements as element;
 use esas\cmsgate\hro\HRO;
 use esas\cmsgate\utils\htmlbuilder\page\AbstractPage;
-use esas\cmsgate\utils\htmlbuilder\presets\BootstrapPreset;
 use esas\cmsgate\utils\Logger;
 
 abstract class PageHRO implements HRO, AbstractPage
@@ -60,16 +59,6 @@ abstract class PageHRO implements HRO, AbstractPage
 
     public static function elementMessages()
     {
-        $ret = "";
-        foreach (Registry::getRegistry()->getMessenger()->getErrorMessagesArray() as $message) {
-            $ret .= BootstrapPreset::elementAlertError($message);
-        }
-        foreach (Registry::getRegistry()->getMessenger()->getInfoMessagesArray() as $message) {
-            $ret .= BootstrapPreset::elementAlertInfo($message);
-        }
-        foreach (Registry::getRegistry()->getMessenger()->getWarnMessagesArray() as $message) {
-            $ret .= BootstrapPreset::elementAlertWarn($message);
-        }
-        return $ret;
+        return MessagesPanelHROFactory::findBuilder()->build();
     }
 }

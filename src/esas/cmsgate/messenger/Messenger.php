@@ -21,6 +21,7 @@ class Messenger extends Service
     protected $translator;
 
     private $infoMessages = array();
+    private $successMessages = array();
     private $warnMessages = array();
     private $errorMessages = array();
 
@@ -55,6 +56,11 @@ class Messenger extends Service
             $this->errorMessages[] = $this->translator->translate($msg);
     }
 
+    public function addSuccessMessage($msg) {
+        if (!in_array($msg, $this->successMessages))
+            $this->successMessages[] = $this->translator->translate($msg);
+    }
+
     /**
      * @return string
      */
@@ -69,6 +75,22 @@ class Messenger extends Service
     public function getInfoMessagesArray()
     {
         return $this->infoMessages;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSuccessMessages()
+    {
+        return implode("\n", $this->successMessages);
+    }
+
+    /**
+     * @return array
+     */
+    public function getSuccessMessagesArray()
+    {
+        return $this->successMessages;
     }
 
     /**

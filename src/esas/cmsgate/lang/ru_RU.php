@@ -59,6 +59,7 @@ return array(
     ClientViewFields::COMPLETION_PAGE_ORDER_CANCELED_HEADER => 'Заказ отменен',
     ClientViewFields::COMPLETION_PAGE_ORDER_CANCELED_HEADER_DETAILS => 'Заказ не может быть оплачен',
     ClientViewFields::COMPLETION_PAGE_ORDER_CANCELED_ALERT => 'Заказ №<strong>@order_number_or_id</strong> был отменен',
+    ClientViewFields::COMPLETION_PAGE_ORDER_UNKNOWN_STATUS_ALERT => 'Некорректный статус заказ №<strong>@order_number_or_id</strong>. Обратитесь к администратору',
     ClientViewFields::COMPLETION_ERROR_PAGE_HEADER_DETAILS => 'Ошибка оформления заказа',
     ClientViewFields::COMPLETION_PAGE_FOOTER_ABOUT => 'О компании',
     ClientViewFields::COMPLETION_PAGE_FOOTER_ADDRESS => 'Адрес',

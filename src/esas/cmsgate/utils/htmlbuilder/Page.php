@@ -14,6 +14,7 @@ use esas\cmsgate\utils\Logger;
 /**
  * Class Page
  * @package esas\cmsgate\utils\htmlbuilder
+ * @deprecated Use PageHRO
  */
 abstract class Page implements AbstractPage
 {

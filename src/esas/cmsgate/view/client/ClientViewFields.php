@@ -26,6 +26,7 @@ class ClientViewFields extends ViewFields
     const COMPLETION_PAGE_ORDER_CANCELED_HEADER = 'completion_page_order_canceled_header';
     const COMPLETION_PAGE_ORDER_CANCELED_HEADER_DETAILS = 'completion_page_order_canceled_header_details';
     const COMPLETION_PAGE_ORDER_CANCELED_ALERT = 'completion_page_order_canceled_alert';
+    const COMPLETION_PAGE_ORDER_UNKNOWN_STATUS_ALERT = 'completion_page_order_unknown_status_alert';
     const COMPLETION_ERROR_PAGE_HEADER_DETAILS = 'completion_error_page_header_details';
     const COMPLETION_PAGE_FOOTER_ABOUT = 'completion_page_footer_about';
     const COMPLETION_PAGE_FOOTER_ADDRESS = 'completion_page_footer_address';
