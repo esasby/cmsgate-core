@@ -38,6 +38,8 @@ abstract class PaysystemConnector
         $this->logger = Logger::getLogger(get_class($this));
     }
 
+    public function init() {}
+
     /**
      * @return ConfigWrapper
      */

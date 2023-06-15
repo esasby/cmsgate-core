@@ -38,6 +38,8 @@ abstract class CmsConnector
         $this->logger = Logger::getLogger(get_class($this));
     }
 
+    public function init() {}
+
     /**
      * @deprecated use this class instead
      * @return mixed

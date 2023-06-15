@@ -85,6 +85,10 @@ abstract class Registry
         if ($$registryName == null) {
             $$registryName = $this;
         }
+        if ($this->cmsConnector != null)
+            $this->cmsConnector->init();
+        if ($this->paysystemConnector != null)
+            $this->paysystemConnector->init();
     }
 
     /**
