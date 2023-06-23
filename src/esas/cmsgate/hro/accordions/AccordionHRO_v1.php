@@ -17,8 +17,18 @@ class AccordionHRO_v1 implements AccordionHRO
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function addTab($tab) {
-        $this->tabs[] = $tab;
+        if (empty($tab))
+            return $this;
+        if ($tab instanceof AccordionTabHRO) {
+            if (empty($tab->getParentId()))
+                $tab->setParentId($this->id);
+            $this->tabs[] = $tab->build();
+        } else
+            $this->tabs[] = $tab;
         return $this;
     }
 

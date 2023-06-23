@@ -46,6 +46,10 @@ class AccordionTabHRO_v1 implements AccordionTabHRO
         return $this;
     }
 
+    public function getParentId() {
+        return $this->parentId;
+    }
+
     public static function builder() {
         return new AccordionTabHRO_v1();
     }
@@ -69,10 +73,8 @@ class AccordionTabHRO_v1 implements AccordionTabHRO
                     attribute::data_bs_toggle("collapse"),
                     attribute::data_bs_target("#" . $this->getTabBodyId($key)),
                     attribute::aria_controls("#" . $this->getTabBodyId($key)),
-                    attribute::clazz('accordion-button collapsed'),
-                    element::h5(
-                        element::content($header)
-                    )
+                    attribute::clazz('accordion-button' . ($this->checked ? "" : " collapsed")),
+                    element::content($header)
                 )
             );
     }
@@ -81,7 +83,7 @@ class AccordionTabHRO_v1 implements AccordionTabHRO
         return
             element::div(
                 attribute::id($this->getTabBodyId($key)),
-                attribute::clazz("accordion-collapse collapse" . ($this->checked ? " show" : "") ),
+                attribute::clazz("accordion-collapse collapse" . ($this->checked ? " show" : "")),
                 attribute::aria_labelledby($this->getTabHeaderId($key)),
                 attribute::data_bs_parent($this->parentId),
                 element::div(
@@ -98,4 +100,6 @@ class AccordionTabHRO_v1 implements AccordionTabHRO
     public function getTabBodyId($key) {
         return "collapse" . $key;
     }
+
+
 }

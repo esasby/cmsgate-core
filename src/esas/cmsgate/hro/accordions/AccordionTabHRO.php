@@ -37,4 +37,9 @@ interface AccordionTabHRO extends HRO
      * @return AccordionTabHRO
      */
     public function setParentId($parentId);
+
+    /**
+     * @return mixed
+     */
+    public function getParentId();
 }

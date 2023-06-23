@@ -15,7 +15,7 @@ interface AccordionHRO extends HRO
     public function setId($id);
 
     /**
-     * @param $tab
+     * @param $tab AccordionTabHRO
      * @return AccordionHRO
      */
     public function addTab($tab);

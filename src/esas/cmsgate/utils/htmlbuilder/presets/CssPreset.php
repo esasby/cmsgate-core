@@ -36,6 +36,6 @@ class CssPreset
     }
 
     public static function elementAccordionV1() {
-        return element::styleFile(dirname(__FILE__) . "/css/accordion_v1.css");;
+        return element::styleFile(dirname(__FILE__) . "/css/accordion_v1.css");
     }
 }
