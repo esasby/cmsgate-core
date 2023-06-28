@@ -24,8 +24,7 @@ class AccordionHRO_v1 implements AccordionHRO
         if (empty($tab))
             return $this;
         if ($tab instanceof AccordionTabHRO) {
-            if (empty($tab->getParentId()))
-                $tab->setParentId($this->id);
+            $tab->setParentId($this->id);
             $this->tabs[] = $tab->build();
         } else
             $this->tabs[] = $tab;

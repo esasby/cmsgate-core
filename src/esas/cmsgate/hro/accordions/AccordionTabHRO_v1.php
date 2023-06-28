@@ -17,6 +17,10 @@ class AccordionTabHRO_v1 implements AccordionTabHRO
      */
     protected $checked;
     protected $parentId;
+    /**
+     * @var boolean
+     */
+    protected $onlyOneTabEnabled;
 
     public function setKey($key) {
         $this->key = $key;
@@ -41,13 +45,18 @@ class AccordionTabHRO_v1 implements AccordionTabHRO
     /**
      * @inheritDoc
      */
-    public function setParentId($parentId) {
-        $this->parentId = $parentId;
+    public function setParentId($parentId, $forceOverride = false) {
+        if (empty($this->parentId) || $forceOverride)
+            $this->parentId = $parentId;
         return $this;
     }
 
-    public function getParentId() {
-        return $this->parentId;
+    /**
+     * @inheritDoc
+     */
+    public function setOnlyOneTabEnabled($onlyOneTabEnabled) {
+        $this->onlyOneTabEnabled = $onlyOneTabEnabled;
+        return $this;
     }
 
     public static function builder() {
@@ -100,6 +109,4 @@ class AccordionTabHRO_v1 implements AccordionTabHRO
     public function getTabBodyId($key) {
         return "collapse" . $key;
     }
-
-
 }

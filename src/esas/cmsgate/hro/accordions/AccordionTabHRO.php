@@ -34,12 +34,14 @@ interface AccordionTabHRO extends HRO
 
     /**
      * @param mixed $parentId
+     * @param bool $forceOverride
      * @return AccordionTabHRO
      */
-    public function setParentId($parentId);
+    public function setParentId($parentId, $forceOverride = false);
 
     /**
-     * @return mixed
+     * @param bool $onlyOneTabEnabled
+     * @return AccordionTabHRO
      */
-    public function getParentId();
+    public function setOnlyOneTabEnabled($onlyOneTabEnabled);
 }
