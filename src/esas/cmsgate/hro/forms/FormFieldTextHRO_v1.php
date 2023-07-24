@@ -52,7 +52,7 @@ class FormFieldTextHRO_v1 implements FormFieldTextHRO
             ->setOneRow($this->oneRow);
         if ($this->onFieldAction != null)
             $formGroupBuilder->addExtraElements(element::div(
-                attribute::clazz('btn-group col col-sm-2 pl-0'),
+                attribute::clazz('btn-group col col-auto pl-0'),
                 $this->onFieldAction));
         return $formGroupBuilder->build();
     }

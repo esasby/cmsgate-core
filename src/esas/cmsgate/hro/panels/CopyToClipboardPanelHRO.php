@@ -19,5 +19,9 @@ interface CopyToClipboardPanelHRO extends HRO
      */
     public function setValue($value);
 
+    /**
+     * @param $elementButton
+     * @return CopyToClipboardPanelHRO
+     */
     public function addButton($elementButton);
 }

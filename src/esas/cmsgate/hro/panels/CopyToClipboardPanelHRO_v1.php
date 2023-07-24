@@ -62,5 +62,6 @@ class CopyToClipboardPanelHRO_v1 implements CopyToClipboardPanelHRO
 
     public function addButton($elementButton) {
         $this->extraButtons .= $elementButton;
+        return $this;
     }
 }
