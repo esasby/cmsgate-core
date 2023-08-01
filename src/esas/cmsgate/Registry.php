@@ -67,12 +67,12 @@ abstract class Registry
     /**
      * @var array
      */
-    protected $services;
+    protected $services = array();
 
     /**
      * @var array
      */
-    protected $servicesPostConstructed;
+    protected $servicesPostConstructed = array();
 
     /**
      * @var Properties
