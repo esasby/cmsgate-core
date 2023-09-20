@@ -12,12 +12,12 @@ class HROManager extends Service
     /**
      * @var array
      */
-    protected $implementations;
+    protected $implementations = array();
 
     /**
      * @var array
      */
-    protected $tuners;
+    protected $tuners = array();
 
     /**
      * Для удобства работы в IDE и подсветки синтаксиса.
