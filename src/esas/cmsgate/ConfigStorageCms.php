@@ -39,7 +39,7 @@ abstract class ConfigStorageCms
 
     public function isStorageInitialised($marker) {
         $markerValue = $this->getConfig($marker);
-        return empty($markerValue);
+        return !empty($markerValue);
     }
 
     public function saveConfigs($keyValueArray)
