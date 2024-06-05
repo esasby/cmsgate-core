@@ -47,7 +47,7 @@ abstract class ConfigStorageCms
         foreach ($keyValueArray as $key => $value) {
             $this->saveConfig($key, $value);
         }
-        Registry::getRegistry()->getMessenger()->addInfoMessage(Messages::SETTINGS_SAVED);
+   //     Registry::getRegistry()->getMessenger()->addInfoMessage(Messages::SETTINGS_SAVED); duplicate save message
         FileUtils::uploadFiles();
     }
 
