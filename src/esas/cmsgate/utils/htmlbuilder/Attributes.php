@@ -49,6 +49,7 @@ class Attributes
     const DATA_BS_TOGGLE = "data-bs-toggle";
     const DATA_BS_TARGET = "data-bs-target";
     const DATA_BS_PARENT = "data-bs-parent";
+    const DATA_PARENT = "data-parent";
     const DATA_BS_RIDE = "data-bs-ride";
     const DATA_BS_SLIDE = "data-bs-slide";
     const DATA_BS_SLIDE_TO = "data-bs-slide-to";
@@ -264,6 +265,11 @@ class Attributes
     public static function data_bs_parent($dataBSParent)
     {
         return new Attribute(self::DATA_BS_PARENT, $dataBSParent);
+    }
+
+    public static function data_parent($dataParent)
+    {
+        return new Attribute(self::DATA_PARENT, $dataParent);
     }
 
     public static function data_bs_ride($dataBSRide)
