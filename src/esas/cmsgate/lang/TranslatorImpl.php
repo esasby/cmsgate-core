@@ -75,7 +75,7 @@ class TranslatorImpl extends Translator
         if (null == $locale)
             $locale = $this->localeLoader->getLocale();
         $this->loadLocale($locale);
-        if (array_key_exists($msg, $this->lang[$locale]))
+        if (is_string($msg) && array_key_exists($msg, $this->lang[$locale]))
             return $this->lang[$locale][$msg];
         else
             return $msg;
