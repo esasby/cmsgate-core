@@ -41,6 +41,7 @@ class ResourceUtils
     private static function getVirtualPath($path)
     {
         // finding symlink
+        $real_part=$virtual_part='';
         $script_path = $_SERVER["SCRIPT_FILENAME"];
         $script_real_path = realpath($script_path);
         if ($script_path != $script_real_path) {

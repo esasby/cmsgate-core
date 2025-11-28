@@ -24,7 +24,7 @@ class ScriptsPreset
     }
 
     public static function elementScriptBootstrap5Min() {
-        return self::elementScript("https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js");
+        return element::scriptFile(dirname(__FILE__) . "/js/bootstrap.bundle.min.js");;
     }
 
     public static function elementScriptBootstrapMin() {
@@ -32,7 +32,7 @@ class ScriptsPreset
     }
 
     public static function elementScriptPopper1Min() {
-        return self::elementScript("https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js");
+        return element::scriptFile(dirname(__FILE__) . "/js/popper.min.js");;
     }
 
     public static function elementScriptGoogleRecaptcha() {
