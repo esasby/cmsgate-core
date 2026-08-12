@@ -12,7 +12,7 @@ use esas\cmsgate\Registry;
  */
 class TranslatorImpl extends Translator
 {
-    private $lang;
+    private $lang = [];
 
     /**
      * @var LocaleLoaderCms
@@ -39,7 +39,7 @@ class TranslatorImpl extends Translator
 
     private function loadLocale($locale)
     {
-        if (!isset($this->lang) || null == $this->lang[$locale]) {
+        if (!isset($this->lang[$locale])) {
             $this->loadLocaleFromDir(__DIR__, $locale); //загружаем локаль из каталога lang core
             foreach ($this->extraVocabularyDirs as $extraVocabularyDir) {
                 $this->loadLocaleFromDir($extraVocabularyDir, $locale); //загружаем локаль для каталога lang наследника
@@ -60,7 +60,7 @@ class TranslatorImpl extends Translator
             return;
         }
         $vocabulary = include $file;
-        if (isset($this->lang) && is_array($this->lang[$locale]))
+        if (isset($this->lang[$locale]))
             $this->lang[$locale] = array_merge($this->lang[$locale], $vocabulary);
         else
             $this->lang[$locale] = $vocabulary;
